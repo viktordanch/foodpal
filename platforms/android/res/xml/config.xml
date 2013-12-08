@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.foodpal.foodpal" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Foodpal.com</name>
+    <description>
+        Foodpal.com website client app.
+    </description>
+    <access origin="*" />
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="App">
+        <param name="android-package" value="com.foodpal.foodpal.App" />
+    </feature>
+    <author email="info@foodpal.com" href="http://foodpal.com">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <feature name="Device">
+        <param name="android-package" value="com.foodpal.foodpal.device.Device" />
+    </feature>
+</widget>

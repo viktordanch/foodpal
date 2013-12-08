@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <title>Foodpal Home</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <link rel="stylesheet"  href="css/jquery.mobile.structure.css" />
+            <link rel="stylesheet" href="css/themes/foodpal.css" />
+            <link rel="stylesheet" href="css/jqm-icon-pack-2.1.2-fa.css" />
+            <link rel="stylesheet" href="css/fluid960.css" />
+            <link rel="stylesheet" href="css/bartender.css" />
+            <link rel="stylesheet" href="css/appcropolis/app-reset.css" />
+            <link rel="stylesheet" href="css/custom-buttons.css" />
+            <link rel="stylesheet" href="css/application.css" />
+            <link rel="stylesheet" href="css/ios.css" />
+            <script src="cordova.js"></script>
+            <script src="cordova_plugins.js"></script>
+            <script src="js/lib/jquery.js"></script>
+            
+            <script src="js/app/ios.js"></script>
+            <!-- your scripts here -->
+            <script src="js/app/app.js"></script>
+            <script src="js/app/bootstrap.js"></script>
+            <script src="js/lib/jquery.mobile.js"></script>
+
+    </head>
+    <body>
+        <div data-role="page" id="home">
+            <div data-role="header" data-position="fixed" class="grayheader">
+                <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                
+            </div>
+            <div data-role="content" class="home-pad">
+                <div class="ui-grid-a pad">
+                    <div class="ui-block-a">
+                        <a  href="#search" data-transition="slidefade" >
+                            <img src="assets/images/v6_01.png" class="t_btn" />
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a  href="#register" data-transition="slidefade">
+                            <img src="assets/images/v6_02.png" class="t_btn" />
+                        </a>
+                    </div>
+                    <div class="ui-block-a">
+                        <a href="#how_work" >
+                            
+                            <img src="assets/images/v6_03.png" class="t_btn" />
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#page1" >
+                            <img src="assets/images/v6_04.png" class="t_btn" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- tab bar with custom icons -->
+            
+            <div data-role="footer" data-id="tab1">
+                <div data-role="navbar" class="tab-bar">
+                    <ul>
+                        <li><a href="#home" data-transition="flip" class="home_t ui-btn-active ui-state-persist" data-iconpos="top" data-icon="custom">Home</a></li>
+                        <li><a href="#account" data-transition="flip" class="account_t" data-icon="custom" data-iconpos="top">Account</a></li>
+                        <li><a href="#cart" data-transition="flip" class="cart_t" data-icon="custom" data-iconpos="top">Cart</a></li>
+                        <li><a href="#settings" data-transition="flip" class="settings_t" data-icon="custom" data-iconpos="top">Settings</a></li>
+                        <li><a href="#info" data-transition="flip" class="info_t" data-icon="custom" data-iconpos="top">Info</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            
+        </div><!-- /page -->
+        
+        <div data-role="page" id="search">
+            
+            <div data-role="header" data-position="fixed" class="grayheader" >
+                <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                
+            </div>
+            <div data-role="header" data-position="fixed" class="ui-header ui-bar-a on-page-heager-bar" role="banner">
+				<h1 class="ui-title" role="heading" aria-level="1">SEARCH RESTAURANT</h1>
+			</div>
+            <div data-role="content">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div data-role="fieldcontain">
+                            <input name="" id="searchinput1" placeholder="" value="" type="search">
+                                </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <input type="submit" value="Submit">
+                            </div>
+                </div>
+                <ul data-role="listview" data-divider-theme="" data-inset="true">
+                    <li data-theme="">
+                        <a href="#page1" data-transition="pop">
+                            City
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page1" data-transition="pop">
+                            Cuisine
+                        </a>
+                    </li>
+                    <li data-theme="c">
+                        <a href="#page1" data-transition="pop">
+                            Rating
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="found-result-count">
+                    Found:
+                </h4>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a data-role="button" href="#page1">
+                            Button
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" href="#page1">
+                            Button
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- tab bar with custom icons -->
+            
+            <div data-role="footer" data-id="tab1">
+                <div data-role="navbar" class="tab-bar">
+                    <ul>
+                        <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom" >Home</a></li>
+                        <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom" >Account</a></li>
+                        <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                        <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                        <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div><!-- /page -->
+
+<div data-role="page" id="account">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content">
+        
+    </div>
+    
+    <!-- tab bar with custom icons -->
+    
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div><!-- /page -->
+<div data-role="page" id="cart">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content">
+        
+    </div>
+    
+    <!-- tab bar with custom icons -->
+    
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div><!-- /page -->
+<div data-role="page" id="settings">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content">
+        
+        
+        
+        
+    </div>
+    
+    <!-- tab bar with custom icons -->
+    
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div><!-- /page -->
+
+<div data-role="page" id="how_work">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+        <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content" class="home-pad" >
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+         <img src="assets/images/01.png" class="step" />
+            </div>
+            <div class="ui-block-a">
+                <img src="assets/images/02.png" class="step" />
+            </div>
+            <div class="ui-block-a">
+                <img src="assets/images/03.png" class="step" />
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- tab bar with custom icons -->
+    
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div><!-- /page -->
+
+<div data-role="page" id="info">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content">
+        
+    </div>
+    
+    <!-- tab bar with custom icons -->
+    
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div><!-- /page -->
+<!-- page reg -->
+<div data-role="page" id="register">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        
+    </div>
+    <div data-role="content">
+<div class="ui-grid-a">
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            First Name
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="first_name" data-clear-btn="true" placeholder="First Name" value="" type="text">
+                </div>
+    </div>
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            Last Name
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="last_name" data-clear-btn="true" placeholder="Last Name" value="" type="text">
+                </div>
+    </div>
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            Account
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="account_name" data-clear-btn="true" placeholder="Account Name" value="" type="text">
+                </div>
+    </div>
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            E-mail
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="email" data-clear-btn="true" placeholder="e-mail" value="" type="email">
+                </div>
+    </div>
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            Address
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="address" data-clear-btn="true" placeholder="Address" value="" type="text">
+                </div>
+    </div>
+    <div class="ui-block-a">
+        <h4 class="r_label">
+            Password
+        </h4>
+    </div>
+    <div class="ui-block-b">
+        <div data-role="fieldcontain">
+            <input name="" id="password" placeholder="Password" value="" type="password">
+                </div>
+             <a href="#" data-role="button" data-theme="reset" class="ios green register-btn ui-btn-right ui-btn ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Registration</span></span></a>
+    </div>
+
+
+
+    
+</div>
+</div>
+
+
+
+<!-- tab bar with custom icons -->
+
+<div data-role="footer" data-id="tab1">
+    <div data-role="navbar" class="tab-bar">
+        <ul>
+            <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+            <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+            <li><a href="#cart" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+            <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+            <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- /page -->
+
+
+
+
+
+
+    </body>
+</html>
