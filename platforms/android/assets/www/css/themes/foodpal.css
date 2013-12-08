@@ -435,7 +435,8 @@ a.ui-link-inherit {
 /* Active class used as the "on" state across all themes
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-active {
-	border: 1px solid #93c974 /*{global-active-border}*/;
+	/*border: 1px solid #93c974 /*{global-active-border}*/;
+
 	background: #93c974 /*{global-active-background-color}*/;
 	font-weight: bold;
 	color: #000000 /*{global-active-color}*/;
@@ -714,7 +715,7 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-corner-all {
 	-webkit-border-radius: 1em /*{global-radii-buttons}*/;
-	border-radius: 1em /*{global-radii-buttons}*/;
+	border-radius: 4px; /*{global-radii-buttons}*/;
 }
 /* radius clip workaround for cleaning up corner trapping */
 .ui-corner-all,
@@ -792,5 +793,10 @@ a.ui-link-inherit {
 .ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
 	outline-width: 1px;
 	outline-style: auto;
+}
+#sign-in{
+ padding-top: 0;
+ margin-top: 5px;
+ -webkit-border-radius: 5px;
 }
 			
