@@ -1,6 +1,6 @@
 body{background-color:#66666!important;margin:0;overflow:hidden;}
 #container{height:100%;position:absolute;width:100%;}
-.ui-content{background-color:#94ca74; overflow: hidden; margin-top: 45px;}
+.ui-content{background-color:#94ca74; overflow: hidden; }
 .ui-header{background-color:gray; position:fixed;}
 .ui-footer,.ui-header{border-bottom-width:0;border-top-width:0;width:100%;}
 .ui-footer{bottom:0; position:fixed;}

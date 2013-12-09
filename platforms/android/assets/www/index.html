@@ -26,7 +26,7 @@
 <div data-role="page" id="home">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true"
            data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
@@ -131,6 +131,9 @@
     height: 55px;
     background: white;
     }
+    ul#select-menu li .ui-select a span.ui-btn-inner {
+    height: 31px;
+    }
     ul#select-menu li.city-select .ui-select a span span.ui-btn-text:after {padding-top: 5px;
     content: "Select City "; float: right; text-overflow: ellipsis;
     color: green; font-weight: 100; font-size: 18px;}
@@ -165,7 +168,7 @@
 
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -355,7 +358,7 @@
 <div data-role="page" id="account">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" data-role="button" id='sign-in'
+        <a href="#log_in" data-role="button" id='sign-in'
            data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -499,13 +502,17 @@
     right: 5px;
 
     }
+    #settings ul.setting-panel li{
+    font-weight: 100;
+    padding-left: 5px;
+    }
 </style>
 
 
 <div data-role="page" id="settings">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" data-role="button" id='sign-in'
+        <a href="#log_in" data-role="button" id='sign-in'
            data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -516,10 +523,13 @@
     </div>
     <div data-role="content" class='page-content'>
 
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul class = 'setting-panel' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
+               <span class = 'sign'>
+                      Auto connect to internet
+                </span>
 
-                   Auto connect to internet
+
                 <div data-role="fieldcontain" class = 'fieldcontain'>
                     <select name="toggleswitch2" id="toggleswitch2" data-theme="" data-role="slider">
                         <option value="off">
@@ -533,8 +543,10 @@
 
             </li>
             <li data-theme="c">
-
+                <span class = 'sign'>
                     Do not distable WiFi
+                </span>
+
                 <div data-role="fieldcontain"  class = 'fieldcontain'>
                     <select name="toggleswitch3" id="toggleswitch3" data-theme="" data-role="slider">
                         <option value="off">
@@ -623,7 +635,7 @@
 <div data-role="page" id="how_work">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -679,7 +691,7 @@
 <div data-role="page" id="info">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" data-role="button" id='sign-in'
+        <a href="#log_in" data-role="button" id='sign-in'
            data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -750,7 +762,7 @@
 <div data-role="page" id="register">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -932,7 +944,7 @@
 <div data-role="page" id="my-orders">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1085,7 +1097,7 @@
 <div data-role="page" id="restouran-page">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1276,7 +1288,7 @@
 <div data-role="page" id="restouran-card">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1432,7 +1444,7 @@
 <div data-role="page" id="menu-group">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1449,7 +1461,7 @@
         <ul data-role="listview" class=' menu-list ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
                     <span class='text'>   First courses </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
 
@@ -1458,21 +1470,21 @@
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
 
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/main-courses.png" style=" ">
                     <span class='text'>  Main Courses </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
                 </a>
             </li>
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/desserts.png" style=" ">
                     <span class='text'>  Desserts </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
                 </a>
             </li>
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/drinks.png" style=" ">
                     <span class='text'> Drinks </span>
 
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
@@ -1584,7 +1596,7 @@
 <div data-role="page" id="menu-item-page">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1601,7 +1613,7 @@
         <ul data-role="listview" class='  item-list ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
                 <a href="#" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
                     <span class='text'>   First courses </span>
                 </a>
             </li>
@@ -1837,7 +1849,7 @@
 <div data-role="page" id="ordering-page">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -2010,7 +2022,7 @@
 
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -2153,7 +2165,7 @@
 
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -2255,7 +2267,7 @@
 <div data-role="page" id="profile-info">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -2357,7 +2369,7 @@
 <div data-role="page" id="info-page">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -2461,6 +2473,79 @@
         </div>
     </div>
 
+</div>
+
+<!--sign-in-->
+<style>
+  #log_in form .submit-block input {
+
+
+    }
+    #log_in form .submit-block>div {
+    background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5 17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977 43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46 64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
+    border: 1px solid #506E3F;
+    border-radius: 10px;
+    margin-left: 0px;
+    }
+    #log_in .content{
+     margin-top: 40px;
+    background: #94CA74;
+    }
+</style>
+
+<div data-role="page" id="log_in">
+    <div data-role="header" class="grayheader">
+        <img src="assets/images/logo.png" class="logo"/>
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
+           class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                class="ui-btn-text">Sign In</span></span></a>
+
+
+    </div>
+
+    <div data-role="content" class = 'content'>
+        <form action="">
+            <div data-role="fieldcontain">
+                <label for="textinput3">
+                    Email
+                </label>
+                <input name="email" id="textinput3" placeholder="" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="textinput4">
+                    Password
+                </label>
+                <input name="" id="textinput4" placeholder="" value="" type="text">
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a submit-block">
+
+                    <input type="submit" value="Log in"  class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+
+                          >
+                </div>
+                <div class="ui-block-b">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div data-role="footer" data-id="tab1">
+
+
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" class="settings_t">Settings</a></li>
+                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 

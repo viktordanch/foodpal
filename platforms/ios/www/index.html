@@ -31,7 +31,7 @@
         <div data-role="page" id="home">
             <div data-role="header" data-position="fixed" class="grayheader">
                 <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
                 
             </div>
             <div data-role="content" class="home-pad">
@@ -77,12 +77,14 @@
             
         </div>
 <style>
-    #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
+    #search .grayheader h1, #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
     #restouran-card .grayheader h1, #menu-group .grayheader h1, #menu-item-page .grayheader h1{
     font-size: 18px;
     padding: 5px;
-
+    background: #95C974;
     font-weight: 100;
+    color: white;
+    margin: 0;
     }
     #my-orders .back-button, #info-page .back-button,  #profile-info .back-button,   #register .back-button,   #settings .back-button,  #map-page .back-button, #restouran-page .back-button, #menu-option-page .back-button, #restouran-card .back-button,
     #ordering-page .back-button, #menu-group .back-button, #menu-item-page .back-button{
@@ -91,7 +93,7 @@
     background: green url('assets/images/arrow.png');
     background-size: 100% 100%;
     margin-bottom: 0px;
-    margin-top: -30px;
+    margin-top: -13px;
     z-index: 1000;
     border: none;
     }
@@ -199,6 +201,25 @@
 
     border-bottom-right-radius: 20px;
     }
+    #search .search-block{
+        padding: 10px;
+        background: #323232;
+        padding-top: 30px;
+            border-bottom-left-radius: 20px ;
+
+    border-bottom-right-radius: 20px;
+
+
+
+    }
+    #search .search-block .ui-block-a{
+      width:70%;
+      padding-right: 10px;  
+    }
+    #search .search-block .ui-block-b{
+      width: 30%;
+    }
+
 </style>
 
         
@@ -206,12 +227,10 @@
             
             <div data-role="header" data-position="fixed" class="grayheader" >
                 <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-                 <h1 class="ui-title page-title" role="heading" aria-level="1">SEARCH RESTAURANT</h1>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <h1 class="ui-title page-title" role="heading" aria-level="1">SEARCH RESTAURANT</h1>
             </div>
-            <div data-role="header" data-position="fixed" class="ui-header ui-bar-a on-page-heager-bar" role="banner">
-				<h1 class="ui-title" role="heading" aria-level="1">SEARCH RESTAURANT</h1>
-			</div>
+       
   <div data-role="content" class="search-page">
         <div class="ui-grid-a search-block">
             <div class="ui-block-a">
@@ -392,7 +411,7 @@
 <div data-role="page" id="account">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
    <div data-role="content" class='page-content'>
@@ -561,7 +580,7 @@
 <div data-role="page" id="ordering-page">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
 
@@ -690,7 +709,7 @@
 </div><!-- /page settings-->
 <style>
     #settings .page-content, #info .page-content, #account .page-content{
-    margin-top: 44px;
+   
     background: #95C974;
 
     }
@@ -745,7 +764,7 @@
 <div data-role="page" id="settings">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
   
@@ -814,7 +833,7 @@
 <div data-role="page" id="how_work">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-        <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
     <div data-role="content" class="home-pad" >
@@ -852,7 +871,7 @@
 <div data-role="page" id="info">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
        <div data-role="content" class='page-content'>
@@ -901,7 +920,7 @@
 <div data-role="page" id="register">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
     <div data-role="content">
@@ -1067,7 +1086,7 @@
 <div data-role="page" id="restouran-page">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
                  <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANTS LIST</h1>
         
     </div>
@@ -1253,7 +1272,8 @@
 <div data-role="page" id="restouran-card">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                 <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANT CARD</h1>
         
     </div>
     <div data-role="content" class='body-container'>
@@ -1403,7 +1423,7 @@
 <div data-role="page" id="menu-group">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
                    <h1 class="ui-title page-title" role="heading" aria-level="1">MENU GROUP</h1>
         
     </div>
@@ -1415,7 +1435,7 @@
         <ul data-role="listview" class=' menu-list ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
                     <span class='text'>   First courses </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
 
@@ -1424,21 +1444,21 @@
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
 
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/main-courses.png" style=" ">
                     <span class='text'>  Main Courses </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
                 </a>
             </li>
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/desserts.png" style=" ">
                     <span class='text'>  Desserts </span>
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
                 </a>
             </li>
             <li data-theme="c">
                 <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
+                    <img class='r-logo' src="assets/images/drinks.png" style=" ">
                     <span class='text'> Drinks </span>
 
                     <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
@@ -1544,7 +1564,7 @@
 <div data-role="page" id="menu-item-page">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         <h1 class="ui-title page-title" role="heading" aria-level="1">MENU ITEMS</h1>
     </div>
     <div data-role="content" class='body-container'>
@@ -1672,14 +1692,50 @@
     
 </div>
 <!-- /page -->
-<div data-role="page" id="">
+<style>
+
+    #log-in form .submit-block .ui-submit{    
+        background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5 17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977 43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46 64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
+      border: 1px solid #506E3F;
+    border-radius: 10px;
+    margin-left: 0px;
+    }
+    #log-in .content{
+     padding-top: 40px;
+     background-color: #94CA74;
+    }
+</style>
+
+<div data-role="page" id="log-in">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
-                <a href="#" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
         
     </div>
-    <div data-role="content">
-        
+    <div data-role="content" class = 'content'>
+        <form action="">
+            <div data-role="fieldcontain">
+                <label for="textinput3">
+                    Email
+                </label>
+                <input name="email" id="textinput3" placeholder="" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="textinput4">
+                    Password
+                </label>
+                <input name="" id="textinput4" placeholder="" value="" type="text">
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a submit-block">
+
+                    <input type="submit" value="Log in"  class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset">
+                </div>
+                <div class="ui-block-b">
+                </div>
+            </div>
+
+        </form>
         
         
         
