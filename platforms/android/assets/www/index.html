@@ -921,6 +921,9 @@
     }
     #my-orders .orders-list{
     margin-top: 0px;
+    border-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     }
     #my-orders .orders-list li a{
     font-size: 14px;
@@ -1833,15 +1836,23 @@
 
 
 </style>
-<script>
+<script type="text/javascript" charset="utf-8">
     function order_warning(){
        $('#ordering-page .alert-warning').css('display', 'block');
+alert(localStorage.getItem( "name" ));
+
 
     }
     function order_warning_cancel(){
        $('#ordering-page .alert-warning').css('display', 'none');
 
     }
+
+
+
+localStorage.setItem( "name", "value" );
+
+
 
 
 </script>
@@ -1866,6 +1877,8 @@
         <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
            style='margin-left: 10px;'>
         </a>
+
+
 
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
@@ -2018,6 +2031,20 @@
 
 
 </style>
+<script type="text/javascript" charset="utf-8">
+    function local_st(){
+
+alert(localStorage.getItem( "name" ));
+
+
+    }
+
+
+
+
+
+
+</script>
 <div data-role="page" id="menu-option-page">
 
     <div data-role="header" class="grayheader">
@@ -2060,7 +2087,7 @@
         <div class="ui-grid-a">
             <div class="ui-block-a">
 
-                <a data-role="button" href="#ordering-page" onclick='order_warning();'
+                <a data-role="button" href="#ordering-page" onclick='local_st();'
                    data-role="button" data-theme="reset"
                    class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                    data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -2071,7 +2098,7 @@
                 </a>
             </div>
             <div class="ui-block-b">
-                <a data-role="button" href="#menu-item-page" onclick='order_warning();'
+                <a data-role="button" href="#menu-item-page" onclick='local_st();'
                    data-role="button" data-theme="reset"
                    class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                    data-corners="true" data-shadow="true" data-iconshadow="true"

@@ -77,6 +77,10 @@
             
         </div>
 <style>
+.top-padding{
+padding-top: 31px;
+
+}
     #search .grayheader h1, #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
     #restouran-card .grayheader h1, #menu-group .grayheader h1, #menu-item-page .grayheader h1{
     font-size: 18px;
@@ -85,6 +89,7 @@
     font-weight: 100;
     color: white;
     margin: 0;
+    margin-top: -3px;
     }
     #my-orders .back-button, #info-page .back-button,  #profile-info .back-button,   #register .back-button,   #settings .back-button,  #map-page .back-button, #restouran-page .back-button, #menu-option-page .back-button, #restouran-card .back-button,
     #ordering-page .back-button, #menu-group .back-button, #menu-item-page .back-button{
@@ -92,8 +97,8 @@
     height: 30px;
     background: green url('assets/images/arrow.png');
     background-size: 100% 100%;
-    margin-bottom: 0px;
-    margin-top: -13px;
+    margin-bottom: -4px;
+    margin-top: -25px;
     z-index: 1000;
     border: none;
     }
@@ -122,6 +127,8 @@
 
         <!-- /page -->
         <style>
+   
+
     #search #checkboxes2 .ui-checkbox .ui-btn-inner{
     padding-top: 0px;
     padding-bottom: 0px;
@@ -219,6 +226,12 @@
     #search .search-block .ui-block-b{
       width: 30%;
     }
+    #search ul#select-menu li a .ui-btn-inner{
+      max-height: 30px;
+    }
+    #search{
+        padding-bottom: 50px;
+    }    
 
 </style>
 
@@ -561,6 +574,10 @@
     width: 35px;
     height: 35px;
     }
+    #ordering-page{
+        padding-bottom: 50px;
+
+    }  
 
 
 </style>
@@ -581,13 +598,21 @@
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
                 <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-        
-    </div>
-
-        <div data-role="content" class='body-container'>
+                <h1 class="ui-title page-title" role="heading" aria-level="1">CART     
+                        <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
+           style='margin-right: 45px; float: right; margin-top: -4px;  '>
+        </a>    
         <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
            style='margin-left: 10px;'>
         </a>
+         </h1>
+        
+    </div>
+
+        <div data-role="content" class='body-container top-padding' >
+        
+
+
 
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
@@ -1024,7 +1049,7 @@
 
     }
     #restouran-page .body-container, #menu-group .body-container{
-    padding: 15px 0 15px 0;
+    padding: 31px 0 15px 0;
 
     }
     #restouran-page ul li a span.address{
@@ -1080,20 +1105,23 @@
     height: 30px;
     margin: 15px 5px ;
     }
-
+    #restouran-page{
+        padding-bottom: 50px;
+    } 
 </style>
 
 <div data-role="page" id="restouran-page">
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
                 <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-                 <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANTS LIST</h1>
-        
+                 <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANTS LIST
+                <a data-role="button" class='back-button' data-transition="slide" href="#search"
+                 style='margin-left: 10px;'>
+                </a>
+                </h1>
     </div>
-    <div data-role="content" class='body-container'>
-        <a data-role="button" class='back-button' data-transition="slide" href="#search"
-           style='margin-left: 10px;'>
-        </a>
+    <div data-role="content" class='body-container '>
+
 
         <ul data-role="listview" class='restaurant-list' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
@@ -1273,13 +1301,15 @@
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
                 <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-                 <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANT CARD</h1>
-        
-    </div>
-    <div data-role="content" class='body-container'>
-        <a data-role="button" class='back-button' data-transition="slide" href="#restouran-page"
+                 <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANT CARD
+               <a data-role="button" class='back-button' data-transition="slide" href="#restouran-page"
            style='margin-left: 10px;'>
+
         </a>
+        </h1>
+ 
+    </div>
+    <div data-role="content" class='body-container top-padding'>
 
         <div class="ui-grid-a title">
             <div class="ui-block-a" style="width: 40%; ">
@@ -1417,6 +1447,10 @@
     height: 60px;
     width: 60px;
     }
+     #menu-group{
+        padding-top: 50px;
+        padding-bottom: 50px;
+     }
 
 </style>
 
@@ -1424,13 +1458,15 @@
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
                 <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-                   <h1 class="ui-title page-title" role="heading" aria-level="1">MENU GROUP</h1>
+                   <h1 class="ui-title page-title" role="heading" aria-level="1">MENU GROUP
+                        <a data-role="button" class='back-button' data-transition="slide" href="#restouran-card"
+                           style='margin-left: 10px;'>
+                        </a>
+
+                   </h1>
         
     </div>
     <div data-role="content" class='body-container'>
-        <a data-role="button" class='back-button' data-transition="slide" href="#restouran-card"
-           style='margin-left: 10px;'>
-        </a>
 
         <ul data-role="listview" class=' menu-list ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
@@ -1558,6 +1594,10 @@
 
     border-bottom-right-radius: 20px;
     }
+    #menu-item-page{
+        padding-bottom: 50px;
+
+    }
 
 
 </style>
@@ -1565,12 +1605,14 @@
     <div data-role="header" data-position="fixed" class="grayheader" >
         <img src="assets/images/logo.png" class="logo" />
                 <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
-        <h1 class="ui-title page-title" role="heading" aria-level="1">MENU ITEMS</h1>
-    </div>
-    <div data-role="content" class='body-container'>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">MENU ITEMS
         <a data-role="button" class='back-button' data-transition="slide" href="#menu-group"
            style='margin-left: 10px; '>
         </a>
+
+        </h1>
+    </div>
+    <div data-role="content" class='body-container top-padding'>
 
         <ul data-role="listview" class='  item-list ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
@@ -1757,6 +1799,358 @@
     
     
 </div>
+<!-- map page -->
+<style>
+    #map-page .content .conteiner-context{
+    width: 100%;
+    height: 100%;
+
+    margin-bottom: 50px;
+    position: relative;
+    }
+
+
+    #map-page .content{
+      padding-left: 0;
+      padding-right: 0;
+    margin-bottom: 50px;
+
+    }
+    #map-page .ui-grid-a {
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+    left: 0px;
+
+
+    }
+
+    #map-page .content ul li .ui-input-search {
+    background: white;
+    border-radius: 25px;
+
+    }
+    #map-page .content ul li{
+    border: none;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5e5c0),
+    color-stop(6%,#cfe1b9), color-stop(13%,#c3dfae), color-stop(15%,#c2dead),
+    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694), color-stop(32%,#a6d08e),
+    color-stop(34%,#a5d589), color-stop(36%,#9ece82), color-stop(38%,#a0ce83), color-stop(40%,#9ecc81),
+    color-stop(43%,#95c977), color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a), color-stop(49%,#75b954),
+    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039), color-stop(62%,#63c03e),
+    color-stop(64%,#69bc46), color-stop(74%,#6ec14b), color-stop(77%,#72c251), color-stop(83%,#77c357),
+    color-stop(85%,#7ec55f), color-stop(91%,#84c665), color-stop(94%,#89c669), color-stop(100%,#8dc86e));
+    }
+    #map-page .content ul{
+      margin: 0px;
+    border-radius: 0px;
+    border: none;
+
+    }
+
+    #map-page .content img{
+
+    width: 100%;
+    height: 62%;
+    }
+
+
+
+</style>
+<div data-role="page" id="map-page">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">MAP
+        <a data-role="button" class='back-button' data-transition="slide" href="#search"
+           style='margin-left: 10px; '>
+        </a>
+
+        </h1>
+    </div>
+          <div data-role="content" class = 'content top-padding'>
+
+            <div class="conteiner-context">
+                <ul data-role="listview"   data-divider-theme="b" data-inset="true">
+                    <li data-theme="c" class = '' data-iconshadow="true">
+                        <div data-role="fieldcontain">
+                            <input name="" id="searchinput1" placeholder="" value="" type="search">
+                        </div>
+                    </li>
+
+                </ul>
+
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false">
+
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+
+                        <a data-role="button" href="#" onclick='order_warning();'
+                           data-role="button" data-theme="reset"
+                           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                           data-corners="true" data-shadow="true" data-iconshadow="true"
+                           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                                class="ui-btn-text"
+                                style=" font-weight: bold;">My location</span></span>
+
+                        </a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a data-role="button" href="#restouran-page" onclick='order_warning();'
+                           data-role="button" data-theme="reset"
+                           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                           data-corners="true" data-shadow="true" data-iconshadow="true"
+                           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                                class="ui-btn-text"
+                                style=" font-weight: bold;">Go to list</span></span>
+
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+   </div>
+
+
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#ordering-page" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div>
+
+<!--menu-option page-->
+
+
+<style>
+    #menu-option-page fieldset .ui-checkbox-on .ui-btn-inner:after{
+
+    content: "$10"; float: right;
+     font-weight: 100; font-size: 18px;
+    }
+
+    #menu-option-page fieldset{
+      padding-top: 10px;
+
+    }
+    #menu-option-page fieldset .ui-btn-inner{
+    padding-left: 10px;
+    padding-right: 50px;
+    }
+    #menu-option-page .details{
+      color: green;
+      height: 100px;
+    background-color: white;
+    padding: 10px;
+    margin: 30px 0;
+    }
+
+    #menu-option-page fieldset .ui-icon{
+    left: 90%;
+
+
+
+    }
+
+
+</style>
+
+<div data-role="page" id="menu-option-page">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">OPTIONS
+        <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
+           style='margin-left: 10px; '>
+        </a>
+
+        </h1>
+    </div>
+          <div data-role="content" class = 'content top-padding'>
+           <div id="checkboxes1" data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="vertical">
+
+                    <input id="checkbox1" name="" data-theme="c" type="checkbox">
+                    <label for="checkbox1">
+                        Delivery
+                    </label>
+                    <input id="checkbox2" name="" data-theme="c" type="checkbox">
+
+                    <label for="checkbox2">
+                        Pickap
+                    </label>
+                </fieldset>
+            </div>
+        <div class = 'details'>
+          Details
+
+        </div>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+
+                <a data-role="button" href="#ordering-page" onclick='order_warning();'
+                   data-role="button" data-theme="reset"
+                   class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                   data-corners="true" data-shadow="true" data-iconshadow="true"
+                   data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                        class="ui-btn-text"
+                        style=" font-weight: bold;">Ordering</span></span>
+
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a data-role="button" href="#menu-item-page" onclick='order_warning();'
+                   data-role="button" data-theme="reset"
+                   class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                   data-corners="true" data-shadow="true" data-iconshadow="true"
+                   data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                        class="ui-btn-text"
+                        style=" font-weight: bold;">Go to menu</span></span>
+
+                </a>
+            </div>
+        </div>
+
+
+</div>
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#ordering-page" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div>
+<!--profile-info-->
+<style>
+
+    #my-orders .orders-list{
+    margin-top: 0px;
+    border-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    }
+    #my-orders .orders-list li a{
+    font-size: 14px;
+    }
+    #my-orders .orders-list li a span.state{
+    font-weight: 100;
+    font-size: 12px;
+    float: right;
+    width: 61px;
+    }
+    #my-orders .orders-list li a span.active{
+    color: green;
+    }
+    #my-orders .orders-list li a span.paid{
+    color: #7C7C7C;
+    }
+    #my-orders .orders-list li a span.not-paid{
+    color: red;
+    }
+    #my-orders a.back-button{
+        margin-top: -25px;
+        margin-bottom: -4px;
+    }
+</style>
+
+<div data-role="page" id="my-orders">
+    <div data-role="header" data-position="fixed" class="grayheader" >
+        <img src="assets/images/logo.png" class="logo" />
+                <a href="#log-in" data-role="button" data-theme="reset" class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">ORDER HISTORY
+        <a data-role="button" class='back-button' data-transition="slide" href="#account"
+           style='margin-left: 10px; '>
+        </a>
+
+        </h1>
+    </div>
+          <div data-role="content" class = 'content top-padding'>
+
+        <ul class='orders-list' data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#" data-transition="slide">
+                    Order #105/08/25/2012
+                    <span class='state active'>
+                        Active
+                    </span>
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Order #105/08/25/2012
+                    <span class='state paid'>
+                        Paid
+                    </span>
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Order #105/08/25/2012
+                    <span class='state paid'>
+                       Paid
+                    </span>
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+
+                    Order #105/08/25/2012
+                    <span class='state paid'>
+                       Paid
+                    </span>
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Order #105/08/25/2012
+                    <span class='state not-paid'>
+                        Not paid
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div class="ui-block-a" style='width: 100%;'>
+            <a href="#" data-role="button" data-theme="reset"
+               class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+               data-corners="true" data-shadow="true" data-iconshadow="true"
+               data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                    class="ui-btn-text" style=" font-weight: bold;"> Update !</span></span></a>
+        </div>
+
+
+          </div>
+    <div data-role="footer" data-id="tab1">
+        <div data-role="navbar" class="tab-bar">
+            <ul>
+                <li><a href="#home" data-transition="flip" class="home_t" data-iconpos="top" data-icon="custom">Home</a></li>
+                <li><a href="#account" data-transition="flip" class="account_t" data-iconpos="top" data-icon="custom">Account</a></li>
+                <li><a href="#ordering-page" data-transition="flip" class="cart_t" data-iconpos="top" data-icon="custom">Cart</a></li>
+                <li><a href="#settings" data-transition="flip" class="settings_t" data-iconpos="top" data-icon="custom">Settings</a></li>
+                <li><a href="#info" data-transition="flip" class="info_t" data-iconpos="top" data-icon="custom">Info</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div>
+
 
 
 
