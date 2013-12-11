@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/ios.css"/>
     <script src="js/lib/jquery.js"></script>
     <script src="js/app/ios.js"></script>
+    <script src="js/app/api.js"></script>
     <!-- your scripts here -->
     <script src="js/app/app.js"></script>
     <script src="js/app/bootstrap.js"></script>
@@ -33,19 +34,46 @@
    // restaurant list
    var restaurant = {};
 
-   restaurant['rest1']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-   restaurant['rest2']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-   restaurant['rest3']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
+
+   restaurant['rest1']={id: 1, name: 'Rest_1', city: ['Tallahassee','Miami','Miami Beach'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
+   restaurant['rest2']={id: 2, name: 'Rest_2', city: ['Tallahassee','Fort Lauderdale'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
+   restaurant['rest3']={id: 3, name: 'Rest_3', city: ['Vero Beach','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
+   rest_manu = {};
+
+   // restaurant card
+
+   rest = {};
+
+   rest['1'] = {id: 1,name: 'Rest_', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
+                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel", img: 'http://google.com' };
+   rest['2'] = {id: 2,name: 'Rest_2', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
+                rating: ['4'], description: " One Miami Tovel One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel", img: 'http://google.com' };
+   rest['3'] = {id: 1,name: 'Rest_3', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
+                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel\
+                        One Miami Tovel", img: 'http://google.com' };
 
 
+   localStorage['rest'] = JSON.stringify(rest);
    localStorage['restaurant'] = JSON.stringify(restaurant);
-   localStorage['selected_restaurant'] = {};
+   localStorage['selected_restaurants'] = JSON.stringify({});;
 
 
 
 
 
-</script>
+
+    </script>
 
 </head>
 <body>
@@ -54,7 +82,7 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true"
+           data-corners="true" data-rel="dialog"
            data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
                 class="ui-btn-inner ui-btn-corner-all">
                     <span class="ui-btn-text">Sign In</span></span></a>
@@ -189,7 +217,8 @@
     border-bottom-right-radius: 20px;
     }
 
-    #search #selectCity-listbox .ui-header, #search #selecCouisine-listbox .ui-header,  #search #selectRating-listbox-popup .ui-header{
+    #search #selectCity-listbox .ui-header, #search #selecCouisine-listbox .ui-header, #search
+    #selectRating-listbox-popup .ui-header{
     width: auto;
     }
 </style>
@@ -233,49 +262,122 @@
  $(document).on("click", "#search #selectCity-listbox li a", find_restaurant_by_city);
  $(document).on("click", "#search #selectCuisine-listbox li a", find_restaurant_by_city);
  $(document).on("click", "#search #selectRating-listbox li a", find_restaurant_by_city);
+ $(document).on("click", "#search #set_rest_list", set_list);
 
+ function set_list(){
+
+       selected_restaurant = JSON.parse(localStorage['selected_restaurants']);
+
+      $('#restouran-page ul.restaurant-list').html('');
+      for(key in selected_restaurant ){
+      name = selected_restaurant[key]['name'];
+
+
+      rating = parseInt(selected_restaurant[key]['rating'][0]);
+
+      active_star = '<img class="star" src="assets/images/superstar.png" >';
+      pasive_star = '<img class="star" src="assets/images/star.png" >';
+
+     full_rating = set_rating(rating);
+
+      rest_id = selected_restaurant[key]['id'];
+
+      li = '<li data-theme="c" style = "border-bottom: none; padding:0;" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c">\
+                  <div class="ui-btn-inner ui-li"><div class="ui-btn-text"> \
+                <a href="#restouran-card" data-transition="slide" class="ui-link-inherit" id = "'+ rest_id+'">\
+                    <img class="r-logo ui-li-thumb" src="assets/images/magaz.png" style=" ">\
+                    <img class="sign" style="float: right;" src="assets/images/logo.png">\
+                    <img class="location-logo" style="float: right;" src="assets/images/whereami.png">\
+                    <span class="container">\
+                          <span class="name">  '+name+' </span>\
+                    <br>\
+                           <span class="address"> Address for this restaurant </span>\
+                    <br>\
+                        <span class="rating">\
+                     '+full_rating+'\
+                    </span>\
+                    </span>\
+                </a>\
+              </li>'
+
+
+
+
+
+
+          $('#restouran-page ul.restaurant-list').append(li);
+
+
+     }
+
+ }
+ function set_rating(rating){
+    active_star = '<img class="star" src="assets/images/superstar.png" >';
+    pasive_star = '<img class="star" src="assets/images/star.png" >';
+      full_rating = '';
+
+      for( i=0;i< rating;i++){full_rating = full_rating + active_star};
+      for( i=0;i< (5-rating);i++){full_rating = full_rating + pasive_star};
+      return full_rating;
+
+
+ }
  function find_restaurant_by_city(){
- var element_id= '#selectCity'
+
+
+
   var city_selected = $('#selectCity option:selected');
   var cuisine_selected = $('#selectCuisine option:selected');
   var rating_selected = $('#selectRating option:selected');
-
+  previus_list={}
 
   restaurants = JSON.parse(localStorage['restaurant']);
 
-  rest_list = find_by_city(city_selected, restaurants, 'city');
-
-  rest_list = find_by_city(cuisine_selected, rest_list, 'cuisine');
-
-  rest_list = find_by_city(rating_selected, rest_list, 'rating');
-
-  localStorage['selected_restaurant'] = rest_list;
+  rest_list = find_by_city(city_selected, restaurants, 'city', previus_list);
+  previus_list = rest_list;
+  rest_list = find_by_city(cuisine_selected, rest_list, 'cuisine', previus_list);
+  previus_list = rest_list;
+  rest_list = find_by_city(rating_selected, rest_list, 'rating', previus_list);
 
  }
 
- function find_by_city(city, arr, object){
+ function find_by_city(city, arr, object, previus_list){
+
     local_array = [];
     rest_list = {};
+    restaurant = {};
     if(city.val() != ''){
+     localStorage.removeItem('selected_restaurants');
+     localStorage['selected_restaurants'] = JSON.stringify({});
 
 
     for (key in arr){
+
        if(jQuery.inArray(city.text(), restaurants[key][object]) > -1){
          local_array.push(key);
-          rest_list[key]='';
+
+         restaurant[key] = restaurants[key];
+         localStorage['selected_restaurants'] = JSON.stringify(restaurant);
+            rest_list[key]='';
+
          $('.found-result-count .result').html(local_array.length);
        }else{
          $('.found-result-count .result').html(local_array.length);
        }
     }
     }else{
-     if(jQuery.isEmptyObject(rest_list)){
-       rest_list = restaurants;
-     }
+         if(jQuery.isEmptyObject(previus_list) && jQuery.isEmptyObject(rest_list) ){
+
+               rest_list = restaurants;
+          }else{
+          rest_list = previus_list;
+         }
     }
+
     return rest_list;
 
  };
+
 
 
 
@@ -284,43 +386,11 @@
 
 <div data-role="page" id="search">
 
-    <!--rest_2 = [];-->
-    <!--if(cuisine_selected.val() != ''){-->
-    <!--console.log(rest_list);-->
-    <!--console.log(rest_list);-->
-    <!--for (key in rest_list)-->
-    <!--{-->
-    <!--console.log(key);-->
-
-    <!--if(jQuery.inArray(cuisine_selected.text(), restaurants[key]['cuisine']) > -1){-->
-    <!--console.log('for if condition');-->
-    <!--rest_2.push(key);-->
-    <!--$('.found-result-count .result').html(rest_2.join( ", " ));-->
-    <!--}-->
-
-    <!--}-->
-    <!--}-->
-    <!--rest_3 = [];-->
-    <!--if(city_selected.val() != ''){-->
-    <!--console.log(rest_2 );-->
-    <!--console.log(rest_2 );-->
-    <!--for (key in rest_2)-->
-    <!--{-->
-    <!--if(jQuery.inArray(city_selected.text(), restaurants[key]['city']) > -1){-->
-    <!--console.log('for if condition');-->
-    <!--rest_3.push(key);-->
-    <!--$('.found-result-count .result').html(rest_3.join( ", " ));-->
-    <!--}-->
-
-    <!--}-->
-    <!--}-->
-
-
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -359,16 +429,16 @@
             <ul id='select-menu' data-role="listview" data-divider-theme="b" data-inset="true">
                 <li data-theme="" class='city-select'>
                     <select id="selectCity" data-native-menu="false" name="" data-theme="a">
-                        <option value="" >
+                        <option value="">
                             City
-                       </option>
+                        </option>
                     </select>
                 </li>
                 <li data-theme="c" class='cuisine-select'>
                     <select id="selectCuisine" data-native-menu="false" name="" data-theme="a">
                         <option value="">
                             Cuisine
-                       </option>
+                        </option>
                     </select>
                 </li>
                 <li data-theme="c" class='rating-select'>
@@ -383,7 +453,7 @@
             </ul>
             <h4 class="found-result-count">
                 Found:
-                <span class = 'result'>
+                <span class='result'>
 
                 </span>
             </h4>
@@ -392,6 +462,7 @@
             <div class="ui-grid-a">
                 <div class="ui-block-a">
                     <a href="#restouran-page" data-role="button" data-theme="reset"
+                       id='set_rest_list'
                        class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                        data-corners="true" data-shadow="true" data-iconshadow="true"
                        data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -431,7 +502,7 @@
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" data-role="button" id='sign-in'
-           data-theme="reset"
+           data-theme="reset" data-rel="dialog"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -534,7 +605,7 @@
     background-size: auto 100%;
     }
     #settings .fieldcontain{
-      float: right;
+    float: right;
     position: absolute;
     top: 0;
     right: 5px;
@@ -551,7 +622,7 @@
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" data-role="button" id='sign-in'
-           data-theme="reset"
+           data-theme="reset" data-rel="dialog"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -561,15 +632,16 @@
     </div>
     <div data-role="content" class='page-content'>
 
-        <ul class = 'setting-panel' data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul class='setting-panel' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
-               <span class = 'sign'>
+               <span class='sign'>
                       Auto connect to internet
                 </span>
 
 
-                <div data-role="fieldcontain" class = 'fieldcontain'>
-                    <select name="toggleswitch2" id="toggleswitch2" data-theme="" data-role="slider">
+                <div data-role="fieldcontain" class='fieldcontain'>
+                    <select name="toggleswitch2" id="toggleswitch2" data-theme=""
+                            data-role="slider">
                         <option value="off">
                             Off
                         </option>
@@ -581,12 +653,13 @@
 
             </li>
             <li data-theme="c">
-                <span class = 'sign'>
+                <span class='sign'>
                     Do not distable WiFi
                 </span>
 
-                <div data-role="fieldcontain"  class = 'fieldcontain'>
-                    <select name="toggleswitch3" id="toggleswitch3" data-theme="" data-role="slider">
+                <div data-role="fieldcontain" class='fieldcontain'>
+                    <select name="toggleswitch3" id="toggleswitch3" data-theme=""
+                            data-role="slider">
                         <option value="off">
                             Off
                         </option>
@@ -607,14 +680,11 @@
         </div>
 
 
-
-
     </div>
 
     <!-- tab bar with custom icons -->
 
     <div data-role="footer" data-id="tab1">
-
 
 
         <div data-role="navbar" class="tab-bar">
@@ -637,7 +707,7 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -692,7 +762,7 @@
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" data-role="button" id='sign-in'
-           data-theme="reset"
+           data-theme="reset" data-rel="dialog"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -748,14 +818,14 @@
 <!-- /page -->
 <!-- page reg -->
 <style>
-   #register .cart-sign a{
+    #register .cart-sign a{
     position: absolute;
     top: 0;
     left: 15px;
     margin-top: 1px;
     }
     #register .cart-sign {
-     position: relative;
+    position: relative;
     }
 
 </style>
@@ -764,11 +834,12 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
+
         <h1 class="ui-title page-title cart-sign" role="heading" aria-level="1">REGISTRATION
-            <a data-role="button" class='back-button' data-transition="slide" href="#home" >
+            <a data-role="button" class='back-button' data-transition="slide" href="#home">
             </a>
         </h1>
 
@@ -818,7 +889,8 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="email" data-clear-btn="Address" data-clear-btn="true" placeholder="Password" value=""
+                    <input name="" id="email" data-clear-btn="Address" data-clear-btn="true"
+                           placeholder="Password" value=""
                            type="email">
                 </div>
             </div>
@@ -829,7 +901,8 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="address" data-clear-btn="true" placeholder="Password" value=""
+                    <input name="" id="address" data-clear-btn="true" placeholder="Password"
+                           value=""
                            type="text">
                 </div>
             </div>
@@ -840,7 +913,8 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="address" data-clear-btn="true" placeholder="  Re-Type" value=""
+                    <input name="" id="address" data-clear-btn="true" placeholder="  Re-Type"
+                           value=""
                            type="text">
                 </div>
             </div>
@@ -853,8 +927,8 @@
                 <div data-role="fieldcontain">
                     <input name="" id="password" placeholder="Lang" value="" type="password">
                 </div>
-             </div>
-            <a href="#account" data-role="button" data-theme="reset" style = 'width: 100%'
+            </div>
+            <a href="#account" data-role="button" data-theme="reset" style='width: 100%'
                class="ios green register-btn ui-btn-right ui-btn ui-btn-corner-all ui-btn-up-reset"
                data-corners="true" data-shadow="true" data-iconshadow="true"
                data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -902,14 +976,18 @@
 <!-- /page My orders -->
 <!-- Home -->
 <style>
-    #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
+    #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register
+    .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader
+    h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
     #restouran-card .grayheader h1, #menu-group .grayheader h1, #menu-item-page .grayheader h1{
     font-size: 18px;
     padding: 5px;
 
     font-weight: 100;
     }
-    #my-orders .back-button, #info-page .back-button,  #profile-info .back-button,   #register .back-button,   #settings .back-button,  #map-page .back-button, #restouran-page .back-button, #menu-option-page .back-button, #restouran-card .back-button,
+    #my-orders .back-button, #info-page .back-button, #profile-info .back-button, #register
+    .back-button, #settings .back-button, #map-page .back-button, #restouran-page .back-button,
+    #menu-option-page .back-button, #restouran-card .back-button,
     #ordering-page .back-button, #menu-group .back-button, #menu-item-page .back-button{
     width: 30px;
     height: 30px;
@@ -949,7 +1027,7 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1030,79 +1108,100 @@
 
 <!-- restourant-list page -->
 <style>
-    #restouran-page .body-container ul li, #menu-group .body-container ul li{
+    #restouran-page .body-container ul li,#search .body-container ul li, #menu-group .body-container ul li{
     border-bottom: none;
     }
-    #restouran-page .body-container ul, #menu-group .body-container ul{
+    #restouran-page .body-container ul, #search .body-container ul, #menu-group .body-container ul{
     margin-top: 0;
     border-radius: 0px
 
     }
-    #restouran-page .body-container, #menu-group .body-container{
+    #restouran-page .body-container,#search .body-container, #menu-group .body-container{
     padding: 15px 0 15px 0;
 
     }
-    #restouran-page ul li a span.address{
+    #restouran-page ul li a span.address, #search ul li a span.address{
     font-weight: 100;
     font-size: 12px;
     }
-    #restouran-page ul li a span.name{
+    #restouran-page ul li a span.name, #search ul li a span.name{
     font-weight: 150;
     font-size: 16px;
     }
 
-    #restouran-page ul.restaurant-list li a{
+    #restouran-page ul.restaurant-list li a, #search ul.restaurant-list li a{
     height: 60px;
     padding: 1px 0px 1px 60px;
     background-color: #A3CF8A ;
-
     box-shadow: inset 0 50px 50px -20px #EAECE7;
-
-
     }
-    #restouran-page ul li a span.container span{
+    #restouran-page ul li a span.container span, #search ul li a span.container span{
     margin-left: 15px;
     }
-    #restouran-page span.right-span{
+    #restouran-page span.right-span, #search span.right-span{
     vertical-align: center;
 
     }
-    #restouran-page img.r-logo,#restouran-page img.location-logo {
+    #restouran-page img.r-logo,#restouran-page img.location-logo ,#search img.r-logo,#restouran-page img.location-logo {
     width: 54px;
     height: 54px;
     margin: 4px 10px ;
     }
-    #restouran-page img.sign{
+    #restouran-page img.sign, #search img.sign{
     width: 10px;
     height: 20px;
     margin: 20px 10px ;
     }
 
-    #restouran-page img.r-logo{
+    #restouran-page img.r-logo, #search img.r-logo{
     width: 52px;
     height: 52px;
     margin: 4px 10px ;
     }
-    #restouran-page li a img.star{
+    #restouran-page li a img.star, #search li a img.star{
     width: 15px;
     }
-    #restouran-page li a span.rating{
+  #restouran-page ul.restaurant-list li .ui-btn-inner, #search ul.restaurant-list li .ui-btn-inner{
+    background-color: #A3CF8A;
+    box-shadow: inset 0 50px 50px -20px #EAECE7;
+    }
+    #restouran-page li a span.rating, #search li a span.rating{
     margin-left: 20px;
     }
 
-    #restouran-page img.location-logo {
+    #restouran-page ul li .ui-li-static.ui-li {
+      padding: 0px;
+      border: none;
+    }
+
+    #restouran-page img.location-logo,#search img.location-logo {
     width: 30px;
     height: 30px;
     margin: 15px 5px ;
     }
 
 </style>
+<script>
+     $(document).ready(function(){
+     selected_restaurant = JSON.parse(localStorage['selected_restaurants']);
+
+     for(key in selected_restaurant ){
+      console_log(key);
+
+
+     }
+     });
+     $(document).on();
+
+
+
+</script>
 <div data-role="page" id="restouran-page">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1115,132 +1214,6 @@
         </a>
 
         <ul data-role="listview" class='restaurant-list' data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
-                <a href="#restouran-card" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
-                    <img class='sign' style='float: right;' src="assets/images/logo.png" style=" ">
-                    <img class='location-logo' style='float: right;'
-                         src="assets/images/whereami.png" style=" ">
-
-
-                    <span class='container'>
-                          <span class="name">  Restaurant's name </span>
-                    <br/>
-
-                           <span class="address"> Address for this restaurant </span>
-                    <br/>
-                         <span class="rating">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-
-                    </span>
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#restouran-card" data-transition="slide">
-
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
-                    <img class='sign' style='float: right;' src="assets/images/logo.png" style=" ">
-                    <img class='location-logo' style='float: right;'
-                         src="assets/images/whereami.png" style=" ">
-
-
-                    <span class='container'>
-                          <span class="name">  Restaurant's name </span>
-                    <br/>
-
-                           <span class="address"> Address for this restaurant </span>
-                    <br/>
-                        <span class="rating">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-
-                    </span>
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#restouran-card" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
-                    <img class='sign' style='float: right;' src="assets/images/logo.png" style=" ">
-                    <img class='location-logo' style='float: right;'
-                         src="assets/images/whereami.png" style=" ">
-
-
-                    <span class='container'>
-                          <span class="name">  Restaurant's name </span>
-                    <br/>
-
-                           <span class="address"> Address for this restaurant </span>
-                    <br/>
-                        <span class="rating">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-
-                    </span>
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#restouran-card" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
-                    <img class='sign' style='float: right;' src="assets/images/logo.png" style=" ">
-                    <img class='location-logo' style='float: right;'
-                         src="assets/images/whereami.png" style=" ">
-
-
-                    <span class='container'>
-                          <span class="name">  Restaurant's name </span>
-                    <br/>
-
-                           <span class="address"> Address for this restaurant </span>
-                    <br/>
-                        <span class="rating">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-
-                    </span>
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <img class='r-logo' src="assets/images/magaz.png" style=" ">
-                    <img class='sign' style='float: right;' src="assets/images/logo.png" style=" ">
-                    <img class='location-logo' style='float: right;'
-                         src="assets/images/whereami.png" style=" ">
-
-
-                    <span class='container'>
-                          <span class="name">  Restaurant's name </span>
-                    <br/>
-
-                           <span class="address"> Address for this restaurant </span>
-                    <br/>
-                        <span class="rating">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/superstar.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-                         <img class='star' src="assets/images/star.png" style=" ">
-
-                    </span>
-                    </span>
-                </a>
-            </li>
         </ul>
     </div>
     <div data-role="footer" data-id="tab1">
@@ -1264,7 +1237,8 @@
 
 <!-- restaurant-card page -->
 <style>
-    #restouran-card .body-container .title .contecst-area, #info-page .body-container .title .contecst-area{
+    #restouran-card .body-container .title .contecst-area, #info-page .body-container .title
+    .contecst-area{
     -webkit-border-radius: 10px;
     margin-top: 7px;
     padding: 3%;
@@ -1288,12 +1262,25 @@
 
 
 </style>
+<script>
+     $(document).on("click", "#restouran-page ul.restaurant-list li a", select_restaurant);
+
+ function select_restaurant(){
+  restaurant  = JSON.parse(localStorage['rest'])[$(this).attr('id')];
+  localStorage['current_restaurant'] = JSON.stringify( restaurant);
+  $('#restouran-card .right-column h3.title').html(restaurant['name']);
+  $('#restouran-card .right-column .address').html(restaurant["address"]);
+  $('#restouran-card .contecst-area .content').html(restaurant["description"]);
+  $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating'][0]));
+
+ }
+</script>
 <div data-role="page" id="restouran-card">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1311,35 +1298,20 @@
                     <img src="assets/images/logo.png" alt="image" style="width: 100%;">
                 </div>
             </div>
-            <div class="ui-block-b" style="width: 60%;">
+            <div class="ui-block-b right-column" style="width: 60%;">
                 <div style="width: 100%; height: auto; position: relative; ">
-                    Zagat
-                    <br/>
+                    <h3 class = 'title' style = 'margin: 0;'></h3>
+                    <div class='address' style='word-wrap: break-word; width: 100%;'>
 
-                    <div class='content' style='word-wrap: break-word; width: 100%;'>
-                        One Miami Tovel
-                        One Miami Tovel
-                        One Miami Tovel
-                        One Miami Tovel
-                        One Miami Tovel
-                        One Miami Tovel
                     </div>
 
                 </div>
 
             </div>
             <div class="ui-block-b contecst-area" style="width: 100%; max-height: 400px;">
-                <div style="font-weight: 100; font-size: 12px; max-height: 215px; overflow: auto; ">
-                    Zagat
+                <div class = 'content' style="font-weight: 100; font-size: 12px; max-height: 215px; overflow: auto; ">
 
 
-                    <br/>
-                    One Miami Tovel
-                    One Miami Tovel
-                    One Miami Tovel
-                    One Miami Tovel
-                    One Miami Tovel
-                    One Miami Tovel
                 </div>
                 <div class="ui-grid-a footer-section" style='width: 100%; padding-top: 10px'>
 
@@ -1352,19 +1324,11 @@
                         Average rating
 
                     </div>
-                    <div class="ui-block-a">
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/star.png" class="logo"/>
-                        <img src="assets/images/star.png" class="logo"/>
+                    <div class="ui-block-a  avarage_rating">
+
                     </div>
-                    <div class="ui-block-b">
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/superstar.png" class="logo"/>
-                        <img src="assets/images/star.png" class="logo"/>
-                        <img src="assets/images/star.png" class="logo"/>
+                    <div class="ui-block-b avarage_rating">
+
                     </div>
                 </div>
 
@@ -1449,7 +1413,7 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1601,7 +1565,7 @@
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1791,7 +1755,7 @@
 
     }
     #ordering-page .alert-warning{
-     background-color: green;
+    background-color: green;
     padding: 10px;
     border-radius: 10px;
     color: white;
@@ -1820,16 +1784,16 @@
     }
 
     #ordering-page h1.cart-sign{
-      position: relative;
+    position: relative;
     }
-   #ordering-page h1.cart-sign span{
-      position: absolute;
+    #ordering-page h1.cart-sign span{
+    position: absolute;
     margin-top: -2px;
-      top: 0;
-      right: 47px;
+    top: 0;
+    right: 47px;
     }
 
-   #ordering-page h1.cart-sign span img{
+    #ordering-page h1.cart-sign span img{
     width: 35px;
     height: 35px;
     }
@@ -1855,6 +1819,7 @@ localStorage.setItem( "name", "value" );
 
 
 
+
 </script>
 
 <div data-role="page" id="ordering-page">
@@ -1862,7 +1827,7 @@ localStorage.setItem( "name", "value" );
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -1877,7 +1842,6 @@ localStorage.setItem( "name", "value" );
         <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
            style='margin-left: 10px;'>
         </a>
-
 
 
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
@@ -1945,8 +1909,8 @@ localStorage.setItem( "name", "value" );
                     </span>
                 </a>
             </li>
-            <div class = 'alert-warning' style = 'z-index: 1000'>
-                <h1 style = 'text-align: center; font-size: 18px;'>Order Warning </h1>
+            <div class='alert-warning' style='z-index: 1000'>
+                <h1 style='text-align: center; font-size: 18px;'>Order Warning </h1>
                 The minimum Order for Delivery is $10
                 <a data-role="button" href="#page1" onclick='order_warning_cancel();'
                    data-role="button" data-theme="reset"
@@ -1964,7 +1928,6 @@ localStorage.setItem( "name", "value" );
         </ul>
 
 
-
         <a data-role="button" href="#page1" onclick='order_warning();'
            data-role="button" data-theme="reset"
            class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
@@ -1974,8 +1937,6 @@ localStorage.setItem( "name", "value" );
                 style=" font-weight: bold;">Check Out!</span></span>
 
         </a>
-
-
 
 
     </div>
@@ -2003,11 +1964,11 @@ localStorage.setItem( "name", "value" );
     #menu-option-page fieldset .ui-checkbox-on .ui-btn-inner:after{
 
     content: "$10"; float: right;
-     font-weight: 100; font-size: 18px;
+    font-weight: 100; font-size: 18px;
     }
 
     #menu-option-page fieldset{
-      padding-top: 10px;
+    padding-top: 10px;
 
     }
     #menu-option-page fieldset .ui-btn-inner{
@@ -2015,8 +1976,8 @@ localStorage.setItem( "name", "value" );
     padding-right: 50px;
     }
     #menu-option-page .details{
-      color: green;
-      height: 100px;
+    color: green;
+    height: 100px;
     background-color: white;
     padding: 10px;
     margin: 30px 0;
@@ -2024,7 +1985,6 @@ localStorage.setItem( "name", "value" );
 
     #menu-option-page fieldset .ui-icon{
     left: 90%;
-
 
 
     }
@@ -2038,7 +1998,7 @@ localStorage.setItem( "name", "value" );
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -2052,22 +2012,22 @@ localStorage.setItem( "name", "value" );
            style='margin-left: 10px;'>
         </a>
 
-            <div id="checkboxes1" data-role="fieldcontain">
-                <fieldset data-role="controlgroup" data-type="vertical">
+        <div id="checkboxes1" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
 
-                    <input id="checkbox1" name="" data-theme="c" type="checkbox">
-                    <label for="checkbox1">
-                        Delivery
-                    </label>
-                    <input id="checkbox2" name="" data-theme="c" type="checkbox">
+                <input id="checkbox1" name="" data-theme="c" type="checkbox">
+                <label for="checkbox1">
+                    Delivery
+                </label>
+                <input id="checkbox2" name="" data-theme="c" type="checkbox">
 
-                    <label for="checkbox2">
-                        Pickap
-                    </label>
-                </fieldset>
-            </div>
-        <div class = 'details'>
-          Details
+                <label for="checkbox2">
+                    Pickap
+                </label>
+            </fieldset>
+        </div>
+        <div class='details'>
+            Details
 
         </div>
 
@@ -2126,8 +2086,8 @@ localStorage.setItem( "name", "value" );
 
 
     #map-page .content{
-      padding-left: 0;
-      padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
     margin-bottom: 50px;
 
     }
@@ -2149,15 +2109,21 @@ localStorage.setItem( "name", "value" );
     border: none;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5e5c0),
     color-stop(6%,#cfe1b9), color-stop(13%,#c3dfae), color-stop(15%,#c2dead),
-    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694), color-stop(32%,#a6d08e),
-    color-stop(34%,#a5d589), color-stop(36%,#9ece82), color-stop(38%,#a0ce83), color-stop(40%,#9ecc81),
-    color-stop(43%,#95c977), color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a), color-stop(49%,#75b954),
-    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039), color-stop(62%,#63c03e),
-    color-stop(64%,#69bc46), color-stop(74%,#6ec14b), color-stop(77%,#72c251), color-stop(83%,#77c357),
-    color-stop(85%,#7ec55f), color-stop(91%,#84c665), color-stop(94%,#89c669), color-stop(100%,#8dc86e));
+    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694),
+    color-stop(32%,#a6d08e),
+    color-stop(34%,#a5d589), color-stop(36%,#9ece82), color-stop(38%,#a0ce83),
+    color-stop(40%,#9ecc81),
+    color-stop(43%,#95c977), color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a),
+    color-stop(49%,#75b954),
+    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039),
+    color-stop(62%,#63c03e),
+    color-stop(64%,#69bc46), color-stop(74%,#6ec14b), color-stop(77%,#72c251),
+    color-stop(83%,#77c357),
+    color-stop(85%,#7ec55f), color-stop(91%,#84c665), color-stop(94%,#89c669),
+    color-stop(100%,#8dc86e));
     }
     #map-page .content ul{
-      margin: 0px;
+    margin: 0px;
     border-radius: 0px;
     border: none;
 
@@ -2167,8 +2133,6 @@ localStorage.setItem( "name", "value" );
 
     width: 100%;
     height: 62%;
-
-
 
 
     }
@@ -2181,7 +2145,7 @@ localStorage.setItem( "name", "value" );
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -2191,55 +2155,53 @@ localStorage.setItem( "name", "value" );
     </div>
 
 
+    <div data-role="content" class=content>
+        <a data-role="button" class='back-button' data-transition="slide" href="#search"
 
+           style='margin-left: 10px;'>
+        </a>
 
-        <div data-role="content" class = content>
-            <a data-role="button" class='back-button' data-transition="slide" href="#search"
-
-               style='margin-left: 10px;'>
-            </a>
-
-            <div class="conteiner-context">
-                <ul data-role="listview"   data-divider-theme="b" data-inset="true">
-                    <li data-theme="c" class = '' data-iconshadow="true">
-                        <div data-role="fieldcontain">
-                            <input name="" id="searchinput1" placeholder="" value="" type="search">
-                        </div>
-                    </li>
-
-                </ul>
-
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false">
-
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-
-                        <a data-role="button" href="#" onclick='order_warning();'
-                           data-role="button" data-theme="reset"
-                           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-                           data-corners="true" data-shadow="true" data-iconshadow="true"
-                           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
-                                class="ui-btn-text"
-                                style=" font-weight: bold;">My location</span></span>
-
-                        </a>
+        <div class="conteiner-context">
+            <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                <li data-theme="c" class='' data-iconshadow="true">
+                    <div data-role="fieldcontain">
+                        <input name="" id="searchinput1" placeholder="" value="" type="search">
                     </div>
-                    <div class="ui-block-b">
-                        <a data-role="button" href="#restouran-page" onclick='order_warning();'
-                           data-role="button" data-theme="reset"
-                           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-                           data-corners="true" data-shadow="true" data-iconshadow="true"
-                           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
-                                class="ui-btn-text"
-                                style=" font-weight: bold;">Go to list</span></span>
+                </li>
 
-                        </a>
-                    </div>
+            </ul>
+
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false">
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+
+                    <a data-role="button" href="#" onclick='order_warning();'
+                       data-role="button" data-theme="reset"
+                       class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                       data-corners="true" data-shadow="true" data-iconshadow="true"
+                       data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                            class="ui-btn-text"
+                            style=" font-weight: bold;">My location</span></span>
+
+                    </a>
                 </div>
+                <div class="ui-block-b">
+                    <a data-role="button" href="#restouran-page" onclick='order_warning();'
+                       data-role="button" data-theme="reset"
+                       class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                       data-corners="true" data-shadow="true" data-iconshadow="true"
+                       data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                            class="ui-btn-text"
+                            style=" font-weight: bold;">Go to list</span></span>
 
+                    </a>
+                </div>
             </div>
 
-   </div>
+        </div>
+
+    </div>
 
     <div data-role="footer" data-id="tab1">
 
@@ -2274,7 +2236,7 @@ localStorage.setItem( "name", "value" );
     border-bottom-left-radius: 20px ;
 
     border-bottom-right-radius: 20px;
-   }
+    }
 
 
 </style>
@@ -2283,7 +2245,7 @@ localStorage.setItem( "name", "value" );
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -2296,7 +2258,7 @@ localStorage.setItem( "name", "value" );
         <ul class='orders-list' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c">
 
-                    First name
+                First name
                     <span class='state active'>
                         First name
                     </span>
@@ -2304,7 +2266,7 @@ localStorage.setItem( "name", "value" );
             </li>
             <li data-theme="c">
 
-                   Last Name
+                Last Name
                     <span class='state paid'>
                         Last Name
                     </span>
@@ -2312,7 +2274,7 @@ localStorage.setItem( "name", "value" );
             </li>
             <li data-theme="c">
 
-                    Email
+                Email
                     <span class='state paid'>
                        Email
                     </span>
@@ -2321,7 +2283,7 @@ localStorage.setItem( "name", "value" );
             <li data-theme="c">
 
 
-                  Address
+                Address
                     <span class='state paid'>
                        Address
                     </span>
@@ -2329,23 +2291,23 @@ localStorage.setItem( "name", "value" );
             </li>
             <li data-theme="c">
 
-                    Password
+                Password
                     <span class='state not-paid'>
                         Password
                     </span>
 
             </li>
-           <li data-theme="c">
+            <li data-theme="c">
 
-                    Re-Type
+                Re-Type
                     <span class='state not-paid'>
                         Re-Type
                     </span>
 
             </li>
-           <li data-theme="c">
+            <li data-theme="c">
 
-                    Lang
+                Lang
                     <span class='state not-paid'>
                         Lang
                     </span>
@@ -2385,7 +2347,7 @@ localStorage.setItem( "name", "value" );
         <img src="assets/images/logo.png" class="logo"/>
         <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
+           data-corners="true" data-shadow="true" data-iconshadow="true" data-rel="dialog"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
@@ -2401,7 +2363,7 @@ localStorage.setItem( "name", "value" );
 
             <div class="ui-block-b" style="width: 100%;">
                 <div style="width: 100%; height: auto; position: relative; ">
-                    <h1 style = 'text-align: center; ' >FoodPal</h1>
+                    <h1 style='text-align: center; '>FoodPal</h1>
 
 
                     <div class='content' style='word-wrap: break-word; width: 100%;'>
@@ -2451,13 +2413,13 @@ localStorage.setItem( "name", "value" );
                     One Miami Tovel
                     One Miami Tovel
                     One Miami Tovel
-                    <div class = 'sign' style = 'padding: 5px  5px 5px 50%;'>
+                    <div class='sign' style='padding: 5px  5px 5px 50%;'>
                         Best regards, FoodPal
 
                     </div>
                 </div>
-                <div class = 'fb'>
-                Our Site
+                <div class='fb'>
+                    Our Site
 
 
                 </div>
@@ -2467,8 +2429,6 @@ localStorage.setItem( "name", "value" );
 
 
         </div>
-
-
 
 
     </div>
@@ -2491,72 +2451,72 @@ localStorage.setItem( "name", "value" );
 
 <!--sign-in-->
 <style>
-  #log_in form .submit-block input {
+    #log_in form .submit-block input {
 
 
     }
     #log_in form .submit-block>div {
-    background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5 17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977 43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46 64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
+    background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5
+    17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977
+    43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46
+    64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
     border: 1px solid #506E3F;
     border-radius: 10px;
     margin-left: 0px;
     }
-    #log_in .content{
-     margin-top: 40px;
+    #log_in .log-header{
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5e5c0),
+    color-stop(6%,#cfe1b9), color-stop(13%,#c3dfae), color-stop(15%,#c2dead),
+    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694),
+    color-stop(32%,#a6d08e), color-stop(34%,#a5d589), color-stop(36%,#9ece82),
+    color-stop(38%,#a0ce83), color-stop(40%,#9ecc81), color-stop(43%,#95c977),
+    color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a), color-stop(49%,#75b954),
+    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039),
+    color-stop(62%,#63c03e), color-stop(64%,#69bc46), color-stop(74%,#6ec14b),
+    color-stop(77%,#72c251), color-stop(83%,#77c357), color-stop(85%,#7ec55f),
+    color-stop(91%,#84c665), color-stop(94%,#89c669), color-stop(100%,#8dc86e));
+    border: 1px solid green;
+    border-bottom: 0px;
+    }
+
+    #log_in .content#log_in-cotent{
+    border: 1px solid green;
+    padding: 30px;
+    min-height: 200px;
+    max-height: 250px;
     background: #94CA74;
+    border-bottom-left-radius: 10px ;
+
+    border-bottom-right-radius: 10px;
+    }
+    #log_in{
+    background: #94CA74!important;
     }
 </style>
+<script>
+
+
+</script>
 
 <div data-role="page" id="log_in">
-    <div data-role="header" class="grayheader">
-        <img src="assets/images/logo.png" class="logo"/>
-        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset"
-           class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-shadow="true" data-iconshadow="true"
-           data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
-                class="ui-btn-text">Sign In</span></span></a>
+    <div data-role="header" class="grayheader log-header" style='height: 40px'>
 
 
     </div>
 
-    <div data-role="content" class = 'content'>
-        <!--<form action="">-->
-            <!--<div data-role="fieldcontain">-->
-                <!--<label for="textinput3">-->
-                    <!--Email-->
-                <!--</label>-->
-                <!--<input name="email" id="textinput3" placeholder="" value="" type="text">-->
-            <!--</div>-->
-            <!--<div data-role="fieldcontain">-->
-                <!--<label for="textinput4">-->
-                    <!--Password-->
-                <!--</label>-->
-                <!--<input name="" id="textinput4" placeholder="" value="" type="text">-->
-            <!--</div>-->
-            <!--<div class="ui-grid-a">-->
-                <!--<div class="ui-block-a submit-block">-->
+    <div class='content' id='log_in-cotent'>
 
-                    <!--<input type="submit" value="Log in"  class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
-
-                          <!-->
-                <!--</div>-->
-                <!--<div class="ui-block-b">-->
-                <!--</div>-->
-            <!--</div>-->
-
-        <!--</form>-->
-
-        <form id="login" action="#" style = 'margin-top: 0px;'>
-        <div data-role="fieldcontain">
-        <input name="" id="textinput2" placeholder="login name" value="" type="text">
-        </div>
-        <div data-role="fieldcontain">
-        <input name="" id="textinput3" placeholder="password" value="" type="password">
-        </div>
-        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
-        class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-        data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
-        class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
+        <form id="login" action="#" style='margin-top: 0px;'>
+            <div data-role="fieldcontain">
+                <input name="" id="user_login" placeholder="login name" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <input name="" id="user_password" placeholder="password" value="" type="password">
+            </div>
+            <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+               class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+               data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
+                    class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
 
         </form>
 
@@ -2564,24 +2524,11 @@ localStorage.setItem( "name", "value" );
 
     <div data-role="footer" data-id="tab1">
 
-
-        <div data-role="navbar" class="tab-bar">
-            <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">Settings</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 
 
-
 </body>
-
-
 
 
 </html>
