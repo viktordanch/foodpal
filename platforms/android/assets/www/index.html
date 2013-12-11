@@ -19,7 +19,33 @@
     <script src="js/app/app.js"></script>
     <script src="js/app/bootstrap.js"></script>
     <script src="js/lib/jquery.mobile.js"></script>
+    <script type="text/javascript" charset="utf-8">
+   // city, country, rating list
 
+   var city = ['Fort Lauderdale', 'Miami', 'Vero Beach', 'Tallahassee', 'Miami Beach' ];
+   localStorage['counties'] = city;
+   var cart = ['item1', 'item2', 'item2', 'item3'];
+   var cuisine = ['American','Appetizers','Argentinean','Armenian', 'Asian', 'Fusion', 'Bagels', 'Baked', 'Goods', 'Baskets',  'Breakfast', ' Sandwiches' ];
+   localStorage['cuisine'] = cuisine;
+   var rating = [1, 2, 3, 4, 5 ];
+   localStorage['rating'] = rating;
+
+   // restaurant list
+   var restaurant = {};
+
+   restaurant['rest1']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
+   restaurant['rest2']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
+   restaurant['rest3']={city: ['Tallahassee','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
+
+
+   localStorage['restaurant'] = JSON.stringify(restaurant);
+   localStorage['selected_restaurant'] = {};
+
+
+
+
+
+</script>
 
 </head>
 <body>
@@ -162,9 +188,133 @@
 
     border-bottom-right-radius: 20px;
     }
+
+    #search #selectCity-listbox .ui-header, #search #selecCouisine-listbox .ui-header,  #search #selectRating-listbox-popup .ui-header{
+    width: auto;
+    }
 </style>
+<script>
+
+
+ $(document).ready(function(){
+
+
+ var city = localStorage['counties'].split(",");
+ var cuisine = localStorage['cuisine'].split(",");
+ var rating = localStorage['rating'].split(",");
+
+ for (var i=0;i<city.length;i++)
+ {
+  $('#search #select-menu #selectCity').append(
+  "<option value="+city[i]+">"+city[i]+"</option>");
+
+
+ }
+ for (var i=0;i<cuisine.length;i++)
+ {
+  $('#search #select-menu #selectCuisine').append(
+  "<option value="+cuisine[i]+">"+cuisine[i]+"</option>");
+
+
+ }
+ for (var i=0;i<rating.length;i++)
+ {
+  $('#search #select-menu #selectRating').append(
+  "<option value="+rating[i]+">"+rating[i]+"</option>");
+
+
+ }
+ // search
+
+
+
+
+ });
+ $(document).on("click", "#search #selectCity-listbox li a", find_restaurant_by_city);
+ $(document).on("click", "#search #selectCuisine-listbox li a", find_restaurant_by_city);
+ $(document).on("click", "#search #selectRating-listbox li a", find_restaurant_by_city);
+
+ function find_restaurant_by_city(){
+ var element_id= '#selectCity'
+  var city_selected = $('#selectCity option:selected');
+  var cuisine_selected = $('#selectCuisine option:selected');
+  var rating_selected = $('#selectRating option:selected');
+
+
+  restaurants = JSON.parse(localStorage['restaurant']);
+
+  rest_list = find_by_city(city_selected, restaurants, 'city');
+
+  rest_list = find_by_city(cuisine_selected, rest_list, 'cuisine');
+
+  rest_list = find_by_city(rating_selected, rest_list, 'rating');
+
+  localStorage['selected_restaurant'] = rest_list;
+
+ }
+
+ function find_by_city(city, arr, object){
+    local_array = [];
+    rest_list = {};
+    if(city.val() != ''){
+
+
+    for (key in arr){
+       if(jQuery.inArray(city.text(), restaurants[key][object]) > -1){
+         local_array.push(key);
+          rest_list[key]='';
+         $('.found-result-count .result').html(local_array.length);
+       }else{
+         $('.found-result-count .result').html(local_array.length);
+       }
+    }
+    }else{
+     if(jQuery.isEmptyObject(rest_list)){
+       rest_list = restaurants;
+     }
+    }
+    return rest_list;
+
+ };
+
+
+
+
+</script>
 
 <div data-role="page" id="search">
+
+    <!--rest_2 = [];-->
+    <!--if(cuisine_selected.val() != ''){-->
+    <!--console.log(rest_list);-->
+    <!--console.log(rest_list);-->
+    <!--for (key in rest_list)-->
+    <!--{-->
+    <!--console.log(key);-->
+
+    <!--if(jQuery.inArray(cuisine_selected.text(), restaurants[key]['cuisine']) > -1){-->
+    <!--console.log('for if condition');-->
+    <!--rest_2.push(key);-->
+    <!--$('.found-result-count .result').html(rest_2.join( ", " ));-->
+    <!--}-->
+
+    <!--}-->
+    <!--}-->
+    <!--rest_3 = [];-->
+    <!--if(city_selected.val() != ''){-->
+    <!--console.log(rest_2 );-->
+    <!--console.log(rest_2 );-->
+    <!--for (key in rest_2)-->
+    <!--{-->
+    <!--if(jQuery.inArray(city_selected.text(), restaurants[key]['city']) > -1){-->
+    <!--console.log('for if condition');-->
+    <!--rest_3.push(key);-->
+    <!--$('.found-result-count .result').html(rest_3.join( ", " ));-->
+    <!--}-->
+
+    <!--}-->
+    <!--}-->
+
 
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
@@ -208,104 +358,23 @@
             </div>
             <ul id='select-menu' data-role="listview" data-divider-theme="b" data-inset="true">
                 <li data-theme="" class='city-select'>
-                    <select id="selectmenu1" data-native-menu="false" name="" data-theme="a">
-
+                    <select id="selectCity" data-native-menu="false" name="" data-theme="a">
                         <option value="" >
-
-
                             City
-
-
-                        </option>
-                        <option value="Fort Lauderdale" onclick="alert('click');">
-                            Fort Lauderdale
-                        </option>
-                        <option value="Miami">
-                            Miami
-                        </option>
-                        <option value="Tallahassee">
-                            Tallahassee werwerwerwerwerwerwer
-                        </option>
-                        <option value="Miami Beach">
-                            Miami Beach
-                        </option>
-                        <option value="Vero Beach">
-                            Vero Beach
-                        </option>
+                       </option>
                     </select>
-
-
                 </li>
                 <li data-theme="c" class='cuisine-select'>
-                    <select id="selectmenu2" data-native-menu="false" name="" data-theme="a">
+                    <select id="selectCuisine" data-native-menu="false" name="" data-theme="a">
                         <option value="">
                             Cuisine
-
-                        </option>
-                        <option value="American">
-                            American
-                        </option>
-                        <option value="Appetizers">
-                            Appetizers
-                        </option>
-                        <option value="Argentinean">
-                            Argentinean
-                        </option>
-                        <option value="Armenian">
-                            Armenian
-                        </option>
-                        <option value="Asian">
-                            Asian
-                        </option>
-                        <option value="Fusion">
-                            Fusion
-                        </option>
-                        <option value="Bagels">
-                            Bagels
-                        </option>
-                        <option value="Baked">
-                            Baked
-                        </option>
-                        <option value="Goods">
-                            Goods
-                        </option>
-                        <option value="Baskets">
-                            Baskets
-                        </option>
-                        <option value="Brazilian">
-                            Brazilian
-                        </option>
-                        <option value="Breakfast">
-                            Breakfast
-                        </option>
-                        <option value="Sandwiches">
-                            Sandwiches
-                        </option>
+                       </option>
                     </select>
-
-
                 </li>
                 <li data-theme="c" class='rating-select'>
-                    <select id="selectmenu3" data-native-menu="false" name="" data-theme="a">
-
+                    <select id="selectRating" data-native-menu="false" name="" data-theme="a">
                         <option value="" class='select-rating'>
                             Rating
-
-                        </option>
-                        <option value="1">
-                            1
-                        </option>
-                        <option value="2">
-                            2
-                        </option>
-                        <option value="3">
-                            3
-                        </option>
-                        <option value="4">
-                            4
-                        </option>
-                        <option value="5">
-                            5
                         </option>
                     </select>
 
@@ -314,6 +383,9 @@
             </ul>
             <h4 class="found-result-count">
                 Found:
+                <span class = 'result'>
+
+                </span>
             </h4>
 
 
@@ -415,41 +487,7 @@
 
 
 </div>
-<!--&lt;!&ndash; /page &ndash;&gt;-->
-<!--<div data-role="page" id="cart">-->
-    <!--<div data-role="header" class="grayheader">-->
-        <!--<img src="assets/images/logo.png" class="logo"/>-->
-        <!--<a href="#account" data-role="button" data-theme="reset" id='sign-in'-->
-           <!--class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
-           <!--data-corners="true" data-shadow="true" data-iconshadow="true"-->
-           <!--data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span-->
-                <!--class="ui-btn-text">Sign In</span></span></a>-->
 
-    <!--</div>-->
-    <!--<div data-role="content">-->
-        <!--<h1 style=" color: #ffffff; font-size: 1.6em;   position:relative;-->
-    <!--left:50%;-->
-    <!--margin-left:-100px;-->
-    <!--width:300px;">Your Cart is Empty!</h1>-->
-    <!--</div>-->
-
-    <!--&lt;!&ndash; tab bar with custom icons &ndash;&gt;-->
-
-    <!--<div data-role="footer" data-id="tab1">-->
-        <!--<div data-role="navbar" class="tab-bar">-->
-            <!--<ul>-->
-                <!--<li><a href="#home" data-icon="custom" class="home_t">Home</a></li>-->
-                <!--<li><a href="#account" data-icon="custom" class="account_t">Account</a></li>-->
-                <!--<li><a href="#cart" data-icon="custom" class="cart_t">Cart</a></li>-->
-                <!--<li><a href="#settings" data-icon="custom" class="settings_t">Settings</a></li>-->
-                <!--<li><a href="#info" data-icon="custom" class="info_t">Info</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
-<!--</div>-->
-<!-- /page settings-->
 <style>
     #settings .page-content, #info .page-content, #account .page-content{
     margin-top: 44px;
@@ -569,44 +607,6 @@
         </div>
 
 
-
-        <!--<ul class='select-menu' data-role="listview" data-divider-theme="b" data-inset="true">-->
-            <!--<li data-theme="c" class='network'>-->
-                <!--<a href="#page1" data-transition="slide">-->
-                    <!--Network-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li data-theme="c" class='security'>-->
-                <!--<a href="#page1" data-transition="slide">-->
-                    <!--Security-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li data-theme="c" class='synchronize'>-->
-                <!--<a href="#page1" data-transition="slide">-->
-                    <!--Synchronization-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li data-theme="c" class='interface'>-->
-                <!--<a href="#page1" data-transition="slide">-->
-                    <!--Interface-->
-                <!--</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-
-
-        <!--<form id="login" action="#">-->
-        <!--<div data-role="fieldcontain">-->
-        <!--<input name="" id="textinput2" placeholder="login name" value="" type="text">-->
-        <!--</div>-->
-        <!--<div data-role="fieldcontain">-->
-        <!--<input name="" id="textinput3" placeholder="password" value="" type="password">-->
-        <!--</div>-->
-        <!--<a href="#account" id='sign-in' data-role="button" data-theme="reset"-->
-        <!--class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
-        <!--data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span-->
-        <!--class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>-->
-
-        <!--</form>-->
 
 
     </div>
@@ -2031,20 +2031,7 @@ localStorage.setItem( "name", "value" );
 
 
 </style>
-<script type="text/javascript" charset="utf-8">
-    function local_st(){
 
-alert(localStorage.getItem( "name" ));
-
-
-    }
-
-
-
-
-
-
-</script>
 <div data-role="page" id="menu-option-page">
 
     <div data-role="header" class="grayheader">
@@ -2087,7 +2074,7 @@ alert(localStorage.getItem( "name" ));
         <div class="ui-grid-a">
             <div class="ui-block-a">
 
-                <a data-role="button" href="#ordering-page" onclick='local_st();'
+                <a data-role="button" href="#ordering-page" onclick='order_warning();'
                    data-role="button" data-theme="reset"
                    class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                    data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -2098,7 +2085,7 @@ alert(localStorage.getItem( "name" ));
                 </a>
             </div>
             <div class="ui-block-b">
-                <a data-role="button" href="#menu-item-page" onclick='local_st();'
+                <a data-role="button" href="#menu-item-page" onclick='order_warning();'
                    data-role="button" data-theme="reset"
                    class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                    data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -2533,31 +2520,46 @@ alert(localStorage.getItem( "name" ));
     </div>
 
     <div data-role="content" class = 'content'>
-        <form action="">
-            <div data-role="fieldcontain">
-                <label for="textinput3">
-                    Email
-                </label>
-                <input name="email" id="textinput3" placeholder="" value="" type="text">
-            </div>
-            <div data-role="fieldcontain">
-                <label for="textinput4">
-                    Password
-                </label>
-                <input name="" id="textinput4" placeholder="" value="" type="text">
-            </div>
-            <div class="ui-grid-a">
-                <div class="ui-block-a submit-block">
+        <!--<form action="">-->
+            <!--<div data-role="fieldcontain">-->
+                <!--<label for="textinput3">-->
+                    <!--Email-->
+                <!--</label>-->
+                <!--<input name="email" id="textinput3" placeholder="" value="" type="text">-->
+            <!--</div>-->
+            <!--<div data-role="fieldcontain">-->
+                <!--<label for="textinput4">-->
+                    <!--Password-->
+                <!--</label>-->
+                <!--<input name="" id="textinput4" placeholder="" value="" type="text">-->
+            <!--</div>-->
+            <!--<div class="ui-grid-a">-->
+                <!--<div class="ui-block-a submit-block">-->
 
-                    <input type="submit" value="Log in"  class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                    <!--<input type="submit" value="Log in"  class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
 
-                          >
-                </div>
-                <div class="ui-block-b">
-                </div>
-            </div>
+                          <!-->
+                <!--</div>-->
+                <!--<div class="ui-block-b">-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</form>-->
+
+        <form id="login" action="#" style = 'margin-top: 0px;'>
+        <div data-role="fieldcontain">
+        <input name="" id="textinput2" placeholder="login name" value="" type="text">
+        </div>
+        <div data-role="fieldcontain">
+        <input name="" id="textinput3" placeholder="password" value="" type="password">
+        </div>
+        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+        class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+        data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
+        class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
 
         </form>
+
     </div>
 
     <div data-role="footer" data-id="tab1">
