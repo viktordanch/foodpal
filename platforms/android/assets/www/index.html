@@ -38,7 +38,21 @@
    restaurant['rest1']={id: 1, name: 'Rest_1', city: ['Tallahassee','Miami','Miami Beach'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
    restaurant['rest2']={id: 2, name: 'Rest_2', city: ['Tallahassee','Fort Lauderdale'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
    restaurant['rest3']={id: 3, name: 'Rest_3', city: ['Vero Beach','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
-   rest_manu = {};
+   rest_menu = {};
+   rest_menu['1']= {'First courses': {first_1: '5$' , first_2: '10$'}, 'Main Courses': {main_1:  '6$' , main_2: '12$'},
+    'Desserts': {dessert_1:  '5$' , dessert_2: '10$'},'Drinks': {drink1_1:  '5$' , drink_2: '10$'},
+    'Other Dishes': {other_1: '5$',other_2: '5$'}
+   };
+   rest_menu['2']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
+    dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
+    other: {other_1: '5$',other_2: '5$'}
+   };
+   rest_menu['3']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
+    dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
+    other: {other_1: '5$',other_2: '5$'}
+   };
+
+
 
    // restaurant card
 
@@ -56,17 +70,23 @@
                         One Miami Tovel\
                         One Miami Tovel\
                         One Miami Tovel", img: 'http://google.com' };
-   rest['3'] = {id: 1,name: 'Rest_3', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
+   rest['3'] = {id: 3,name: 'Rest_3', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
                 rating: ['3'], description: " One Miami Tovel One Miami Tovel\
                         One Miami Tovel\
                         One Miami Tovel\
                         One Miami Tovel\
                         One Miami Tovel", img: 'http://google.com' };
 
+  // user cart
+
+  user_cart ={};
+  localStorage['user_cart'] = JSON.stringify(user_cart);
+
 
    localStorage['rest'] = JSON.stringify(rest);
    localStorage['restaurant'] = JSON.stringify(restaurant);
-   localStorage['selected_restaurants'] = JSON.stringify({});;
+   localStorage['selected_restaurants'] = JSON.stringify({});
+   localStorage['rest_menu'] = JSON.stringify(rest_menu);
 
 
 
@@ -1021,6 +1041,7 @@
     #my-orders .orders-list li a span.not-paid{
     color: red;
     }
+
 </style>
 <div data-role="page" id="my-orders">
     <div data-role="header" class="grayheader">
@@ -1183,15 +1204,9 @@
 </style>
 <script>
      $(document).ready(function(){
-     selected_restaurant = JSON.parse(localStorage['selected_restaurants']);
 
-     for(key in selected_restaurant ){
-      console_log(key);
-
-
-     }
      });
-     $(document).on();
+
 
 
 
@@ -1264,16 +1279,38 @@
 </style>
 <script>
      $(document).on("click", "#restouran-page ul.restaurant-list li a", select_restaurant);
+     $(document).on("click", "#restouran-card .control .set_menu", set_menu);
 
  function select_restaurant(){
+
   restaurant  = JSON.parse(localStorage['rest'])[$(this).attr('id')];
   localStorage['current_restaurant'] = JSON.stringify( restaurant);
   $('#restouran-card .right-column h3.title').html(restaurant['name']);
   $('#restouran-card .right-column .address').html(restaurant["address"]);
   $('#restouran-card .contecst-area .content').html(restaurant["description"]);
   $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating'][0]));
-
+  $("#restouran-card .control .set_menu").attr('id',restaurant['id'] );
  }
+  function set_menu(){
+  localStorage.removeItem('menu');
+  $('#menu-group ul.menu-list').html('');
+    menu = JSON.parse(localStorage['rest_menu'])[$(this).attr('id')];
+
+    localStorage['menu']= JSON.stringify(menu);
+    for(dish in menu){
+      li = '<li data-theme="c">\
+                <a href="#menu-item-page" id = "'+dish+'" data-transition="slide"style = "display: block;" class = "menu-items">\
+                    <img class="r-logo" src="assets/images/First courses.png" >\
+                    <span class="text"> '+ dish+' </span>\
+                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
+                </a>\
+            </li>'
+
+      $('#menu-group ul.menu-list ').append( li );
+    };
+  }
+
+
 </script>
 <div data-role="page" id="restouran-card">
     <div data-role="header" class="grayheader">
@@ -1339,9 +1376,9 @@
         </div>
 
 
-        <div class="ui-block-a" style='width: 100%;'>
-            <a href="#menu-group" data-role="button" data-theme="reset" data-transition="slide"
-               class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+        <div class="ui-block-a control" style='width: 100%;'>
+            <a href="#menu-group"  data-role="button" data-theme="reset" data-transition="slide"
+               class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset set_menu"
                data-corners="true" data-shadow="true" data-iconshadow="true"
                data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                     class="ui-btn-text"
@@ -1407,6 +1444,66 @@
     }
 
 </style>
+<script>
+  $(document).on("click", "#menu-group ul.menu-list li a", set_items);
+
+  function set_items(){
+
+  $('#menu-item-page ul.items-list').html('');
+    //alert($(this).attr('id'));
+
+    items =  JSON.parse(localStorage['menu'])[$(this).attr('id')];
+
+    $('#menu-item-page ul.list-item-header li a img').attr('src',"assets/images/First courses.png");
+    $('#menu-item-page ul.list-item-header li a .text').html($(this).attr('id'));
+    $.each(items, function(key, value){
+     if(! jQuery.isEmptyObject(previus_list)){
+       item = 0;
+       cart = JSON.parse(localStorage['user_cart']);
+       for(i in cart){
+         if(i == key){
+         console.log('-----------------set---item---------');
+           item = cart[i]['item'];
+         };
+       };
+
+     };
+
+
+    li = '<li data-theme="c" data-corners="false" data-shadow="false" style= "padding: 0;"\
+        data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
+    data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
+    ui-li ui-first-child ui-btn-up-c"><div class="ui-btn-inner ui-li">\
+    <div class="ui-btn-text">\
+                <a href="#" data-transition="slide" class="ui-link-inherit">\
+                    <span class="item-name">\
+                    '+key+'\
+                        </span>\
+                    <span class="insert plus">\
+                       <img src="assets/images/plus.png">\
+                    </span>\
+                    <span class="insert price">\
+                        '+value+'\
+                    </span>\
+                    <span class="insert item">\
+                       '+item+'\
+                    </span>\
+                </a>\
+            </div>\
+            <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">\
+            &nbsp;</span>\
+            </div>\
+            </li>'
+
+
+
+    $('#menu-item-page ul.items-list').append(li);
+
+    });
+  }
+
+
+</script>
 
 <div data-role="page" id="menu-group">
     <div data-role="header" class="grayheader">
@@ -1425,46 +1522,8 @@
            style='margin-left: 10px;'>
         </a>
 
-        <ul data-role="listview" class=' menu-list ' data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
-                <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
-                    <span class='text'>   First courses </span>
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
+        <ul data-role="listview" class='menu-list' data-divider-theme="b" data-inset="true">
 
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#menu-item-page" data-transition="slide">
-
-                    <img class='r-logo' src="assets/images/main-courses.png" style=" ">
-                    <span class='text'>  Main Courses </span>
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/desserts.png" style=" ">
-                    <span class='text'>  Desserts </span>
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#menu-item-page" data-transition="slide">
-                    <img class='r-logo' src="assets/images/drinks.png" style=" ">
-                    <span class='text'> Drinks </span>
-
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#menu-item-page" data-transition="slide">
-                    <span class='text'> Other Dishes </span>
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-
-                </a>
-            </li>
         </ul>
     </div>
     <div data-role="footer" data-id="tab1">
@@ -1522,7 +1581,7 @@
     }
     #menu-item-page ul.items-list a .insert {
     float: right;
-    padding: 10px 15px 0px 15px;
+    padding: 10px 5px 0px 5px;
     font-size: 18px;
 
     }
@@ -1556,9 +1615,67 @@
 
     border-bottom-right-radius: 20px;
     }
+    #menu-item-page ul.items-list li .ui-btn-inner{
+      padding: 0;
+    }
 
 
 </style>
+<script>
+    $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+    function add_to_card(){
+
+      item_name = $.trim(jQuery(".item-name", this).html());
+      item_price = $.trim(jQuery(".insert.price", this).html());
+      item_item = parseInt(jQuery(".insert.item", this).html());
+      user_cart = JSON.parse(localStorage['user_cart']);
+      item_item = item_item +1;
+
+       user_cart[item_name] = { price: item_price, item: item_item};
+       // set item
+
+       parseInt(jQuery(".insert.item", this).html(item_item));
+       localStorage['user_cart'] = JSON.stringify(user_cart);
+    }
+    $(document).on('click',".set-user-cart-oder",set_order);
+
+    function set_order(){
+      console.log('set order');
+      user_cart = JSON.parse(localStorage['user_cart']);
+
+      $('#ordering-page ul.items-list').html('');
+      $.each(user_cart, function(dish, info){
+      console.log(dish+' '+info['price']+' '+info['item'])
+
+      li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0;"   \
+      data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
+      data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
+      ui-li ui-first-child ui-btn-up-c">\
+        <div class="ui-btn-inner ui-li">\
+        <div class="ui-btn-text">\
+                <a href="#" data-transition="slide" class="ui-link-inherit">\
+                    <span class="item-name">\
+                    '+dish+'\
+                        </span>\
+                    <span class="insert plus">\
+                       <img src="assets/images/minus.png">\
+                    </span>\
+                    <span class="insert price">\
+                        '+info['price']+'\
+                    </span>\
+                    <span class="insert item">\
+                       '+info['item']+'\
+                    </span>\
+                </a>\
+            </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;\
+            </span></div></li>'
+         $('#ordering-page ul.items-list').append(li);
+         });
+
+
+    };
+
+</script>
 
 <div data-role="page" id="menu-item-page">
     <div data-role="header" class="grayheader">
@@ -1577,7 +1694,7 @@
            style='margin-left: 10px;'>
         </a>
 
-        <ul data-role="listview" class='  item-list ' data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" class='  item-list list-item-header ' data-divider-theme="b" data-inset="true">
             <li data-theme="c">
                 <a href="#" data-transition="slide">
                     <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
@@ -1587,78 +1704,15 @@
 
         </ul>
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
-                <a href="#" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/plus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/plus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/plus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/plus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
+
 
         </ul>
 
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a data-role="button" href="#ordering-page" data-transition="slide"
+                <a data-role="button"  href="#ordering-page" data-transition="slide"
                    data-role="button" data-theme="reset"
-                   class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                   class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset set-user-cart-oder"
                    data-corners="true" data-shadow="true" data-iconshadow="true"
                    data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                         class="ui-btn-text"
@@ -1797,13 +1851,16 @@
     width: 35px;
     height: 35px;
     }
+    #ordering-page ul.items-list li .ui-btn-inner{
+    padding: 0;
+    }
 
 
 </style>
 <script type="text/javascript" charset="utf-8">
     function order_warning(){
        $('#ordering-page .alert-warning').css('display', 'block');
-alert(localStorage.getItem( "name" ));
+
 
 
     }
@@ -1813,10 +1870,36 @@ alert(localStorage.getItem( "name" ));
     }
 
 
+ $(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
+ $(document).on('click',"#ordering-page #reset-cart",reset_cart);
 
-localStorage.setItem( "name", "value" );
+ function reset_cart(){
 
+        user_cart = JSON.parse(localStorage['user_cart']);
+       user_cart = {};
+        localStorage['user_cart'] = JSON.stringify(user_cart);
+       $('#ordering-page ul.items-list').html('');
+       arr = $('#menu-item-page ul.items-list li a');
+       for(i=0; i<arr.length; i++){$('.insert.item',arr[i]).html(0)};
 
+ }
+ function remove_from_card(){
+
+   console.log('---------------------------remote-----------------------');
+    item_name = $.trim(jQuery(".item-name", this).html());
+    item_item = parseInt(jQuery(".insert.item", this).html());
+
+    item_item = item_item - 1;
+      if(item_item < 1){
+       $(this).parents('li').remove();
+      }
+       user_cart = JSON.parse(localStorage['user_cart']);
+       user_cart[item_name]['item'] = item_item;
+
+       // set item
+       parseInt(jQuery(".insert.item", this).html(item_item));
+       localStorage['user_cart'] = JSON.stringify(user_cart);
+ }
 
 
 
@@ -1832,9 +1915,9 @@ localStorage.setItem( "name", "value" );
                 class="ui-btn-text">Sign In</span></span></a>
 
         <h1 class="ui-title page-title cart-sign" role="heading" aria-level="1">CART
-                              <span class='insert plus'>
+                             <a href = '#' id = 'reset-cart'> <span class='insert plus'>
                        <img src="assets/images/minus.png"/>
-                    </span>
+                    </span></a>
         </h1>
     </div>
 
@@ -1845,70 +1928,8 @@ localStorage.setItem( "name", "value" );
 
 
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
-                <a href="#" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/minus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/minus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/minus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    <span class='item-name'>
-                    Apple pie
-                        </span>
-                    <span class='insert plus'>
-                       <img src="assets/images/minus.png"/>
-                    </span>
-                    <span class='insert price'>
-                        $5
-                    </span>
-                    <span class='insert item'>
-                       12
-                    </span>
-                </a>
-            </li>
+
+        </ul>
             <div class='alert-warning' style='z-index: 1000'>
                 <h1 style='text-align: center; font-size: 18px;'>Order Warning </h1>
                 The minimum Order for Delivery is $10
@@ -1925,7 +1946,7 @@ localStorage.setItem( "name", "value" );
 
             </div>
 
-        </ul>
+
 
 
         <a data-role="button" href="#page1" onclick='order_warning();'
