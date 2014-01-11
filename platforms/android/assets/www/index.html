@@ -13,90 +13,87 @@
     <link rel="stylesheet" href="css/custom-buttons.css"/>
     <link rel="stylesheet" href="css/application.css"/>
     <link rel="stylesheet" href="css/ios.css"/>
+    <link rel="stylesheet" href="css/android.css"/>
+
     <script src="js/lib/jquery.js"></script>
+    <script src="js/app/user.js"></script>
     <script src="js/app/ios.js"></script>
     <script src="js/app/api.js"></script>
     <!-- your scripts here -->
     <script src="js/app/app.js"></script>
     <script src="js/app/bootstrap.js"></script>
     <script src="js/lib/jquery.mobile.js"></script>
-    <script type="text/javascript" charset="utf-8">
-   // city, country, rating list
-
-   var city = ['Fort Lauderdale', 'Miami', 'Vero Beach', 'Tallahassee', 'Miami Beach' ];
-   localStorage['counties'] = city;
-   var cart = ['item1', 'item2', 'item2', 'item3'];
-   var cuisine = ['American','Appetizers','Argentinean','Armenian', 'Asian', 'Fusion', 'Bagels', 'Baked', 'Goods', 'Baskets',  'Breakfast', ' Sandwiches' ];
-   localStorage['cuisine'] = cuisine;
-   var rating = [1, 2, 3, 4, 5 ];
-   localStorage['rating'] = rating;
-
-   // restaurant list
-   var restaurant = {};
-
-
-   restaurant['rest1']={id: 1, name: 'Rest_1', city: ['Tallahassee','Miami','Miami Beach'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-   restaurant['rest2']={id: 2, name: 'Rest_2', city: ['Tallahassee','Fort Lauderdale'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-   restaurant['rest3']={id: 3, name: 'Rest_3', city: ['Vero Beach','Miami'], cuisine: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
-   rest_menu = {};
-   rest_menu['1']= {'First courses': {first_1: '5$' , first_2: '10$'}, 'Main Courses': {main_1:  '6$' , main_2: '12$'},
-    'Desserts': {dessert_1:  '5$' , dessert_2: '10$'},'Drinks': {drink1_1:  '5$' , drink_2: '10$'},
-    'Other Dishes': {other_1: '5$',other_2: '5$'}
-   };
-   rest_menu['2']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
-    dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
-    other: {other_1: '5$',other_2: '5$'}
-   };
-   rest_menu['3']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
-    dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
-    other: {other_1: '5$',other_2: '5$'}
-   };
-
-
-
-   // restaurant card
-
-   rest = {};
-
-   rest['1'] = {id: 1,name: 'Rest_', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-   rest['2'] = {id: 2,name: 'Rest_2', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['4'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-   rest['3'] = {id: 3,name: 'Rest_3', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-
-  // user cart
-
-  user_cart ={};
-  localStorage['user_cart'] = JSON.stringify(user_cart);
-
-
-   localStorage['rest'] = JSON.stringify(rest);
-   localStorage['restaurant'] = JSON.stringify(restaurant);
-   localStorage['selected_restaurants'] = JSON.stringify({});
-   localStorage['rest_menu'] = JSON.stringify(rest_menu);
+    <script type="text/javascript" src="js/app/googlemap.js"></script>
 
 
 
 
+    <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 
 
-    </script>
+
+     <script type="text/javascript" charset="utf-8">
+  </script>
 
 </head>
 <body>
+<style>
+    #my-orders .grayheader h1, #search .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register
+    .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader
+    h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
+    #restouran-card .grayheader h1, #menu-group .grayheader h1, #menu-item-page .grayheader h1{
+    font-size: 18px;
+    padding: 5.5px;
+
+    font-weight: 100;
+    }
+    #my-orders .back-button, #info-page .back-button, #profile-info .back-button, #register
+    .back-button, #settings .back-button, #map-page .back-button, #restouran-page .back-button,
+    #menu-option-page .back-button, #restouran-card .back-button,
+    #ordering-page .back-button, #menu-group .back-button, #menu-item-page .back-button{
+    width: 30px;
+    height: 30px;
+    background: green url('assets/images/arrow.png');
+    background-size: 100% 100%;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    border: none;
+    }
+    body div[data-role='content']{
+
+    padding-bottom: 70px!important;
+    margin-bottom: -100px!important;
+    min-height: 0px!important;
+    }
+    #search div[data-role='content']{
+
+    margin-bottom: -146px!important;
+    }
+
+    div[data-role="page"]{
+     background:#D6D4D5;
+    }
+    #home[data-role="page"]{
+    background: #94CA74;
+    }
+    .ui-dialog-contain.ui-overlay-shadow.ui-corner-all .ui-content.ui-body-a{
+        max-height: 300px;
+        overflow: auto;
+    }
+    #selectRating-listbox > .ui-header{
+      width: 103px;
+    }
+
+</style>
+<script>
+$(document).ready(function(){
+
+ });
+
+</script>
+
 <div data-role="page" id="home">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
@@ -111,7 +108,7 @@
     <div data-role="content" class="home-pad">
         <div class="ui-grid-a pad">
             <div class="ui-block-a">
-                <a href="#search" data-transition="slidefade">
+                <a href="#search" data-transition="slidefade" id = "link-to-search">
                     <img src="assets/images/v6_01.png" class="t_btn"/>
                 </a>
             </div>
@@ -153,256 +150,7 @@
 
 </div>
 <!-- /page  search-->
-<style>
-    #search #checkboxes2 .ui-checkbox .ui-btn-inner{
-    padding-top: 0px;
-    padding-bottom: 0px;
-    }
-    #search .search-page .found-result-count{
-    margin-bottom: 0px;
-    }
 
-    label#location-label{
-    background: none;
-    border: none;
-
-    }
-    label#location-label span.ui-btn-inner{
-    border-top: none;
-    -webkit-box-shadow: #D6D4D5;
-    }
-
-    label#location-label span.ui-icon{
-    background: #8ECC76 ;
-
-    }
-    #select-menu .ui-btn-text{
-    background: white;
-    }
-    #select-menu a span.ui-li-count{
-    border: none;
-    background: #FFFFFF;
-    font-size: 16px;
-    font-weight: 100;
-    color: green;
-
-    }
-    .found-result-count{
-    margin: 10px 0;
-    text-align: center;
-    font-weight: 100;
-    }
-    #search .ui-input-search{
-    height: 39px;
-    }
-    ul#select-menu li{
-    padding: 0;
-    border: none;
-    }
-    ul#select-menu li .ui-select a{
-    margin: 0;
-    border-radius: 0px;
-    height: 55px;
-    background: white;
-    }
-    ul#select-menu li .ui-select a span.ui-btn-inner {
-    height: 31px;
-    }
-    ul#select-menu li.city-select .ui-select a span span.ui-btn-text:after {padding-top: 5px;
-    content: "Select City "; float: right; text-overflow: ellipsis;
-    color: green; font-weight: 100; font-size: 18px;}
-    ul#select-menu li.cuisine-select .ui-select a span span.ui-btn-text:after {padding-top: 5px;
-    content: "Select Cuisine "; float: right;
-    color: green; font-weight: 100; font-size: 18px;}
-    ul#select-menu li.rating-select .ui-select a span span.ui-btn-text:after {padding-top: 5px;
-    content: "Select Rating "; float: right;
-    color: green; font-weight: 100; font-size: 18px;}
-    ul#select-menu li .ui-select a span span{
-    font-size: 28px;
-    font-weight: 150;
-    text-align: left;
-    }
-    ul#select-menu{
-
-    border-radius: 20px;
-    }
-    ul#select-menu li.city-select .ui-select a{
-    border-top-left-radius: 20px ;
-
-    border-top-right-radius: 20px;
-    }
-    ul#select-menu li.rating-select .ui-select a{
-    border-bottom-left-radius: 20px ;
-
-    border-bottom-right-radius: 20px;
-    }
-
-    #search #selectCity-listbox .ui-header, #search #selecCouisine-listbox .ui-header, #search
-    #selectRating-listbox-popup .ui-header{
-    width: auto;
-    }
-</style>
-<script>
-
-
- $(document).ready(function(){
-
-
- var city = localStorage['counties'].split(",");
- var cuisine = localStorage['cuisine'].split(",");
- var rating = localStorage['rating'].split(",");
-
- for (var i=0;i<city.length;i++)
- {
-  $('#search #select-menu #selectCity').append(
-  "<option value="+city[i]+">"+city[i]+"</option>");
-
-
- }
- for (var i=0;i<cuisine.length;i++)
- {
-  $('#search #select-menu #selectCuisine').append(
-  "<option value="+cuisine[i]+">"+cuisine[i]+"</option>");
-
-
- }
- for (var i=0;i<rating.length;i++)
- {
-  $('#search #select-menu #selectRating').append(
-  "<option value="+rating[i]+">"+rating[i]+"</option>");
-
-
- }
- // search
-
-
-
-
- });
- $(document).on("click", "#search #selectCity-listbox li a", find_restaurant_by_city);
- $(document).on("click", "#search #selectCuisine-listbox li a", find_restaurant_by_city);
- $(document).on("click", "#search #selectRating-listbox li a", find_restaurant_by_city);
- $(document).on("click", "#search #set_rest_list", set_list);
-
- function set_list(){
-
-       selected_restaurant = JSON.parse(localStorage['selected_restaurants']);
-
-      $('#restouran-page ul.restaurant-list').html('');
-      for(key in selected_restaurant ){
-      name = selected_restaurant[key]['name'];
-
-
-      rating = parseInt(selected_restaurant[key]['rating'][0]);
-
-      active_star = '<img class="star" src="assets/images/superstar.png" >';
-      pasive_star = '<img class="star" src="assets/images/star.png" >';
-
-     full_rating = set_rating(rating);
-
-      rest_id = selected_restaurant[key]['id'];
-
-      li = '<li data-theme="c" style = "border-bottom: none; padding:0;" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c">\
-                  <div class="ui-btn-inner ui-li"><div class="ui-btn-text"> \
-                <a href="#restouran-card" data-transition="slide" class="ui-link-inherit" id = "'+ rest_id+'">\
-                    <img class="r-logo ui-li-thumb" src="assets/images/magaz.png" style=" ">\
-                    <img class="sign" style="float: right;" src="assets/images/logo.png">\
-                    <img class="location-logo" style="float: right;" src="assets/images/whereami.png">\
-                    <span class="container">\
-                          <span class="name">  '+name+' </span>\
-                    <br>\
-                           <span class="address"> Address for this restaurant </span>\
-                    <br>\
-                        <span class="rating">\
-                     '+full_rating+'\
-                    </span>\
-                    </span>\
-                </a>\
-              </li>'
-
-
-
-
-
-
-          $('#restouran-page ul.restaurant-list').append(li);
-
-
-     }
-
- }
- function set_rating(rating){
-    active_star = '<img class="star" src="assets/images/superstar.png" >';
-    pasive_star = '<img class="star" src="assets/images/star.png" >';
-      full_rating = '';
-
-      for( i=0;i< rating;i++){full_rating = full_rating + active_star};
-      for( i=0;i< (5-rating);i++){full_rating = full_rating + pasive_star};
-      return full_rating;
-
-
- }
- function find_restaurant_by_city(){
-
-
-
-  var city_selected = $('#selectCity option:selected');
-  var cuisine_selected = $('#selectCuisine option:selected');
-  var rating_selected = $('#selectRating option:selected');
-  previus_list={}
-
-  restaurants = JSON.parse(localStorage['restaurant']);
-
-  rest_list = find_by_city(city_selected, restaurants, 'city', previus_list);
-  previus_list = rest_list;
-  rest_list = find_by_city(cuisine_selected, rest_list, 'cuisine', previus_list);
-  previus_list = rest_list;
-  rest_list = find_by_city(rating_selected, rest_list, 'rating', previus_list);
-
- }
-
- function find_by_city(city, arr, object, previus_list){
-
-    local_array = [];
-    rest_list = {};
-    restaurant = {};
-    if(city.val() != ''){
-     localStorage.removeItem('selected_restaurants');
-     localStorage['selected_restaurants'] = JSON.stringify({});
-
-
-    for (key in arr){
-
-       if(jQuery.inArray(city.text(), restaurants[key][object]) > -1){
-         local_array.push(key);
-
-         restaurant[key] = restaurants[key];
-         localStorage['selected_restaurants'] = JSON.stringify(restaurant);
-            rest_list[key]='';
-
-         $('.found-result-count .result').html(local_array.length);
-       }else{
-         $('.found-result-count .result').html(local_array.length);
-       }
-    }
-    }else{
-         if(jQuery.isEmptyObject(previus_list) && jQuery.isEmptyObject(rest_list) ){
-
-               rest_list = restaurants;
-          }else{
-          rest_list = previus_list;
-         }
-    }
-
-    return rest_list;
-
- };
-
-
-
-
-
-</script>
 
 <div data-role="page" id="search">
 
@@ -417,16 +165,16 @@
         <h1 class="ui-title page-title" role="heading" aria-level="1">SEARCH RESTAURANT</h1>
 
     </div>
-    <div data-role="content" class="search-page">
+    <div data-role="content" class="search-page" style = 'min-height: 0px;'>
         <div class="ui-grid-a search-block">
             <div class="ui-block-a">
                 <div data-role="fieldcontain" data-theme="a">
-                    <input data-theme="a" name="" id="searchinput1" placeholder="" value=""
+                    <input data-theme="a" name="" id="search-value" placeholder="" value=""
                            type="search">
                 </div>
             </div>
             <div class="ui-block-b"><a href="#"
-                                       onclick="alert('The data were not received. Please try again later.');"
+                                       id  = 'search-restaurant'
                                        data-role="button" data-theme="reset"
                                        class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                                        data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -489,7 +237,7 @@
                             class="ui-btn-text"> Go to list</span></span></a>
                 </div>
                 <div class="ui-block-b">
-                    <a href="#map-page" data-role="button" data-theme="reset"
+                    <a href="#map-page" data-role="button" data-theme="reset" id = "set_hotels_to_map"
                        class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                        data-corners="true" data-shadow="true" data-iconshadow="true"
                        data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -533,12 +281,12 @@
 
         <ul class='select-menu' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c" class='network'>
-                <a href="#profile-info" data-transition="slide">
+                <a href="#profile-info" data-transition="slide" id = 'set-profile-info'>
                     Profile Info
                 </a>
             </li>
             <li data-theme="c" class='security'>
-                <a href="#my-orders" data-transition="slide">
+                <a href="#my-orders" data-transition="slide" id = 'set-orders'>
                     My Orders
                 </a>
             </li>
@@ -548,7 +296,7 @@
                 </a>
             </li>
             <li data-theme="c" class='interface'>
-                <a href="#page1" data-transition="slide">
+                <a href="#" id = "log-aut-button" data-transition="slide">
                     Logout
                 </a>
             </li>
@@ -580,61 +328,6 @@
 </div>
 
 <style>
-    #settings .page-content, #info .page-content, #account .page-content{
-    margin-top: 44px;
-    background: #95C974;
-
-    }
-    #settings .page-content ul, #info .page-content ul, #account .page-content ul{
-    border: 1px solid #0E54F1;
-
-    -webkit-box-shadow: 0 7px 4px -2px #7DAB7D;
-    -moz-box-shadow: 0 7px 4px -2px #7DAB7D;
-    box-shadow: 0 7px 4px -2px #7DAB7D;
-    }
-    #settings ul.select-menu li, #info ul.select-menu li, #account ul.select-menu li{
-    padding-left: 40px;
-
-    }
-    #settings ul.select-menu li a, #info ul.select-menu li a, #account ul.select-menu li a{
-    font-weight: 100;
-
-    }
-    #settings ul.select-menu li.network, #info ul.select-menu li.network, #account ul.select-menu
-    li.network{
-
-    background: white url('assets/images/search_small.png') left bottom no-repeat;
-    background-size: auto 100%;
-    }
-    #settings ul.select-menu li.security, #info ul.select-menu li.security, #account ul.select-menu
-    li.security{
-
-    background: white url('assets/images/register_small.png') left bottom no-repeat;
-    background-size: auto 100%;
-    }
-    #settings ul.select-menu li.synchronize, #info ul.select-menu li.synchronize, #account
-    ul.select-menu li.synchronize{
-
-    background: white url('assets/images/settings_small.png') left bottom no-repeat;
-    background-size: auto 100%;
-    }
-    #settings ul.select-menu li.interface, #info ul.select-menu li.interface, #account
-    ul.select-menu li.interface{
-
-    background: white url('assets/images/help_small.png') left bottom no-repeat;
-    background-size: auto 100%;
-    }
-    #settings .fieldcontain{
-    float: right;
-    position: absolute;
-    top: 0;
-    right: 5px;
-
-    }
-    #settings ul.setting-panel li{
-    font-weight: 100;
-    padding-left: 5px;
-    }
 </style>
 
 
@@ -867,27 +560,27 @@
     </div>
     <div data-role="content" class="registration-page">
 
-
+      <form id="logup" action="http://foodpal.com/rest_api/user/logup.json" type = 'post' >
         <div class="ui-grid-a">
             <div class="ui-block-a">
                 <h4 class="r_label">
-                    First Name
+                    Login
                 </h4>
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="first_name" data-clear-btn="true" placeholder="First Name"
+                    <input name="" id="login_f" data-clear-btn="true" placeholder="Login"
                            value="" type="text">
                 </div>
             </div>
             <div class="ui-block-a">
                 <h4 class="r_label">
-                    Last Name
+                    User name
                 </h4>
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="last_name" data-clear-btn="true" placeholder="Last Name"
+                    <input name="" id="user_name" data-clear-btn="true" placeholder="User name"
                            value="" type="text">
                 </div>
             </div>
@@ -898,22 +591,22 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="account_name" data-clear-btn="true"
+                    <input name="" id="email" data-clear-btn="true"
                            placeholder="Email" value="" type="text">
                 </div>
             </div>
-            <div class="ui-block-a">
-                <h4 class="r_label">
-                    Address
-                </h4>
-            </div>
-            <div class="ui-block-b">
-                <div data-role="fieldcontain">
-                    <input name="" id="email" data-clear-btn="Address" data-clear-btn="true"
-                           placeholder="Password" value=""
-                           type="email">
-                </div>
-            </div>
+            <!--<div class="ui-block-a">-->
+                <!--<h4 class="r_label">-->
+                    <!--Address-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="ui-block-b">-->
+                <!--<div data-role="fieldcontain">-->
+                    <!--<input name="" id="address" data-clear-btn="Address" data-clear-btn="true"-->
+                           <!--placeholder="Address" value=""-->
+                           <!--type="email">-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="ui-block-a">
                 <h4 class="r_label">
                     Password
@@ -921,9 +614,9 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="address" data-clear-btn="true" placeholder="Password"
+                    <input name="" id="password" data-clear-btn="true" placeholder="Password"
                            value=""
-                           type="text">
+                           type="password">
                 </div>
             </div>
             <div class="ui-block-a">
@@ -933,22 +626,22 @@
             </div>
             <div class="ui-block-b">
                 <div data-role="fieldcontain">
-                    <input name="" id="address" data-clear-btn="true" placeholder="  Re-Type"
+                    <input name="" id="password_confirmation" data-clear-btn="true" placeholder="Re-Type"
                            value=""
-                           type="text">
+                           type="password">
                 </div>
             </div>
-            <div class="ui-block-a">
-                <h4 class="r_label">
-                    Lang
-                </h4>
-            </div>
-            <div class="ui-block-b">
-                <div data-role="fieldcontain">
-                    <input name="" id="password" placeholder="Lang" value="" type="password">
-                </div>
-            </div>
-            <a href="#account" data-role="button" data-theme="reset" style='width: 100%'
+            <!--<div class="ui-block-a">-->
+                <!--<h4 class="r_label">-->
+                    <!--Lang-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="ui-block-b">-->
+                <!--<div data-role="fieldcontain">-->
+                    <!--<input name="" id="lang" placeholder="Lang" value="" type="text">-->
+                <!--</div>-->
+            <!--</div>-->
+            <a href="#" id = 'registration-button' data-role="button" data-theme="reset" style='width: 100%'
                class="ios green register-btn ui-btn-right ui-btn ui-btn-corner-all ui-btn-up-reset"
                data-corners="true" data-shadow="true" data-iconshadow="true"
                data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -956,6 +649,7 @@
 
 
         </div>
+      </form>
     </div>
 
 
@@ -996,51 +690,7 @@
 <!-- /page My orders -->
 <!-- Home -->
 <style>
-    #my-orders .grayheader h1, #info-page .grayheader h1, #profile-info .grayheader h1, #register
-    .grayheader h1, #settings .grayheader h1,#map-page .grayheader h1, #restouran-page .grayheader
-    h1, #menu-option-page .grayheader h1, #ordering-page .grayheader h1,
-    #restouran-card .grayheader h1, #menu-group .grayheader h1, #menu-item-page .grayheader h1{
-    font-size: 18px;
-    padding: 5px;
 
-    font-weight: 100;
-    }
-    #my-orders .back-button, #info-page .back-button, #profile-info .back-button, #register
-    .back-button, #settings .back-button, #map-page .back-button, #restouran-page .back-button,
-    #menu-option-page .back-button, #restouran-card .back-button,
-    #ordering-page .back-button, #menu-group .back-button, #menu-item-page .back-button{
-    width: 30px;
-    height: 30px;
-    background: green url('assets/images/arrow.png');
-    background-size: 100% 100%;
-    margin-bottom: 0px;
-    margin-top: 10px;
-    border: none;
-    }
-    #my-orders .orders-list{
-    margin-top: 0px;
-    border-radius: 0px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    }
-    #my-orders .orders-list li a{
-    font-size: 14px;
-    }
-    #my-orders .orders-list li a span.state{
-    font-weight: 100;
-    font-size: 12px;
-    float: right;
-    width: 61px;
-    }
-    #my-orders .orders-list li a span.active{
-    color: green;
-    }
-    #my-orders .orders-list li a span.paid{
-    color: #7C7C7C;
-    }
-    #my-orders .orders-list li a span.not-paid{
-    color: red;
-    }
 
 </style>
 <div data-role="page" id="my-orders">
@@ -1059,50 +709,10 @@
         <a data-role="button" class='back-button' data-transition="slide" href="#account">
         </a>
         <ul class='orders-list' data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
-                <a href="#" data-transition="slide">
-                    Order #105/08/25/2012
-                    <span class='state active'>
-                        Active
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    Order #105/08/25/2012
-                    <span class='state paid'>
-                        Paid
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    Order #105/08/25/2012
-                    <span class='state paid'>
-                       Paid
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
 
-                    Order #105/08/25/2012
-                    <span class='state paid'>
-                       Paid
-                    </span>
-                </a>
-            </li>
-            <li data-theme="c">
-                <a href="#page1" data-transition="slide">
-                    Order #105/08/25/2012
-                    <span class='state not-paid'>
-                        Not paid
-                    </span>
-                </a>
-            </li>
         </ul>
         <div class="ui-block-a" style='width: 100%;'>
-            <a href="#" data-role="button" data-theme="reset"
+            <a href="#" data-role="button" data-theme="reset" id = 'update_orders'
                class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                data-corners="true" data-shadow="true" data-iconshadow="true"
                data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
@@ -1129,78 +739,19 @@
 
 <!-- restourant-list page -->
 <style>
-    #restouran-page .body-container ul li,#search .body-container ul li, #menu-group .body-container ul li{
-    border-bottom: none;
+    .empty-list{
+    background: none;
+    border: none;
+    text-align: center;
+    padding-top: 30px;
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px black, 0 0 1em #A89EA3!important;
     }
-    #restouran-page .body-container ul, #search .body-container ul, #menu-group .body-container ul{
-    margin-top: 0;
-    border-radius: 0px
-
+    #restouran-page ul.restaurant-list{
+      max-height: 350px;
+    overflow: auto;
     }
-    #restouran-page .body-container,#search .body-container, #menu-group .body-container{
-    padding: 15px 0 15px 0;
-
-    }
-    #restouran-page ul li a span.address, #search ul li a span.address{
-    font-weight: 100;
-    font-size: 12px;
-    }
-    #restouran-page ul li a span.name, #search ul li a span.name{
-    font-weight: 150;
-    font-size: 16px;
-    }
-
-    #restouran-page ul.restaurant-list li a, #search ul.restaurant-list li a{
-    height: 60px;
-    padding: 1px 0px 1px 60px;
-    background-color: #A3CF8A ;
-    box-shadow: inset 0 50px 50px -20px #EAECE7;
-    }
-    #restouran-page ul li a span.container span, #search ul li a span.container span{
-    margin-left: 15px;
-    }
-    #restouran-page span.right-span, #search span.right-span{
-    vertical-align: center;
-
-    }
-    #restouran-page img.r-logo,#restouran-page img.location-logo ,#search img.r-logo,#restouran-page img.location-logo {
-    width: 54px;
-    height: 54px;
-    margin: 4px 10px ;
-    }
-    #restouran-page img.sign, #search img.sign{
-    width: 10px;
-    height: 20px;
-    margin: 20px 10px ;
-    }
-
-    #restouran-page img.r-logo, #search img.r-logo{
-    width: 52px;
-    height: 52px;
-    margin: 4px 10px ;
-    }
-    #restouran-page li a img.star, #search li a img.star{
-    width: 15px;
-    }
-  #restouran-page ul.restaurant-list li .ui-btn-inner, #search ul.restaurant-list li .ui-btn-inner{
-    background-color: #A3CF8A;
-    box-shadow: inset 0 50px 50px -20px #EAECE7;
-    }
-    #restouran-page li a span.rating, #search li a span.rating{
-    margin-left: 20px;
-    }
-
-    #restouran-page ul li .ui-li-static.ui-li {
-      padding: 0px;
-      border: none;
-    }
-
-    #restouran-page img.location-logo,#search img.location-logo {
-    width: 30px;
-    height: 30px;
-    margin: 15px 5px ;
-    }
-
 </style>
 <script>
      $(document).ready(function(){
@@ -1229,7 +780,10 @@
         </a>
 
         <ul data-role="listview" class='restaurant-list' data-divider-theme="b" data-inset="true">
-        </ul>
+            <li class = "empty-list">
+            List is empty
+            </li>
+            </ul>
     </div>
     <div data-role="footer" data-id="tab1">
         <div style="width: 100%; position: relative; background-color: #fbfbfb;">
@@ -1252,63 +806,9 @@
 
 <!-- restaurant-card page -->
 <style>
-    #restouran-card .body-container .title .contecst-area, #info-page .body-container .title
-    .contecst-area{
-    -webkit-border-radius: 10px;
-    margin-top: 7px;
-    padding: 3%;
-    width: 94%;
-    height: auto;
-    position: relative;
-    background-color: #FFFFFF;
-    border: 1px solid #b8b8b8;
-
-
-    }
-    #restouran-card .body-container .title .footer-section img{
-    width: 15px;
-    height: 15px;
-
-    }
-    #restouran-card .body-container .title, #info-page .body-container .title{
-    width: 100%;
-    padding-top: 10px
-    }
-
 
 </style>
 <script>
-     $(document).on("click", "#restouran-page ul.restaurant-list li a", select_restaurant);
-     $(document).on("click", "#restouran-card .control .set_menu", set_menu);
-
- function select_restaurant(){
-
-  restaurant  = JSON.parse(localStorage['rest'])[$(this).attr('id')];
-  localStorage['current_restaurant'] = JSON.stringify( restaurant);
-  $('#restouran-card .right-column h3.title').html(restaurant['name']);
-  $('#restouran-card .right-column .address').html(restaurant["address"]);
-  $('#restouran-card .contecst-area .content').html(restaurant["description"]);
-  $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating'][0]));
-  $("#restouran-card .control .set_menu").attr('id',restaurant['id'] );
- }
-  function set_menu(){
-  localStorage.removeItem('menu');
-  $('#menu-group ul.menu-list').html('');
-    menu = JSON.parse(localStorage['rest_menu'])[$(this).attr('id')];
-
-    localStorage['menu']= JSON.stringify(menu);
-    for(dish in menu){
-      li = '<li data-theme="c">\
-                <a href="#menu-item-page" id = "'+dish+'" data-transition="slide"style = "display: block;" class = "menu-items">\
-                    <img class="r-logo" src="assets/images/First courses.png" >\
-                    <span class="text"> '+ dish+' </span>\
-                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
-                </a>\
-            </li>'
-
-      $('#menu-group ul.menu-list ').append( li );
-    };
-  }
 
 
 </script>
@@ -1405,14 +905,6 @@
 
 <!--menu group page-->
 <style>
-    #menu-group ul.menu-list li a span.ui-icon-arrow-r, #menu-item-page ul.item-list li a
-    span.ui-icon-arrow-r{
-
-
-    position: absolute;
-    top: 33px;
-    right: 5px;
-    }
     #menu-group ul.menu-list li a span.text, #menu-item-page ul.item-list li a span.text{
 
     margin:0 0 0 80px ;
@@ -1425,7 +917,6 @@
     left: 0;
 
     }
-
     #menu-group ul.menu-list li a, #menu-item-page ul.item-list li a{
     background: #72AD5D;
     position: relative;
@@ -1443,64 +934,22 @@
     width: 60px;
     }
 
+
+    #menu-group ul.menu-list li .ui-btn-inner{
+    border: none;
+    }
+    #menu-group ul.menu-list li a span.ui-icon-arrow-r{
+    position: absolute;
+    top: 33px;
+    right: 5px;
+    }
+    #menu-group ul.menu-list{
+    max-height: 350px;
+    overflow: auto;
+    }
 </style>
 <script>
-  $(document).on("click", "#menu-group ul.menu-list li a", set_items);
 
-  function set_items(){
-
-  $('#menu-item-page ul.items-list').html('');
-    //alert($(this).attr('id'));
-
-    items =  JSON.parse(localStorage['menu'])[$(this).attr('id')];
-
-    $('#menu-item-page ul.list-item-header li a img').attr('src',"assets/images/First courses.png");
-    $('#menu-item-page ul.list-item-header li a .text').html($(this).attr('id'));
-    $.each(items, function(key, value){
-     if(! jQuery.isEmptyObject(previus_list)){
-       item = 0;
-       cart = JSON.parse(localStorage['user_cart']);
-       for(i in cart){
-         if(i == key){
-         console.log('-----------------set---item---------');
-           item = cart[i]['item'];
-         };
-       };
-
-     };
-
-
-    li = '<li data-theme="c" data-corners="false" data-shadow="false" style= "padding: 0;"\
-        data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
-    data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
-    ui-li ui-first-child ui-btn-up-c"><div class="ui-btn-inner ui-li">\
-    <div class="ui-btn-text">\
-                <a href="#" data-transition="slide" class="ui-link-inherit">\
-                    <span class="item-name">\
-                    '+key+'\
-                        </span>\
-                    <span class="insert plus">\
-                       <img src="assets/images/plus.png">\
-                    </span>\
-                    <span class="insert price">\
-                        '+value+'\
-                    </span>\
-                    <span class="insert item">\
-                       '+item+'\
-                    </span>\
-                </a>\
-            </div>\
-            <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">\
-            &nbsp;</span>\
-            </div>\
-            </li>'
-
-
-
-    $('#menu-item-page ul.items-list').append(li);
-
-    });
-  }
 
 
 </script>
@@ -1550,6 +999,7 @@
 
 
 <style>
+
     #menu-item-page ul.item-list{
     margin-top: 0;
     margin-bottom: 0;
@@ -1558,55 +1008,11 @@
     border: 0px;
     border-radius: 0;
     }
-    #menu-item-page ul.item-list li{
-    border: 0px;
-    }
-    #menu-item-page ul.item-list li .ui-li{
-    border: 0px;
-    }
-    #menu-item-page ul.item-list li a{
-
-    border: 0px;
-    }
-    #menu-item-page ul.items-list .ui-li>.ui-icon-arrow-r {
-    display: none;
-    }
-
-    #menu-item-page ul.items-list a span.item-name{
-    position: absolute;
-
-    top: 20px;
-    left: 10px;
-    font-size: 20px;
-    }
-    #menu-item-page ul.items-list a .insert {
-    float: right;
-    padding: 10px 5px 0px 5px;
-    font-size: 18px;
-
-    }
-    #menu-item-page ul.items-list a .price{
-    font-weight: 100;
-
-    }
-    #menu-item-page ul.items-list a .item{
-    font-weight: 100;
-
-    color: green;
-    }
-    #menu-item-page ul.items-list a .plus img{
-    width: 35px;
-    height: 35px;
-    margin-top: -7px;
-    padding-right: 15px;
-    }
-    #menu-item-page ul.items-list a {
-    position: relative;
-    padding-right: 0px;
-
+    #menu-item-page ul.item-list.list-item-header   li{
+      border: none;
     }
     #menu-item-page ul.items-list{
-    max-height: 400px;
+    max-height: 300px;
     overflow: auto;
     border: 0px;
     border-radius: 0px;
@@ -1615,65 +1021,9 @@
 
     border-bottom-right-radius: 20px;
     }
-    #menu-item-page ul.items-list li .ui-btn-inner{
-      padding: 0;
-    }
-
 
 </style>
 <script>
-    $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
-    function add_to_card(){
-
-      item_name = $.trim(jQuery(".item-name", this).html());
-      item_price = $.trim(jQuery(".insert.price", this).html());
-      item_item = parseInt(jQuery(".insert.item", this).html());
-      user_cart = JSON.parse(localStorage['user_cart']);
-      item_item = item_item +1;
-
-       user_cart[item_name] = { price: item_price, item: item_item};
-       // set item
-
-       parseInt(jQuery(".insert.item", this).html(item_item));
-       localStorage['user_cart'] = JSON.stringify(user_cart);
-    }
-    $(document).on('click',".set-user-cart-oder",set_order);
-
-    function set_order(){
-      console.log('set order');
-      user_cart = JSON.parse(localStorage['user_cart']);
-
-      $('#ordering-page ul.items-list').html('');
-      $.each(user_cart, function(dish, info){
-      console.log(dish+' '+info['price']+' '+info['item'])
-
-      li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0;"   \
-      data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
-      data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
-      ui-li ui-first-child ui-btn-up-c">\
-        <div class="ui-btn-inner ui-li">\
-        <div class="ui-btn-text">\
-                <a href="#" data-transition="slide" class="ui-link-inherit">\
-                    <span class="item-name">\
-                    '+dish+'\
-                        </span>\
-                    <span class="insert plus">\
-                       <img src="assets/images/minus.png">\
-                    </span>\
-                    <span class="insert price">\
-                        '+info['price']+'\
-                    </span>\
-                    <span class="insert item">\
-                       '+info['item']+'\
-                    </span>\
-                </a>\
-            </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;\
-            </span></div></li>'
-         $('#ordering-page ul.items-list').append(li);
-         });
-
-
-    };
 
 </script>
 
@@ -1695,7 +1045,7 @@
         </a>
 
         <ul data-role="listview" class='  item-list list-item-header ' data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
+            <li data-theme="c" >
                 <a href="#" data-transition="slide">
                     <img class='r-logo' src="assets/images/first_cosine.png" style=" ">
                     <span class='text'>   First courses </span>
@@ -1753,78 +1103,6 @@
 <!--ordering-page-->
 
 <style>
-    #ordering-page ul.item-list{
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: -15px;
-    margin-right: -15px;
-    border: 0px;
-    border-radius: 0;
-    }
-    #ordering-page ul.item-list li{
-    border: 0px;
-    }
-    #ordering-page ul.item-list li .ui-li{
-    border: 0px;
-    }
-    #ordering-page ul.item-list li a{
-
-    border: 0px;
-    }
-    #ordering-page ul.items-list .ui-li>.ui-icon-arrow-r {
-    display: none;
-    }
-
-    #ordering-page ul.items-list a span.item-name{
-    position: absolute;
-
-    top: 20px;
-    left: 10px;
-    font-size: 20px;
-    }
-    #ordering-page ul.items-list a .insert {
-    float: right;
-    padding: 10px 15px 0px 15px;
-    font-size: 18px;
-
-    }
-    #ordering-page ul.items-list a .price{
-    font-weight: 100;
-
-    }
-    #ordering-page ul.items-list a .item{
-    font-weight: 100;
-
-    color: green;
-    }
-    #ordering-page ul.items-list a .plus img{
-    width: 35px;
-    height: 35px;
-    margin-top: -7px;
-    padding-right: 15px;
-    }
-    #ordering-page ul.items-list a {
-    position: relative;
-    padding-right: 0px;
-
-    }
-    #ordering-page .alert-warning{
-    background-color: green;
-    padding: 10px;
-    border-radius: 10px;
-    color: white;
-    margin: 10px;
-    position: absolute;
-    top: 13%;
-    left: 4%;
-    display: none;
-    }
-
-
-    #ordering-page .items-list{
-    position: relative;
-
-    }
 
     #ordering-page ul.items-list{
     max-height: 400px;
@@ -1837,71 +1115,9 @@
     border-bottom-right-radius: 20px;
     }
 
-    #ordering-page h1.cart-sign{
-    position: relative;
-    }
-    #ordering-page h1.cart-sign span{
-    position: absolute;
-    margin-top: -2px;
-    top: 0;
-    right: 47px;
-    }
-
-    #ordering-page h1.cart-sign span img{
-    width: 35px;
-    height: 35px;
-    }
-    #ordering-page ul.items-list li .ui-btn-inner{
-    padding: 0;
-    }
-
 
 </style>
 <script type="text/javascript" charset="utf-8">
-    function order_warning(){
-       $('#ordering-page .alert-warning').css('display', 'block');
-
-
-
-    }
-    function order_warning_cancel(){
-       $('#ordering-page .alert-warning').css('display', 'none');
-
-    }
-
-
- $(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
- $(document).on('click',"#ordering-page #reset-cart",reset_cart);
-
- function reset_cart(){
-
-        user_cart = JSON.parse(localStorage['user_cart']);
-       user_cart = {};
-        localStorage['user_cart'] = JSON.stringify(user_cart);
-       $('#ordering-page ul.items-list').html('');
-       arr = $('#menu-item-page ul.items-list li a');
-       for(i=0; i<arr.length; i++){$('.insert.item',arr[i]).html(0)};
-
- }
- function remove_from_card(){
-
-   console.log('---------------------------remote-----------------------');
-    item_name = $.trim(jQuery(".item-name", this).html());
-    item_item = parseInt(jQuery(".insert.item", this).html());
-
-    item_item = item_item - 1;
-      if(item_item < 1){
-       $(this).parents('li').remove();
-      }
-       user_cart = JSON.parse(localStorage['user_cart']);
-       user_cart[item_name]['item'] = item_item;
-
-       // set item
-       parseInt(jQuery(".insert.item", this).html(item_item));
-       localStorage['user_cart'] = JSON.stringify(user_cart);
- }
-
-
 
 </script>
 
@@ -1915,7 +1131,7 @@
                 class="ui-btn-text">Sign In</span></span></a>
 
         <h1 class="ui-title page-title cart-sign" role="heading" aria-level="1">CART
-                             <a href = '#' id = 'reset-cart'> <span class='insert plus'>
+                             <a href = '#' id = 'reset-cart' style = 'display: none;'> <span class='insert plus'>
                        <img src="assets/images/minus.png"/>
                     </span></a>
         </h1>
@@ -1928,7 +1144,9 @@
 
 
         <ul class='items-list' data-role="listview" data-divider-theme="b" data-inset="true">
-
+            <li class = "empty-list">
+               Cart is empty
+            </li>
         </ul>
             <div class='alert-warning' style='z-index: 1000'>
                 <h1 style='text-align: center; font-size: 18px;'>Order Warning </h1>
@@ -1950,8 +1168,8 @@
 
 
         <a data-role="button" href="#page1" onclick='order_warning();'
-           data-role="button" data-theme="reset"
-           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+           data-role="button" data-theme="reset" style = 'display: none;'
+           class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset check-order"
            data-corners="true" data-shadow="true" data-iconshadow="true"
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text"
@@ -1982,34 +1200,6 @@
 
 
 <style>
-    #menu-option-page fieldset .ui-checkbox-on .ui-btn-inner:after{
-
-    content: "$10"; float: right;
-    font-weight: 100; font-size: 18px;
-    }
-
-    #menu-option-page fieldset{
-    padding-top: 10px;
-
-    }
-    #menu-option-page fieldset .ui-btn-inner{
-    padding-left: 10px;
-    padding-right: 50px;
-    }
-    #menu-option-page .details{
-    color: green;
-    height: 100px;
-    background-color: white;
-    padding: 10px;
-    margin: 30px 0;
-    }
-
-    #menu-option-page fieldset .ui-icon{
-    left: 90%;
-
-
-    }
-
 
 </style>
 
@@ -2095,71 +1285,15 @@
 
 
 <!--map-page-->
+<script type="text/javascript">
 
+</script>
 <style>
-    #map-page .content .conteiner-context{
-    width: 100%;
-    height: 100%;
-
-    margin-bottom: 50px;
-    position: relative;
-    }
 
 
-    #map-page .content{
-    padding-left: 0;
-    padding-right: 0;
-    margin-bottom: 50px;
-
-    }
-    #map-page .ui-grid-a {
-    width: 100%;
-    position: absolute;
-    bottom: 20px;
-    left: 0px;
-
-
-    }
-
-    #map-page .content ul li .ui-input-search {
-    background: white;
-    border-radius: 25px;
-
-    }
-    #map-page .content ul li{
-    border: none;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5e5c0),
-    color-stop(6%,#cfe1b9), color-stop(13%,#c3dfae), color-stop(15%,#c2dead),
-    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694),
-    color-stop(32%,#a6d08e),
-    color-stop(34%,#a5d589), color-stop(36%,#9ece82), color-stop(38%,#a0ce83),
-    color-stop(40%,#9ecc81),
-    color-stop(43%,#95c977), color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a),
-    color-stop(49%,#75b954),
-    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039),
-    color-stop(62%,#63c03e),
-    color-stop(64%,#69bc46), color-stop(74%,#6ec14b), color-stop(77%,#72c251),
-    color-stop(83%,#77c357),
-    color-stop(85%,#7ec55f), color-stop(91%,#84c665), color-stop(94%,#89c669),
-    color-stop(100%,#8dc86e));
-    }
-    #map-page .content ul{
-    margin: 0px;
-    border-radius: 0px;
-    border: none;
-
-    }
-
-    #map-page .content img{
-
-    width: 100%;
-    height: 62%;
-
-
-    }
 
 </style>
-<div data-role="page" id="map-page">
+<div data-role="page" id="map-page" onload="alert('load');"  >
 
 
     <div data-role="header" class="grayheader">
@@ -2177,12 +1311,12 @@
 
 
     <div data-role="content" class=content>
-        <a data-role="button" class='back-button' data-transition="slide" href="#search"
+        <a data-role="button" class='back-button' data-transition="slide" href="#search" onclick="set_map_to_none();"
 
            style='margin-left: 10px;'>
         </a>
 
-        <div class="conteiner-context">
+        <div class="conteiner-context " >
             <ul data-role="listview" data-divider-theme="b" data-inset="true">
                 <li data-theme="c" class='' data-iconshadow="true">
                     <div data-role="fieldcontain">
@@ -2191,13 +1325,16 @@
                 </li>
 
             </ul>
+            <div id="map" style = 'height: 300px;'>
 
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false">
+            </div>
+
+            <!--<img src="https://maps.googleapis.com/maps/api/staticmap?center=Madison, WI&amp;zoom=14&amp;size=288x200&amp;markers=Madison, WI&amp;sensor=false">-->
 
             <div class="ui-grid-a">
                 <div class="ui-block-a">
 
-                    <a data-role="button" href="#" onclick='order_warning();'
+                    <a data-role="button" href="#" onclick='order_warning(); set_map_view(); '
                        data-role="button" data-theme="reset"
                        class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                        data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -2208,7 +1345,7 @@
                     </a>
                 </div>
                 <div class="ui-block-b">
-                    <a data-role="button" href="#restouran-page" onclick='order_warning();'
+                    <a data-role="button" href="#restouran-page" onclick='order_warning(); '
                        data-role="button" data-theme="reset"
                        class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                        data-corners="true" data-shadow="true" data-iconshadow="true"
@@ -2229,11 +1366,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">Settings</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom"  class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom"  class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom"  class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom"  class="settings_t">Settings</a></li>
+                <li><a href="#info" data-icon="custom" onclick="set_map_to_none();" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -2241,23 +1378,42 @@
 
 <!--profile-info-->
 <style>
-    #profile-info ul li span.state{
-    float: right;
-    margin-right: 60px;
-    width: 80px;
-    text-align: left;
-    color: green;
-    font-weight: 100;
 
-    }
-
-    #profile-info ul{
-    margin-top: 0px;
+    #profile-info #profile-update div.ui-input-text{
+    margin: 0;
+    border: 1.5px solid #C1C3BE;
     border-radius: 0px;
-    border-bottom-left-radius: 20px ;
-
-    border-bottom-right-radius: 20px;
+    padding-left: 20px;
     }
+    #profile-info #profile-update .lang-update div.ui-input-text{
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    #profile-info #profile-update input.ui-input-text{
+      width: 60%;
+      padding-left: 116px;
+    }
+    #profile-info #profile-update .name-update div.ui-input-text:before {margin-right: -100%;
+    content: "Login";float: left; font-weight: bold; padding-top: 9px;
+    }
+   #profile-info #profile-update .user-name-update div.ui-input-text:before {margin-right: -100%;
+    content: "User name";float: left; font-weight: bold; padding-top: 9px;
+    }
+   #profile-info #profile-update .email-update div.ui-input-text:before {margin-right: -100%;
+    content: "Email";float: left; font-weight: bold; padding-top: 9px;
+    }
+   #profile-info #profile-update .address-update div.ui-input-text:before {margin-right: -100%;
+    content: "Address";float: left; font-weight: bold; padding-top: 9px;
+    }
+   #profile-info #profile-update .password-update div.ui-input-text:before {margin-right: -100%;
+    content: "Password";float: left; font-weight: bold; padding-top: 9px;
+    }
+
+
+   #profile-info #profile-update .lang-update div.ui-input-text:before {margin-right: -100%;
+    content: "Lang";float: left; font-weight: bold; padding-top: 9px;
+    }
+
 
 
 </style>
@@ -2270,78 +1426,53 @@
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
-        <h1 class="ui-title page-title" role="heading" aria-level="1">ORDER HISTORY</h1>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">PROFILE INFO</h1>
     </div>
 
     <div data-role="content">
         <a data-role="button" class='back-button' data-transition="slide" href="#account">
         </a>
-        <ul class='orders-list' data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-theme="c">
+        <form id = 'profile-update' action="">
+              <div class = 'name-update'>
+                <input name="" id="login_f" data-clear-btn="true" placeholder="Login"
+                       value="" type="text">
+               </div>
+            <div class = 'user-name-update'>
+                 <input name="" id="user-name" data-clear-btn="true" placeholder="User name"
+                        value="" type="text">
+            </div>
+            <div class = 'email-update'>
 
-                First name
-                    <span class='state active'>
-                        First name
-                    </span>
+                <input name="" id="email" data-clear-btn="true" placeholder="Email"
+                       value="" type="text">
+            </div>
+            <!--<div class = 'address-update'>-->
+                <!--<input name="" id="address" data-clear-btn="true" placeholder="Address"-->
+                       <!--value="" type="text">-->
+            <!--</div>-->
+            <div class = 'password-update'>
+                <input name="" id="password" data-clear-btn="true" placeholder="Password"
+                       value="" type="password">
+            </div>
 
-            </li>
-            <li data-theme="c">
+            <!--<div class = 'lang-update'>-->
+                <!--<input name="" id="lang" data-clear-btn="true" placeholder="Lang"-->
 
-                Last Name
-                    <span class='state paid'>
-                        Last Name
-                    </span>
-
-            </li>
-            <li data-theme="c">
-
-                Email
-                    <span class='state paid'>
-                       Email
-                    </span>
-
-            </li>
-            <li data-theme="c">
+                       <!--value="" type="text">-->
+            <!--</div>-->
 
 
-                Address
-                    <span class='state paid'>
-                       Address
-                    </span>
 
-            </li>
-            <li data-theme="c">
+            <div class="ui-block-a" style='width: 100%;'>
+                <a href="#" data-role="button" data-theme="reset" id = 'save-update'
+                   class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                   data-corners="true" data-shadow="true" data-iconshadow="true"
+                   data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
+                        class="ui-btn-text" style=" font-weight: bold;"> Save & Update</span></span></a>
+            </div>
+        </form>
 
-                Password
-                    <span class='state not-paid'>
-                        Password
-                    </span>
 
-            </li>
-            <li data-theme="c">
-
-                Re-Type
-                    <span class='state not-paid'>
-                        Re-Type
-                    </span>
-
-            </li>
-            <li data-theme="c">
-
-                Lang
-                    <span class='state not-paid'>
-                        Lang
-                    </span>
-
-            </li>
-        </ul>
-        <div class="ui-block-a" style='width: 100%;'>
-            <a href="#" data-role="button" data-theme="reset"
-               class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-               data-corners="true" data-shadow="true" data-iconshadow="true"
-               data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
-                    class="ui-btn-text" style=" font-weight: bold;"> Save & Update</span></span></a>
-        </div>
 
     </div>
     <!-- tab bar with custom icons -->
@@ -2472,47 +1603,6 @@
 
 <!--sign-in-->
 <style>
-    #log_in form .submit-block input {
-
-
-    }
-    #log_in form .submit-block>div {
-    background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5
-    17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977
-    43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46
-    64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
-    border: 1px solid #506E3F;
-    border-radius: 10px;
-    margin-left: 0px;
-    }
-    #log_in .log-header{
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5e5c0),
-    color-stop(6%,#cfe1b9), color-stop(13%,#c3dfae), color-stop(15%,#c2dead),
-    color-stop(17%,#bbdca5), color-stop(23%,#b2d89b), color-stop(26%,#add694),
-    color-stop(32%,#a6d08e), color-stop(34%,#a5d589), color-stop(36%,#9ece82),
-    color-stop(38%,#a0ce83), color-stop(40%,#9ecc81), color-stop(43%,#95c977),
-    color-stop(45%,#9ace7c), color-stop(47%,#8bcf6a), color-stop(49%,#75b954),
-    color-stop(51%,#61bb3f), color-stop(53%,#61bb3f), color-stop(55%,#5ec039),
-    color-stop(62%,#63c03e), color-stop(64%,#69bc46), color-stop(74%,#6ec14b),
-    color-stop(77%,#72c251), color-stop(83%,#77c357), color-stop(85%,#7ec55f),
-    color-stop(91%,#84c665), color-stop(94%,#89c669), color-stop(100%,#8dc86e));
-    border: 1px solid green;
-    border-bottom: 0px;
-    }
-
-    #log_in .content#log_in-cotent{
-    border: 1px solid green;
-    padding: 30px;
-    min-height: 200px;
-    max-height: 250px;
-    background: #94CA74;
-    border-bottom-left-radius: 10px ;
-
-    border-bottom-right-radius: 10px;
-    }
-    #log_in{
-    background: #94CA74!important;
-    }
 </style>
 <script>
 
@@ -2527,19 +1617,21 @@
 
     <div class='content' id='log_in-cotent'>
 
-        <form id="login" action="#" style='margin-top: 0px;'>
+        <form enctype =""  name="multiform" id="login" action="http://foodpal.com/rest_api/user/login.json" method= 'post'  style='margin-top: 0px;'>
             <div data-role="fieldcontain">
-                <input name="" id="user_login" placeholder="login name" value="" type="text">
+                <input name="username" id="user_login" placeholder="login name" value="" type="text">
             </div>
             <div data-role="fieldcontain">
-                <input name="" id="user_password" placeholder="password" value="" type="password">
+                <input name="password" id="user_password" placeholder="password" value="" type="password">
             </div>
+
             <a href="#account" id='sign-in' data-role="button" data-theme="reset"
                class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
                     class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Sign In</span></span></a>
 
         </form>
+
 
     </div>
 
