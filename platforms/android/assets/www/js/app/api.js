@@ -10,12 +10,13 @@ function Api(){
     console.log(name+' '+ password);
     answer= {};
     user = {};
-
-
+    console.log(window.location['hash']== "#ordering-page&ui-state=dialog");
+    window_location = window.location['hash'];
 
     $.ajax({
+
                type: 'POST',
-               url: 'http://localhost:3000/api/users/sign_in',
+               url: (url + '/api/users/sign_in'),
                dataType: 'json',
                data: {user: {login: name, password: password}},
                success: function(data) {
@@ -30,10 +31,20 @@ function Api(){
                    user['password'] = password;
 
                    localStorage['user'] = JSON.stringify(user);
+                   console.log("--------sign in success-------------------------------")
                    set_profile_info();
-                   window.location.href = "#profile-info";
                    alert('sign in success');
-                   console.log(data)  },
+                   if(window_location =='#ordering-page&ui-state=dialog'){
+                      user_cart = JSON.parse(localStorage['user_cart']);
+                      user = JSON.parse(localStorage['user']);
+                      loc_id = JSON.parse(localStorage['current_restaurant'])['location_id'];
+                      //set url
+                      $('#ordering-page #create_cart_link').attr('href', 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'')
+                      window.location['href'] = "#ordering-page";
+                   }else{
+                     window.location.href = "#profile-info";
+                   }
+                    },
                error: function(data) {
 
                    answer = data;
@@ -71,7 +82,7 @@ function Api(){
          //  localStorage['user'] = JSON.stringify({});
          $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:3000/api/users/destroy',
+                    url: (url + '/api/users/destroy'),
                     data:  {authentication_token: user['token']},
 
                     success: function(data) {
@@ -120,7 +131,7 @@ function Api(){
    console.log(user);
    $.ajax({
               type: 'POST',
-              url: 'http://localhost:3000/api/users/create',
+              url: (url + '/api/users/create'),
               dataType: 'json',
               data:  {user: user},
               success: function(data) {
@@ -189,7 +200,7 @@ function Api(){
 
    $.ajax({
            type: 'GET',
-           url: 'http://127.0.0.1:3000/api/users/update',
+           url: ( url + '/api/users/update'),
 
            data:  {
                 authentication_token: token,
@@ -241,7 +252,7 @@ function Api(){
 
     $.ajax({
                type: 'POST',
-               url: 'http://localhost:3000/api/users/orders',
+               url: (url + '/api/users/orders'),
                data:  {authentication_token: user['token']},
                success: function(data) {
                 console.log(data) ;
@@ -266,7 +277,7 @@ function Api(){
 
     $.ajax({
                type: 'POST',
-               url: 'http://localhost:3000/api/users/orders',
+               url: (url + '/api/users/orders'),
                data:  {authentication_token: user['token']},
               success: function(data) {
               console.log(data);
@@ -291,13 +302,16 @@ function Api(){
  console.log("-------------set_params_for_search------------------------");
   cusines = [];
    $.ajax({
-                 type: 'GET',
-                 url: 'http://127.0.0.1:3000/api/restaurants/set_select_params',
+                 url: (url + '/api/restaurants/set_select_params'),
+                 crossDomain: true,
                  dataType: 'json',
+                 type: 'GET',
                  data: {},
                  success: function(data) {
                      answer = data;
-                     localStorage['cusines'] = JSON.stringify(answer['cusines']);
+                     answer['cuisines'].unshift('Cuisine');
+                     answer['cities'].unshift('City');
+                     localStorage['cusines'] = JSON.stringify(answer['cuisines']);
                      localStorage['city'] = JSON.stringify(answer['cities']);
                      set_search_selects();
                      console.log(data)  },
@@ -315,44 +329,56 @@ function Api(){
 
  this.search_by_params = function(){
  console.log("------------search by params------------------------");
+ console.log(localStorage['cusines']);
+ console.log(localStorage['city']);
+   if(localStorage['cusines'] == "" || localStorage['city'] == ""){
+     alert('Pleas try again');
+     window.location.href = "";
 
-  parametr = $('#search-value').val();
-  console.log( parametr);
-    console.log( parametr);
-       cities = JSON.parse(localStorage['city']);
-      city = cities[parseInt($('#selectCity option:selected').val())];
-      cusines = JSON.parse(localStorage['cusines']);
-      cusine  = cusines[parseInt( $('#selectCuisine option:selected').val())];
+   }else{
+        parametr = $('#search-value').val();
+        console.log( parametr);
+        console.log( parametr);
+        cities = JSON.parse(localStorage['city']);
+        city = cities[parseInt($('#selectCity option:selected').val())];
+        cusines = JSON.parse(localStorage['cusines']);
+        cusine  = cusines[parseInt( $('#selectCuisine option:selected').val())];
 
-      ratings = JSON.parse(localStorage['rating']);
-      rating= ratings[parseInt( $('#selectRating option:selected').val())];
-      data = {city: city, cusine: cusine, rating: rating, search_parametr: parametr};
-     restaurants = [];
+        ratings = JSON.parse(localStorage['rating']);
+        rating= ratings[parseInt( $('#selectRating option:selected').val())];
+        user_location = JSON.parse(localStorage['user_location']);
+        data = {city: city, cusine: cusine, rating: rating, search_parametr: parametr, user_location: user_location};
+        restaurants = [];
 
-     $.ajax({
-              type: 'GET',
-               url: 'http://127.0.0.1:3000/api/restaurants/search_by_params',
-               dataType: 'json',
-               data: data ,
-               success: function(data) {
-                   answer = data;
-                   answer.locations
-                    localStorage['selected_restaurants'] = JSON.stringify(answer.locations);
-                   $('h4.found-result-count .result').html(answer.locations.length);
+        $.ajax({
 
-                   console.log(data)  },
-               error: function(data) {
-                  console.log(data['responseText']);
-                }
-           });
-     }
+                url: (url + '/api/restaurants/search_by_params'),
+                crossDomain: true,
+                dataType: 'json',
+                type: 'GET',
+                data: data ,
+                success: function(data) {
+                    answer = data;
+                    answer.locations
+                     localStorage['selected_restaurants'] = JSON.stringify(answer.locations);
+                    $('h4.found-result-count .result').html(answer.locations.length);
+
+                    console.log(data)  },
+                error: function(data) {
+                   console.log(data['responseText']);
+                 }
+            });
+
+   }
+
+ }
 
      this.set_menu = function(){
      resr_id = $("#restouran-card .control .set_menu").attr('id' );
 
      $.ajax({
               type: 'GET',
-               url: 'http://127.0.0.1:3000/api/restaurants/set_menu',
+               url: (url + '/api/restaurants/set_menu'),
                dataType: 'json',
                data: {rest_id: resr_id} ,
                success: function(data) {
@@ -366,71 +392,44 @@ function Api(){
            });
      }
 
-
-
-
-
-
-}
-
- function api_log_in(){
-
-    var name = $('#log_in form#login #user_login').val();
-    var password = $('#log_in form#login #user_password').val();
-
-    console.log(name+' '+ password);
-    answer= {};
-    user = {};
-
-
-
-    $.ajax({
-               type: 'POST',
-               url: 'http://127.0.0.1:3000/api/users/sign_in',
+     this.create_cart = function(){
+     //resr_id = $("#restouran-card .control .set_menu").attr('id' );
+     user = JSON.parse(localStorage['user']);
+     cart = JSON.parse(localStorage['user_cart']);
+     $.ajax({
+              type: 'GET',
+               url: (url + '/api/orders/create_cart'),
                dataType: 'json',
-               data: {user: {login: name, password: password}},
+               data: {authentication_token: user['token'], cart: cart } ,
                success: function(data) {
                    answer = data;
 
-                   user['token'] = answer['auth_token']      ;
-                   user['login'] = answer['user']['login']   ;
-                   user['name'] = answer['user']['name'];
-                   user['language'] = answer['user']['language'];
-                   user['email'] = answer['user']['email'];
-                   user['address'] = answer['user']['address'];
-                   user['password'] = password;
-
-                   localStorage['user'] = JSON.stringify(user);
-                   set_profile_info();
-                   window.location.href = "#profile-info";
-                   alert('sign in success');
                    console.log(data)  },
                error: function(data) {
-
-                   answer = data;
-                   console.log(data);
-                   user = {};
-                   message = '';
-                   errors = JSON.parse(answer['responseText']);
-                   for(key in errors  ){
-
-                   error = errors[key][0];
-
-                   message = message  +key+': ' +error + '\n';
-
-                   }
-
-
-                   alert(message);
-
-
-                   console.log(data['responseText'])
-                   return false;
-               }
-
-
+                     answer = data;
+                      console.log(data);
+                      user = {};
+                      message = '';
+                      try {
+                        errors = JSON.parse(answer['responseText']);
+                        for(key in errors  ){
+                        error = errors[key][0];
+                        message = message  +key+': ' +error + '\n';
+                        }
+                         alert('Pleas sign in before');
+                         console.log(data['responseText'])
+                         return false;
+                      } catch(e) {
+                        return false;
+                      }
+                }
            });
+     }
 
-  return user;
+
+
+
+
 
 }
+

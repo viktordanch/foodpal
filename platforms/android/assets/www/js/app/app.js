@@ -1,11 +1,13 @@
    // city, country, rating list
 
+   localStorage['map_collection'] = localStorage['user_location'] = JSON.stringify([])
+   url = 'http://perechin.net:3000'
    var city = [];
    localStorage['counties'] = city;
    var cart = ['item1', 'item2', 'item2', 'item3'];
    var cusines = [];
    localStorage['cusines'] = cusines;
-   var rating = [1, 2, 3, 4, 5 ];
+   var rating = ['Rating', 1, 2, 3, 4, 5 ];
    localStorage['rating'] = JSON.stringify(rating);
 
    // restaurant list
@@ -39,26 +41,7 @@
 //    };
 
 
-   rest['1'] = {id: 1,name: 'Rest_', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-   rest['2'] = {id: 2,name: 'Rest_2', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['4'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-   rest['3'] = {id: 3,name: 'Rest_3', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',
-                rating: ['3'], description: " One Miami Tovel One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel\
-                        One Miami Tovel", img: 'http://google.com' };
-
-  // user cart
+    // user cart
 
   user_cart ={};
   localStorage['user_cart'] = JSON.stringify(user_cart);
@@ -151,7 +134,7 @@
 // $(document).on("click", " #selectCity-menu li a", find_restaurant_by_city);
 // $(document).on("click", " #selectCuisine-menu li a", find_restaurant_by_city);
 // $(document).on("click", "#search #selectRating-listbox li a", find_restaurant_by_city);
- $(document).on("click", "#search #set_rest_list", set_rest_list);
+ $(document).on("click", "#search #set_rest_list, #map-page #go-to-list", set_rest_list);
  $(document).on("click", "#search #search-restaurant", find_restaurant_by_city);
  $(document).on("click", "#log-aut-button", log_out);
  $(document).on("click", "#registration-button", log_up);
@@ -161,6 +144,54 @@
  $(document).on('click', '#log_in form #sign-in', log_in);
  $(document).on('click', '#search  #set_hotels_to_map', set_to_map);
  $(document).on('click', '#my-orders  #update_orders', update_orders);
+ $(document).on('click', '#ordering-page  #create_cart_link', check_and_create_cart);
+
+ // set and create cart
+ function check_and_create_cart(){
+  console.log('--------------check oau-----------------------------');
+  console.log('--------------check oau-----------------------------');
+  total = JSON.parse(localStorage['user_cart'])['total'];
+  miny_order = JSON.parse(localStorage['current_restaurant'])['miny_order'];
+   console.log(total);
+   console.log(miny_order);
+  if(total < miny_order){
+    alert(" Order Warning. The minimum Order for Delivery is $"+miny_order+"" );
+    return false;
+  }else{
+    console.log();
+    console.log("cart");
+    var api = new Api;
+    api.create_cart();
+  }
+
+ }
+
+ function user_log_in(){
+
+    if(jQuery.isEmptyObject( JSON.parse(localStorage['user']))){
+
+        user = {};
+        response = {}
+        response = api_log_in();
+        console.log("-----user----------"+user+"------------------------");
+        console.log("-----response----------"+response+"------------------------");
+
+    //    user['address'] = response['user']['field_addresses']['und']['0']['value'];
+    //    user['uid'] = parseInt(response['user']['uid']);
+    //    user['username'] = response['user']['name'];
+    //    user['name'] = response['user']['field_name']['und'][0]['value'];
+    //    user['mail'] = response['user']['mail'];
+    //    user['lang'] =response['user']['field_language']['und'][0]['value'];
+    //    user['token'] = get_token();
+    //    user['password']= password;
+
+    }
+    else{
+     alert('user already sing in');
+    }
+
+   };
+
 
  //set list cusines and cities
  $(document).on('click', '#home  #link-to-search', set_select_params);
@@ -232,14 +263,14 @@
            api.update_orders();
    }
    function set_to_map(){
-      console.log('set map');
-       var map = new GoogleMap();
+        var map = new GoogleMap();
         $ ('#map-page').css('display','block');
-        map.initialize();
-
-
-
+        collection = JSON.parse(localStorage['selected_restaurants']);
+        localStorage['map_collection'] = JSON.stringify(collection);
+        user = 'none';
+        map.initialize(collection, user);
    }
+
    function set_map_to_none(){
      $('#map-page').css('display','none');
    }
@@ -317,8 +348,8 @@
 
   }
   function log_in(){
-
-    user_log_in();
+    var user = new User;
+    user.log_in();
 
   }
  function log_out(){
@@ -493,6 +524,9 @@
 
  }
 
+
+
+
  function find_by_city(city, arr, object, previus_list){
 
     local_array = [];
@@ -544,14 +578,14 @@
   $('#restouran-card .right-column .address').html(restaurant["address"]);
   $('#restouran-card .contecst-area .content').html(restaurant["description"]);
   $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating']));
-  $("#restouran-card .control .set_menu").attr('id',rest_id );
+  $("#restouran-card .control .set_menu, #restouran-card .control .show_rest_location").attr('id',rest_id );
  }
 
   function set_menu(){
     var api = new Api;
     api.set_menu();
   }
-
+  console.log('----------------------------menu-group---------------------')
   function create_menu_list(){
    $('#menu-group ul.menu-list').html('');
    menu = JSON.parse(localStorage['menu']);
@@ -561,7 +595,7 @@
      li = '<li data-theme="c" style = "border: none;">\
                <a href="#menu-item-page" id = "'+id +'" data-transition="slide"style = "display: block;" class = "menu-items">\
                    <img class="r-logo" src="assets/images/First courses.png" >\
-                   <span class="text">'+ name +' </span>\
+                   <span class="text" style="padding-right: 30px;">'+ name +' </span>\
                    <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>\
                </a>\
            </li>'
@@ -606,20 +640,22 @@
 //       };
 
 
+        console.log('------------set width----------------------');
+        console.log(($('html').width()-210) + 'px');
        li = '<li data-theme="c" data-corners="false" data-shadow="false" style= "padding: 0; border: none;"\
            data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
        data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
        ui-li ui-first-child ui-btn-up-c"><div class="ui-btn-inner ui-li">\
        <div class="ui-btn-text">\
-                   <a href="#" data-transition="slide" class="ui-link-inherit">\
-                       <span class="item-name">\
+                   <a href="#" data-transition="slide" id = "'+value['product_id']+'" class="ui-link-inherit">\
+                       <span class="item-name" style=" overflow: hidden;text-overflow: ellipsis; ">\
                        '+value['name']+'\
                            </span>\
                        <span class="insert plus">\
                           <img src="assets/images/plus.png">\
                        </span>\
                        <span class="insert price">\
-                           '+value['price']+'\
+                           '+value['price']+' $\
                        </span>\
                        <span class="insert item">\
                           '+item+'\
@@ -634,7 +670,7 @@
 
 
        $('#menu-item-page ul.items-list').append(li);
-
+       $('#menu-item-page ul.items-list li span.item-name').width(($('html').width()-175) + 'px');
        });
    }
 
@@ -644,21 +680,24 @@
 
 
   function add_to_card(){
-    console.log('----add-to--card-----------------');
-    console.log('----add-to--card-----------------');
-    console.log('----add-to--card-----------------');
-
     item_name = $.trim(jQuery(".item-name", this).html());
     item_price = $.trim(jQuery(".insert.price", this).html());
     item_item = parseInt(jQuery(".insert.item", this).html());
     user_cart = JSON.parse(localStorage['user_cart']);
     item_item = item_item +1;
-
-     user_cart[item_name] = { price: item_price, item: item_item};
+    console.log('puts---------to-------cart')
+    product_id = $(this).attr('id');
+    console.log(product_id)
+     user_cart[item_name] = { price: item_price, item: item_item, product_id: product_id};
      // set item
 
      parseInt(jQuery(".insert.item", this).html(item_item));
      localStorage['user_cart'] = JSON.stringify(user_cart);
+     //set total price
+     cart = JSON.parse(localStorage['user_cart']);
+     cart['total'] = total_price(cart);
+     localStorage['user_cart'] = JSON.stringify(cart);
+
   }
 
   $(document).on('click',".set-user-cart-oder",set_order);
@@ -666,37 +705,56 @@
   function set_order(){
     console.log('set order');
     user_cart = JSON.parse(localStorage['user_cart']);
+    user = JSON.parse(localStorage['user']);
+    loc_id = JSON.parse(localStorage['current_restaurant'])['location_id'];
+    //set url
+    $('#ordering-page #create_cart_link').attr('href',(url + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
 
     $('#ordering-page ul.items-list').html('');
     $.each(user_cart, function(dish, info){
-    console.log(dish+' '+info['price']+' '+info['item'])
+      if(dish == 'total'){
+          div = '<span class = "total-fed">Feed: </span>\
+                  <span class = "fed-price"></span>     \
+                  <br />                                  \
+                  <span class = "total-sume">Total: </span>\
+                  <span class = "total-price"></span>'
+       $('#ordering-page .total').html(div);
 
-    li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0; border: none;"   \
-    data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
-    data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
-    ui-li ui-first-child ui-btn-up-c">\
-      <div class="ui-btn-inner ui-li">\
-      <div class="ui-btn-text">\
-              <a href="#" data-transition="slide" class="ui-link-inherit">\
-                  <span class="item-name">\
-                  '+dish+'\
-                      </span>\
-                  <span class="insert plus">\
-                     <img src="assets/images/minus.png">\
-                  </span>\
-                  <span class="insert price">\
-                      '+info['price']+'\
-                  </span>\
-                  <span class="insert item">\
-                     '+info['item']+'\
-                  </span>\
-              </a>\
-          </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;\
-          </span></div></li>'
-       $('#ordering-page ul.items-list').append(li);
-       $(".check-order").css('display', 'block');
-       $("#reset-cart").css('display', 'block');
+      }
+      else{
+
+           li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0; border: none;"   \
+            data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
+            data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
+            ui-li ui-first-child ui-btn-up-c">\
+              <div class="ui-btn-inner ui-li">\
+              <div class="ui-btn-text">\
+                      <a href="#" data-transition="slide" class="ui-link-inherit">\
+                          <span class="item-name" style=" overflow: hidden;text-overflow: ellipsis; ">\
+                          '+dish+'\
+                              </span>\
+                          <span class="insert plus">\
+                             <img src="assets/images/minus.png">\
+                          </span>\
+                          <span class="insert price">\
+                              '+info['price']+' \
+                          </span>\
+                          <span class="insert item">\
+                             '+info['item']+'\
+                          </span>\
+                      </a>\
+                  </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;\
+                  </span></div></li>'
+               $('#ordering-page ul.items-list').append(li);
+               $('#ordering-page ul.items-list li span.item-name').width(($('html').width()-175) + 'px');
+               $(".check-order").css('display', 'block');
+               $("#reset-cart").css('display', 'block');
+       }
+        $('#ordering-page .total .total-price').html(user_cart['total'] + '$');
+        delivery_fee = JSON.parse(localStorage['current_restaurant'])['delivery_fee'];
+        $('#ordering-page .total .fed-price').html( delivery_fee+ '$');
        });
+
        if(  jQuery.isEmptyObject( JSON.parse(localStorage['user_cart']))){
           li = '<li class = "empty-list">\
                       Cart is empty\
@@ -704,10 +762,31 @@
           $('#ordering-page ul.items-list').append(li);
 
 
+
        }
 
 
   };
+  function total_price(cart){
+    if(cart['total']){
+      delete cart['total'];
+    }
+    total = 0;
+    console.log('set---total------');
+    console.log(cart);
+    for(i in cart){
+        console.log(i == 'total');
+        if(parseInt(cart[i]['item'])==0){
+           total += parseFloat(cart[i]['price']);
+        }else{
+          total += parseFloat(cart[i]['price']) * parseFloat(cart[i]['item']);
+        }
+    };
+       console.log( total);
+       $('#ordering-page .total .total-price').html(total.toFixed(2) + '$');
+        return total.toFixed(2);
+
+  }
 
 // ordering page--------------------------------------------------------------------
 
@@ -750,6 +829,7 @@
     item_name = $.trim(jQuery(".item-name", this).html());
     item_item = parseInt(jQuery(".insert.item", this).html());
 
+
     item_item = item_item - 1;
 
        user_cart = JSON.parse(localStorage['user_cart']);
@@ -758,6 +838,7 @@
        // set item
        parseInt(jQuery(".insert.item", this).html(item_item));
        localStorage['user_cart'] = JSON.stringify(user_cart);
+
        if(item_item < 1){
 
         $(this).parents('li').remove();
@@ -815,13 +896,81 @@
        }
 
 
-
+    //set total price
+    cart = JSON.parse(localStorage['user_cart']);
+    cart['total'] = total_price(cart);
+    localStorage['user_cart'] = JSON.stringify(cart);
 
  }
 
 
 
 
+ function show_restaurant(e){
+  rest_id = e.attr('id');
+  arr =   JSON.parse(localStorage['selected_restaurants']);
+  restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
+
+  localStorage['current_restaurant'] = JSON.stringify( restaurant);
+  $('#restouran-card .right-column h3.title').html(restaurant['name']);
+  $('#restouran-card .right-column .address').html(restaurant["address"]);
+  $('#restouran-card .contecst-area .content').html(restaurant["description"]);
+  $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating']));
+  $("#restouran-card .control .set_menu, #restouran-card .control .show_rest_location ").attr('id',rest_id );
+ }
+
+ // show restaurant location
+
+ $(document).on('click', '#restouran-card .show_rest_location', show_rest_location);
+
+ function  show_rest_location(){
+    console.log('show rest ');
+   id = $(this).attr('id');
+   rests =   JSON.parse(localStorage['selected_restaurants']);
+   rest = jQuery.grep(rests, function(n){ return(n.id == id );});
+    var map = new GoogleMap();
+    console.log(rest);
+    $ ('#map-page').css('display','block');
+    collection = rest;
+    localStorage['map_collection'] = JSON.stringify(collection);
+    console.log(collection);
+    user = 'none';
+    map.initialize(collection, user);
+
+ }
+
+
+// set my location
+function  set_my_location(){
+  console.log('location   my');
+  user = new User();
+  user.location();
+  var map = new GoogleMap();
+  collection = JSON.parse(localStorage['map_collection']);
+  map.initialize(collection, 'set');
+
+}
+
+// set location for search
+
+$(document).on('click', "#search #location-label", function(){
+   pervios_state = $('#in-location').is(':checked');
+
+   if(pervios_state == false){
+       user = new User();
+       user.location();
+
+       coord = JSON.parse(localStorage['user_location']);
+       if(coord.length == 0){
+         console.log('------remove------class-------------------');
+
+       };
+   }else{
+
+   }
+
+
+ });
 
 
 
