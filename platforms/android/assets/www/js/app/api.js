@@ -16,7 +16,7 @@ function Api(){
     $.ajax({
 
                type: 'POST',
-               url: (url + '/api/users/sign_in'),
+               url: 'http://perechin.net:3000/api/users/sign_in',
                dataType: 'json',
                data: {user: {login: name, password: password}},
                success: function(data) {
@@ -78,11 +78,9 @@ function Api(){
   this.log_out = function(name, password){
     console.log('log out');
     user = JSON.parse(localStorage['user'])
-           console.log("---------------log out------------------------");
-         //  localStorage['user'] = JSON.stringify({});
          $.ajax({
                     type: 'POST',
-                    url: (url + '/api/users/destroy'),
+                    url: 'http://perechin.net:3000/api/users/destroy',
                     data:  {authentication_token: user['token']},
 
                     success: function(data) {
@@ -131,7 +129,7 @@ function Api(){
    console.log(user);
    $.ajax({
               type: 'POST',
-              url: (url + '/api/users/create'),
+              url: 'http://perechin.net:3000/api/users/create',
               dataType: 'json',
               data:  {user: user},
               success: function(data) {
@@ -181,7 +179,7 @@ function Api(){
   }
 
   this.update = function(name, name, mail, address, password, password_confirmation ){
-   console.log("-------------------api log up----------------------------");
+
    user_session = JSON.parse(localStorage['user']);
     var form = $('form#profile-update');
    user = {};
@@ -190,8 +188,6 @@ function Api(){
    user['password']= $('#password', form).val();
    user['password_confirmation']= $('#password', form).val();
    user['email'] =  $('#email', form).val();
-   //user['address'] = $('#address', form).val();
-   //user['language'] =  $('#lang', form).val();
    token = JSON.parse(localStorage['user'])["token"];
    console.log('--------------------token-----------------');
    console.log(token);
@@ -200,7 +196,7 @@ function Api(){
 
    $.ajax({
            type: 'GET',
-           url: ( url + '/api/users/update'),
+           url: 'http://perechin.net:3000/api/users/update',
 
            data:  {
                 authentication_token: token,
@@ -252,7 +248,7 @@ function Api(){
 
     $.ajax({
                type: 'POST',
-               url: (url + '/api/users/orders'),
+               url:'http://perechin.net:3000/api/users/orders',
                data:  {authentication_token: user['token']},
                success: function(data) {
                 console.log(data) ;
@@ -302,7 +298,7 @@ function Api(){
  console.log("-------------set_params_for_search------------------------");
   cusines = [];
    $.ajax({
-                 url: (url + '/api/restaurants/set_select_params'),
+                 url: 'http://perechin.net:3000/api/restaurants/set_select_params',
                  crossDomain: true,
                  dataType: 'json',
                  type: 'GET',
@@ -314,9 +310,9 @@ function Api(){
                      localStorage['cusines'] = JSON.stringify(answer['cuisines']);
                      localStorage['city'] = JSON.stringify(answer['cities']);
                      set_search_selects();
-                     console.log(data)  },
+                 },
                  error: function(data) {
-                    console.log(data['responseText']);
+                    alert('Not connection with server');
                   }
 
 
@@ -328,9 +324,7 @@ function Api(){
  }
 
  this.search_by_params = function(){
- console.log("------------search by params------------------------");
- console.log(localStorage['cusines']);
- console.log(localStorage['city']);
+
    if(localStorage['cusines'] == "" || localStorage['city'] == ""){
      alert('Pleas try again');
      window.location.href = "";

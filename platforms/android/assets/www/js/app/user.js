@@ -134,6 +134,7 @@ function User(){
     }
     function showLocation(position)
     {
+      alert("your location is "+[position.coords.latitude, position.coords.longitude]+'');
       localStorage['user_location'] =  JSON.stringify([position.coords.latitude, position.coords.longitude]);
     }
   }

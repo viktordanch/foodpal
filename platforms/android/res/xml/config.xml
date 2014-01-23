@@ -4,7 +4,12 @@
     <description>
         Foodpal.com website client app.
     </description>
+    <access origin="*://*.googleapis.com/*" subdomains="true" />
+    <access origin="*://*.gstatic.com/*" subdomains="true" />
+    <access origin="*://*.google.com/*" subdomains="true" />
+    <access origin="*://*.googleusercontent.com/*" subdomains="true" />
     <access origin="*" />
+    <access origin="http://google.com" />
     <preference name="loglevel" value="DEBUG" />
     <feature name="App">
         <param name="android-package" value="com.foodpal.foodpal.App" />
@@ -13,7 +18,7 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <feature name="Device">
         <param name="android-package" value="com.foodpal.foodpal.device.Device" />

@@ -69,7 +69,7 @@ function GoogleMap(){
 
        var info = '<div id="infobox" class="">                                                                                                 \
                                    <a id = "'+rest['id']+'" href="#restouran-card" data-transition="slide" onclick="show_restaurant($(this)); set_map_to_none(); " class="ui-link">\
-                                   <img src="assets/images/plus.png" style="width:40px; float:right; padding-top:10px; padding-right: 20px"></a>\
+                                   <img src="assets/images/plus.png" style="width:40px; height: 40px; float:right; padding-top:10px; padding-right: 20px"></a>\
                                    <div class="image-container" style="width: 50px;\
                                                                              height: 60px;\
                                                                              margin-top: 10px;\
@@ -106,7 +106,6 @@ function GoogleMap(){
 
         });
         google.maps.event.addListener(marker, 'click', function() {
-  //         alert("I am marker " + marker.title);
         $('#infobox').parent().css('width', '100%');
           $('#infobox').parent().parent().css('overflow', 'hidden');
            popup.open(map, marker);
@@ -124,21 +123,4 @@ function GoogleMap(){
 
     function define_restaurant(){}
 }
-
-
-// infobox = new InfoBox({
-//        content: document.getElementById("infobox"),
-//        disableAutoPan: false,
-//        maxWidth: 150,
-//        pixelOffset: new google.maps.Size(-140, 0),
-//        zIndex: null,
-//        boxStyle: {
-//           background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-//           opacity: 0.75,
-//           width: "280px"
-//       },
-//       closeBoxMargin: "12px 4px 2px 2px",
-//       closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-//       infoBoxClearance: new google.maps.Size(1, 1)
-//   });
 

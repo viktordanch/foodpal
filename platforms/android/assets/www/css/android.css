@@ -1,3 +1,14 @@
+.footer-image-container{
+  width: 100%;
+  position: relative;
+  background-color: #fbfbfb;
+  text-align: center;
+}
+.footer-image{
+  width: auto;
+   max-height: 60px;
+}
+
 .ui-body-a, .ui-bar-a, .ui-btn-up-a,.ui-btn-hover-a,.ui-btn-down-a,
 .ui-body-b,.ui-bar-b,.ui-btn-up-b,.ui-btn-hover-b,.ui-btn-down-b,
 .ui-body-c,.ui-bar-c,.ui-btn-up-c,.ui-btn-hover-c,.ui-btn-down-c,
