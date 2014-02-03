@@ -405,82 +405,90 @@ function Api(){
 
      this.create_cart = function(){
      console.log('create cart');
-     console.log('create cart');
-     console.log('create cart');
+     console.log(window.localStorage.user);
+     console.log(window.localStorage.user_cart);
      //resr_id = $("#restouran-card .control .set_menu").attr('id' );
-     var user = JSON.parse(window.localStorage['user']);
-    var  cart = JSON.parse(window.localStorage['user_cart']);
-     $.ajax({
-              type: 'GET',
-              // url: ('http://perechin.net:3000' + '/api/orders/create_cart'),
-               url: ('http://192.168.1.52:3000' + '/api/orders/create_cart'),
-               dataType: 'json',
-               data: {authentication_token: user['token'], cart: cart } ,
-               success: function(data) {
-                  alert('ok!');
-                  try {
-                       var answer = data;
-                      var  user_cart = JSON.parse(window.localStorage['user_cart']);
-                     var   user = JSON.parse(window.localStorage['user']);
-                     var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                    var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                       //url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                       console.log(url);
-                        //window.open(url, '_blank', 'location=yes');
-                        window.open(url, "_system")
-                        console.log('chenge window');
-                        console.log('chenge window');
-                        console.log('chenge window');
+
+     if( window.localStorage.user && window.localStorage.user_cart ){
+         var user = JSON.parse(window.localStorage['user']);
+        var  cart = JSON.parse(window.localStorage['user_cart']);
+
+           $.ajax({
+                      type: 'GET',
+                      // url: ('http://perechin.net:3000' + '/api/orders/create_cart'),
+                       url: ('http://192.168.1.52:3000' + '/api/orders/create_cart'),
+                       dataType: 'json',
+                       data: {authentication_token: user['token'], cart: cart } ,
+                       success: function(data) {
+                          alert('ok!');
+                          try {
+                               var answer = data;
+                              var  user_cart = JSON.parse(window.localStorage['user_cart']);
+                             var   user = JSON.parse(window.localStorage['user']);
+                             var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
+                            var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                               //url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                               console.log(url);
+                               alert('pleas wait a few minutes');
+                                //window.open(url, '_blank', 'location=yes');
+                                window.open(url, "_system")
 
 
-                   } catch(e) {
-                   alert('catch');
-                   alert('connection wrong');
-                   return false;
-                 }
 
-                    },
-               error: function(data) {
-                     console.log('error');
-                     console.log('error');
-                     console.log('error');
-                    var  answer = data;
-                      console.log(data);
-                     var  user = {};
-                     var  message = '';
-                      if(answer.responseText == 'success'){
-                      console.log('success');
-                      console.log('success');
-                      console.log('success');
-                      var    user = JSON.parse(window.localStorage['user']);
-                       var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                       var   url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                         //url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                         window.open(url, "_system");
+                           } catch(e) {
+                           alert('catch');
+                           alert('connection wrong');
+                           return false;
+                         }
 
-                      }else{
-                        try {
-                         var    errors = JSON.parse(answer['responseText']);
-                            console.log( answer['responseText']);
-                            console.log( errors == '');
-                            for(key in errors  ){
-                            error = errors[key][0];
-                            message = message  +key+': ' +error + '\n';
-                            }
-                             alert('Pleas sign in before');
-                             console.log(data['responseText'])
-                             return false;
-                          } catch(e) {
-                            console.log('error')
-                            console.log(e)
-                            return false;
-                          }
+                            },
+                       error: function(data) {
+                             console.log('error');
+                             console.log('error');
+                             console.log('error');
+                            var  answer = data;
+                              console.log(data);
+                             var  user = {};
+                             var  message = '';
+                              if(answer.responseText == 'success'){
 
-                      }
+                                alert('pleas wait a few minutes');
+                               var    user = JSON.parse(window.localStorage['user']);
+                               var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
+                               var   url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                                 //url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                                 window.open(url, "_system");
 
-                }
-           });
-     }
+                              }else{
+                                try {
+                                 var    errors = JSON.parse(answer['responseText']);
+                                    console.log( answer['responseText']);
+                                    console.log( errors == '');
+                                    for(key in errors  ){
+                                    error = errors[key][0];
+                                    message = message  +key+': ' +error + '\n';
+                                    }
+                                     alert('Pleas sign in before');
+                                     console.log(data['responseText'])
+                                     return false;
+                                  } catch(e) {
+                                    console.log('error')
+                                    console.log(e)
+                                    return false;
+                                  }
+
+                              }
+
+                        }
+                   });
+
+
+
+        }else{
+
+        alert('user must sing in before');
+        }
+    }
 
 
 

@@ -1,7 +1,7 @@
 function User(){
   this.log_in = function(){
 
-   if(jQuery.isEmptyObject( JSON.parse(window.localStorage['user']))){
+   if(jQuery.isEmptyObject( localStorage.user)){
        var api = new Api;
        user = {};
        response = {}
