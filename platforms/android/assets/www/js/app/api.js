@@ -353,7 +353,9 @@ function Api(){
 
         var ratings = JSON.parse(window.localStorage['rating']);
         var rating= ratings[parseInt( $('#selectRating option:selected').val())];
-        var user_location = JSON.parse(window.localStorage['user_location']);
+        if(localStorage.user_location){
+          var user_location = JSON.parse(window.localStorage['user_location']);
+        }
         var data = {city: city, cusine: cusine, rating: rating, search_parametr: parametr, user_location: user_location};
         var restaurants = [];
 

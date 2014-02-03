@@ -560,10 +560,11 @@ $(' #profile-info').live('pageshow',function(event, ui){
     console.log('---------menu items---------------');
 
     $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
-
-     if(localStorage.menu){
-        build_items_page();
-      }
+     if($('#menu-item-scroll ul li').length == 0){
+         if(localStorage.menu){
+            build_items_page();
+          }
+     }
    menuItemScroll.refresh();
   })
 
@@ -743,13 +744,17 @@ $(' #profile-info').live('pageshow',function(event, ui){
 
 //       if(! jQuery.isEmptyObject(previus_list)){
            var item = 0;
-            var cart = JSON.parse(window.localStorage['user_cart']);
-            for(i in cart){
-              if(i == key){
-                item = cart[i]['item'];
-              };
-            };
+           if(localStorage.user_cart){
 
+                var cart = JSON.parse(window.localStorage['user_cart']);
+                for(i in cart){
+                  if(i == key){
+                    item = cart[i]['item'];
+                  };
+                };
+           }else{
+            window.localStorage['user_cart'] = JSON.stringify({});
+           }
 //       };
 
 
@@ -788,7 +793,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
-  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+ // $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
   function add_to_card(){
@@ -821,13 +826,18 @@ $(' #profile-info').live('pageshow',function(event, ui){
   function set_order(){
 
     var user_cart = JSON.parse(window.localStorage['user_cart']);
-    var user = JSON.parse(window.localStorage['user']);
-    var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-    //set url
 
-    console.log(loc_id);
-    console.log(+user['token']);
-   // $('#ordering-page #create_cart_link').attr('href',('http://perechin.net:3000' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
+    if(window.localStorage.user){
+         var user = JSON.parse(window.localStorage['user']);
+          var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
+          //set url
+
+          console.log(loc_id);
+          console.log(+user['token']);
+         // $('#ordering-page #create_cart_link').attr('href',('http://perechin.net:3000' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
+
+
+    }
 
     $('#ordering-page ul.items-list').html('');
     $.each(user_cart, function(dish, info){
