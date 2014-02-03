@@ -5,6 +5,7 @@
         Foodpal.com website client application.
     </description>
     <access origin="*" />
+    <plugin name="InAppBrowser" value="CDVInAppBrowser" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="BackupWebStorage" value="cloud" />

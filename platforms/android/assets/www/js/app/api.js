@@ -301,6 +301,7 @@ function Api(){
  this.set_params_for_search = function(){
  console.log("-------------set_params_for_search------------------------");
   var cusines = [];
+  spiner_on();
 
    $.ajax({
                  //url: 'http://perechin.net:3000/api/restaurants/set_select_params',
@@ -321,10 +322,12 @@ function Api(){
                      window.localStorage['city'] = JSON.stringify(answer['cities']);
 
                      set_search_selects();
+                     spiner_off();
 
                  },
                  error: function(data) {
-                    alert('Not connection with server');
+                 spiner_off();
+                    alert('No connection with server');
                   }
 
 
@@ -343,12 +346,13 @@ function Api(){
      window.location.href = "";
 
    }else{
+        spiner_on();
         var parametr = $('#search-value').val();
         console.log( parametr);
         console.log( parametr);
         var cities = JSON.parse(window.localStorage['city']);
         var city = cities[parseInt($('#selectCity option:selected').val())];
-       var  cusines = JSON.parse(window.localStorage['cusines']);
+        var  cusines = JSON.parse(window.localStorage['cusines']);
         var cusine  = cusines[parseInt( $('#selectCuisine option:selected').val())];
 
         var ratings = JSON.parse(window.localStorage['rating']);
@@ -368,6 +372,7 @@ function Api(){
                 type: 'GET',
                 data: data ,
                 success: function(data) {
+                  spiner_off();
                    var  answer = data;
                     answer.locations
                      window.localStorage['received_restaurants'] = JSON.stringify(answer.locations);
@@ -376,6 +381,7 @@ function Api(){
 
                     console.log(data)  },
                 error: function(data) {
+                spiner_off();
                    console.log(data['responseText']);
                  }
             });

@@ -110,7 +110,7 @@ function User(){
       {
 
         //window.localStorage['user_location'] =  JSON.stringify([48.620799999999996, 22.287882999999997]);
-        window.localStorage['user_location'] =  JSON.stringify([]);
+         window.localStorage['user_location'] =  JSON.stringify([]);
            coords = JSON.parse(window.localStorage['user_location']);
          if(coords.length == 0){
             $('#search #location-label span.ui-btn-inner .ui-icon').removeClass('ui-icon-checkbox-on');
