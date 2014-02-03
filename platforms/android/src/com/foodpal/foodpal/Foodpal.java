@@ -19,7 +19,10 @@
 
 package com.foodpal.foodpal;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.webkit.WebView;
+
 import org.apache.cordova.*;
 
 public class Foodpal extends CordovaActivity 
@@ -29,9 +32,15 @@ public class Foodpal extends CordovaActivity
     {
         super.onCreate(savedInstanceState);
         super.init();
+        super.setIntegerProperty("splashscreen", R.drawable.foodpale_splash);
+        super.loadUrl(Config.getStartUrl(), 3000);
         // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
+        //super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html")
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
     }
 }
 

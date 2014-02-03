@@ -1,60 +1,85 @@
    // city, country, rating list
 
-   localStorage['map_collection'] = localStorage['user_location'] = JSON.stringify([])
+
+  function write_local_storage(storage){
+    var foodpal = openDatabase('foodpalDB', '', 'foodpall first database', 9 * 1024 * 10, function(db) {});
+
+
+     foodpal.transaction(function(tx) {
+       tx.executeSql('CREATE TABLE IF NOT EXISTS ' +
+           'session(id INTEGER PRIMARY KEY ASC, session TEXT)');
+       tx.executeSql(
+         'DELETE FROM session');
+       var lstorage = JSON.stringify(storage);
+       tx.executeSql(
+         'INSERT INTO session(session) VALUES (?)', [lstorage]);
+     });
+
+   }
+
+  function read_storage(){
+    function renderFunc(tx, results) {
+              // results.insertId: last row inserted in db.
+              // results.rowsAffected: num of rows changed by the SQL statement.
+         var len = results.rows.length;
+         console.log(results );
+         console.log(len);
+
+       //  localStorage.clear();
+        var local = JSON.parse(results.rows.item(0).session);
+        console.log(local);
+        for(key in local ){
+       //   localStorage[key] = local[key];
+        }
+        // for (var i = 0; i < len; ++i) {
+        //
+        //   var row = results.rows.item(i);
+        //   alert(row);
+         //       alert(row.task, row.added_on);
+         //     }
+    }
+   var foodpal = openDatabase('foodpalDB', '', 'foodpall first database', 9 * 1024 * 10, function(db) {});
+   foodpal.transaction(function(tx) {
+     tx.executeSql('SELECT * FROM session', [], renderFunc);
+   });
+  }
+
+
+//   window.localStorage['map_collection'] = window.window.localStorage['user_location'] = JSON.stringify([])
    url = 'http://perechin.net:3000'
    var city = [];
-   localStorage['counties'] = city;
+//   window.window.localStorage['counties'] = city;
    var cart = ['item1', 'item2', 'item2', 'item3'];
    var cusines = [];
-   localStorage['cusines'] = cusines;
+//   window.window.localStorage['cusines'] = cusines;
    var rating = ['Rating', 1, 2, 3, 4, 5 ];
-   localStorage['rating'] = JSON.stringify(rating);
+   window.window.localStorage['rating'] = JSON.stringify(rating);
 
    // restaurant list
-   var restaurant = {};
+//   var restaurant = {};
 
-
-//   restaurant['rest1']={id: 1, name: 'Rest_1', coord: ['25.9347377', '-80.1372757'], logo: 'http://foodpal.com/uploadedfiles/1381263632Screen%20Shot%202013-10-08%20at%204.17.42%20PM.png',  site: 'www.google.com', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131', city: ['Tallahassee','Miami','Miami Beach'], cusines: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-//   restaurant['rest2']={id: 2, name: 'Rest_2', coord: ['26.1584640', '-80.1176430'], logo: 'http://foodpal.com/uploadedfiles/1381263632Screen%20Shot%202013-10-08%20at%204.17.42%20PM.png', site: 'www.google.com', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',  city: ['Tallahassee','Fort Lauderdale'], cusines: ['American','Appetizers','Argentinean','Armenian'], rating: ["3"]};
-//   restaurant['rest3']={id: 3, name: 'Rest_3', coord: ['27.6237377', '-80.3907679'], logo: 'http://foodpal.com/uploadedfiles/1381263632Screen%20Shot%202013-10-08%20at%204.17.42%20PM.png', site: 'www.google.com', address: 'One Miami Tovel 335 S. Biscayne Blvd. (SE 3rd St.) Miami, FL 33131',  city: ['Vero Beach','Miami'], cusines: ['American','Appetizers','Argentinean','Armenian'], rating: ["4"]};
-
-   rest_menu = {};
-   localStorage['rest_menu'] = JSON.stringify(rest_menu);
+//   window.window.localStorage['rest_menu'] = JSON.stringify({});
 
 
 
    // restaurant card
 
-   rest = {};
-
-//    rest_menu['1']= {'First courses': {first_1: '5$' , first_2: '10$'}, 'Main Courses': {main_1:  '6$' , main_2: '12$'},
-//     'Desserts': {dessert_1:  '5$' , dessert_2: '10$'},'Drinks': {drink1_1:  '5$' , drink_2: '10$'},
-//     'Other Dishes': {other_1: '5$',other_2: '5$'}
-//    };
-//    rest_menu['2']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
-//     dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
-//     other: {other_1: '5$',other_2: '5$'}
-//    };
-//    rest_menu['3']= {first_c: {first_1: '5$' , first_2: '10$'}, main_c: {main_1:  '6$' , main_2: '12$'},
-//     dessert: {dessert_1:  '5$' , dessert_2: '10$'},drinks: {drink1_1:  '5$' , drink_2: '10$'},
-//     other: {other_1: '5$',other_2: '5$'}
-//    };
 
 
-    // user cart
-
-  user_cart ={};
-  localStorage['user_cart'] = JSON.stringify(user_cart);
+   // user cart
 
 
-   localStorage['rest'] = JSON.stringify(rest);
-   localStorage['restaurant'] = JSON.stringify({});
-   localStorage['selected_restaurants'] = JSON.stringify({});
+//  window.window.localStorage['user_cart'] = JSON.stringify({});
 
 
-   localStorage['user'] = JSON.stringify({});
+//   window.window.localStorage['rest'] = JSON.stringify({});
+//   window.window.localStorage['restaurant'] = JSON.stringify({});
+//   window.window.localStorage['selected_restaurants'] = JSON.stringify({});
 
-    localStorage['orders'] = JSON.stringify({});
+
+ //  window.window.localStorage['user'] = JSON.stringify({});
+
+ //   window.window.localStorage['orders'] = JSON.stringify({});
 
 // page  search
 
@@ -63,11 +88,7 @@
 
  $(document).ready(function(){
 
-
-
-
-
-     var rating = JSON.parse(localStorage['rating']);
+     var rating = JSON.parse(window.localStorage['rating']);
      for (var i=0;i<rating.length;i++)
      {
       $('#search #select-menu #selectRating').append(
@@ -75,11 +96,6 @@
 
 
      }
-
- // search page ----------------------------------------------------------------------------------------
-
-
-
 
  });
  $(document).on("change", " #selectCity", filter_on_search);
@@ -97,43 +113,71 @@
  $(document).on('click', '#my-orders  #update_orders', update_orders);
  $(document).on('click', '#ordering-page  #create_cart_link', check_and_create_cart);
 
+
+
+
+
+
+ $('#selectCity-dialog').live('pageshow', function(event, ui){
+     $('#selectCity-dialog [role="dialog"]').height($('html').height() - 50);
+     $('#selectCity-dialog [role="dialog"]').css('overflow', 'hidden');
+     $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
+     var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+
+  });
+
+ $('#selectCuisine-dialog').live('pageshow', function(event, ui){
+      $('#selectCuisine-dialog [role="dialog"]').height($('html').height() - 50);
+      $('#selectCuisine-dialog [role="dialog"]').css('overflow', 'hidden');
+     $('#selectCuisine-dialog [data-role="content"]').attr('id', 'cuisine_scroller');
+     var cuisineScroll = new iScroll('cuisine_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+
+  });
+
+
   function filter_on_search(){
-    console.log('okey-----------------');
 
 
-    city_id = $('#selectCity').val();
-    cuisine_id = $('#selectCuisine').val();
-    rating_id = $('#selectRating').val();
+
+    var city_id = $('#selectCity').val();
+    var cuisine_id = $('#selectCuisine').val();
+    var rating_id = $('#selectRating').val();
     console.log(city_id);
     console.log(cuisine_id);
     console.log(rating_id);
 
     if(city_id != '' && city_id != '0'){
-      cities = JSON.parse(localStorage['city']);
-      city = cities[parseInt(city_id)];
+      var cities = JSON.parse(window.localStorage['city']);
+     var  city = cities[parseInt(city_id)];
       console.log('okey------ci-----------');
     }else{
-      city = '';
+      var city = '';
     }
 
     if(cuisine_id != '' && cuisine_id != '0'){
-       cusines = JSON.parse(localStorage['cusines']);
-       cuisine  = cusines[parseInt(cuisine_id)];
+       var cusines = JSON.parse(window.localStorage['cusines']);
+       var cuisine  = cusines[parseInt(cuisine_id)];
        console.log('okey-------cu----------');
     }else{
-      cuisine = '';
+      var cuisine = '';
     }
 
     if(rating_id != '' && rating_id != '0'){
-      ratings = JSON.parse(localStorage['rating']);
-      rating= ratings[parseInt(rating_id)];
+      var ratings = JSON.parse(window.localStorage['rating']);
+      var rating= ratings[parseInt(rating_id)];
       console.log('okey------ra-----------');
     }else{
-      rating = '';
+      var rating = '';
     }
+    arr = JSON.parse(window.localStorage['received_restaurants']);
+    var collection = jQuery.grep(arr, function(n){
+       return (n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
+    });
 
-    user_location = JSON.parse(localStorage['user_location']);
+    window.localStorage['selected_restaurants'] = JSON.stringify(collection)
 
+    var user_location = JSON.parse(window.localStorage['user_location']);
+    $('.found-result-count .result').html(collection.length);
 
 
     console.log( city +  cuisine + rating + user_location)
@@ -142,8 +186,8 @@
  // set and create cart
  function check_and_create_cart(){
 
-  total = JSON.parse(localStorage['user_cart'])['total'];
-  miny_order = JSON.parse(localStorage['current_restaurant'])['miny_order'];
+  var total = JSON.parse(window.localStorage['user_cart'])['total'];
+  var miny_order = JSON.parse(window.localStorage['current_restaurant'])['miny_order'];
 
   if(total < miny_order){
     alert(" Order Warning. The minimum Order for Delivery is $"+miny_order+"" );
@@ -160,21 +204,22 @@
 
   //////set select cusine and city
   function set_search_selects(){
-        var cusines = JSON.parse(localStorage['cusines']);
+        var cusines = JSON.parse(window.localStorage['cusines']);
+      $('#selectCuisine-listbox-popup ul#selectCuisine-menu').html('');
       for (var i=0;i<cusines.length;i++)
       {
-       li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
+         var li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
                 class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
                 data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
                 data-iconpos="right" data-theme="a" aria-selected="false">\
                   <div class="ui-btn-inner ui-li">\
-                  <div class="ui-btn-text"><a href="#" tabindex="-1" class="ui-link-inherit">\
+                  <div class="ui-btn-text"><a href="#" tabindex="1" class="ui-link-inherit">\
                   '+cusines[i]+'\
                 </a></div></div></li>';
 
 
        $('#search #select-menu #selectCuisine').append(
-       "<option value="+i+">"+cusines[i]+"</option>");
+       "<option value="+(i+1)+">"+cusines[i+1]+"</option>");
         $('#selectCuisine-listbox-popup ul#selectCuisine-menu').append(li);
         $('#selectCuisine-listbox > .ui-header').css('width','103px');
 
@@ -182,19 +227,20 @@
 
 
 
-     var city = JSON.parse(localStorage['city']);
+     var city = JSON.parse(window.localStorage['city']);
+      $('#selectCity-listbox-popup ul#selectCity-menu').html('');
      for (var i=0;i<city.length;i++)
      {
-      li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
+      var li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
                class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
                data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
                data-iconpos="right" data-theme="a" aria-selected="false">\
                  <div class="ui-btn-inner ui-li">\
-                 <div class="ui-btn-text"><a href="#" tabindex="-1" class="ui-link-inherit">\
+                 <div class="ui-btn-text"><a href="#" tabindex="1" class="ui-link-inherit">\
                  '+city[i]+'\
                </a></div></div></li>';
        $('#search #select-menu #selectCity').append(
-       '<option value='+i+'>'+city[i]+'</option>');
+          '<option value='+(i+1)+'>'+city[i+1]+'</option>');
           $('#selectCity-listbox-popup ul#selectCity-menu').append(li);
           $('#selectCuisine-listbox > .ui-header').css('width','103px');
 
@@ -218,16 +264,16 @@
            api.update_orders();
    }
    function set_to_map(){
-        var map = new GoogleMap();
-        $ ('#map-page').css('display','block');
-        collection = JSON.parse(localStorage['selected_restaurants']);
-        localStorage['map_collection'] = JSON.stringify(collection);
-        user = 'none';
-        map.initialize(collection, user);
+
+
+        var collection = JSON.parse(window.localStorage['selected_restaurants']);
+        window.localStorage['map_collection'] = JSON.stringify(collection);
+
+
    }
 
    function set_map_to_none(){
-     $('#map-page').css('display','none');
+
    }
 
    function set_orders(){
@@ -239,8 +285,8 @@
     function set_order_list(){
      var ul = $('#my-orders ul.orders-list');
      ul.html('');
-     list = JSON.parse(localStorage['orders']);
-     span_class = '';
+     var list = JSON.parse(window.localStorage['orders']);
+     var span_class = '';
      for(i = 0; i<list.length; i++ ){
          if(list[i]['state']== 'Not paid' ){
            span_class = 'not-paid';
@@ -250,17 +296,17 @@
            span_class = 'paid';
           }
           if(i == 0){
-          border =   "border-top-left-radius: 20px;\
+          var border =   "border-top-left-radius: 20px;\
                      border-top-right-radius: 20px;";
           }else if( i == (list.length-1)){
-              border =   "border-bottom-left-radius: 20px;\
-              border-bottom-right-radius: 20px;\
-              border-top-left-radius: 0px;\
-              border-top-right-radius: 0px;";
+              var border =   "border-bottom-left-radius: 20px;\
+                               border-bottom-right-radius: 20px;\
+                               border-top-left-radius: 0px;\
+                             border-top-right-radius: 0px;";
           }else{
             border = "border-radius: 0px";
           }
-     li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0px;'+border+'"\
+     var li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0px;'+border+'"\
              data-iconshadow="true" data-wrapperels="div" \
               class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-btn-up-c">\
               <div class="ui-btn-inner ui-li" style = "padding: 0px;"><div class="ui-btn-text">\
@@ -273,8 +319,8 @@
            </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span></div></li>'
        ul.append(li);
      }
-      if( jQuery.isEmptyObject( JSON.parse(localStorage['orders']))){
-     li = '<li class= "empty-list"               \
+      if( jQuery.isEmptyObject( JSON.parse(window.localStorage['orders']))){
+     var li = '<li class= "empty-list"               \
             ">\
             List is empty\
              </li>'
@@ -314,14 +360,16 @@
 
  function set_profile_info(){
 
-  if(! jQuery.isEmptyObject(JSON.parse(localStorage['user']))){
-    user_session = JSON.parse(localStorage['user']);
-    $('#profile-info #profile-update #login_f').val(user_session['login']);
-    $('#profile-info #profile-update #user-name').val(user_session['name']);
-    $('#profile-info #profile-update #email').val(user_session['email']);
-    $('#profile-info #profile-update #address').val(user_session['address']);
+  if(window.localStorage['user']){
+      if(! jQuery.isEmptyObject(JSON.parse(window.localStorage['user']))){
+        user_session = JSON.parse(window.localStorage['user']);
+        $('#profile-info #profile-update #login_f').val(user_session['login']);
+        $('#profile-info #profile-update #user-name').val(user_session['name']);
+        $('#profile-info #profile-update #email').val(user_session['email']);
+        $('#profile-info #profile-update #address').val(user_session['address']);
 
-    $('#profile-info #profile-update #lang').val(user_session['language']);
+        $('#profile-info #profile-update #lang').val(user_session['language']);
+      }
   }
   else{
     alert('You mast sing in before');
@@ -332,28 +380,31 @@
 
  }
  function set_rest_list(){
-       selected_restaurant = JSON.parse(localStorage['selected_restaurants']);
+
+       var selected_restaurant = JSON.parse(window.localStorage['selected_restaurants']);
        $('#restouran-page ul.restaurant-list').html('');
 
       for(key in selected_restaurant ){
-      name = selected_restaurant[key]['name'];
+      var name = selected_restaurant[key]['name'];
 
-      rating = parseInt(selected_restaurant[key]['rating']);
+      var rating = parseInt(selected_restaurant[key]['rating']);
 
-      active_star = '<img class="star" src="assets/images/superstar.png" >';
-      pasive_star = '<img class="star" src="assets/images/star.png" >';
+      var active_star = '<img class="star" src="assets/images/superstar.png" >';
+      var pasive_star = '<img class="star" src="assets/images/star.png" >';
 
-      full_rating = set_rating(rating);
+      var full_rating = set_rating(rating);
       address = selected_restaurant[key]['address'];
-      rest_id = selected_restaurant[key]['id'];
+      var rest_id = selected_restaurant[key]['id'];
+      var logo =  selected_restaurant[key]['logo'];
 
-      li = '<li data-theme="c" style = "border-bottom: none; padding:0;" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c">\
+
+      var li = '<li data-theme="c" style = "border-bottom: none; padding:0;" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-thumb ui-btn-up-c">\
                   <div class="ui-btn-inner ui-li"><div class="ui-btn-text"> \
                 <a href="#restouran-card" data-transition="slide" class="ui-link-inherit" id = "'+ rest_id+'">\
-                    <img class="r-logo ui-li-thumb" src="assets/images/magaz.png" style=" ">\
-                    <img class="sign" style="float: right;" src="assets/images/logo.png">\
-                    <img class="location-logo" style="float: right;" src="assets/images/whereami.png">\
-                    <span class="container">\
+                    <div class="r-logo" src="assets/images/magaz.png" style="width: 55px; height:55px; float:left;\
+                                                             background: url(http://perechin.net:3000/'+logo+') center no-repeat;\
+                                                            margin-top: 4px; margin-left: 5px; background-size: contain"></div>\
+                    <span class="container" style = "float: left;">\
                           <span class="name">  '+name+' </span>\
                     <br>\
                            <span class="address"> '+address+' </span>\
@@ -362,12 +413,14 @@
                      '+full_rating+'\
                     </span>\
                     </span>\
+                    <img class="sign" style="float: right; position: relative;" src="assets/images/arrow.1.png">\
+                    <img class="location-logo" style="float: right;" src="assets/images/whereami.png">\
                 </a>\
               </li>'
           $('#restouran-page ul.restaurant-list').append(li);
      }
-     if( jQuery.isEmptyObject( JSON.parse(localStorage['selected_restaurants']))){
-    li = '<li class= "empty-list"               \
+     if( jQuery.isEmptyObject( JSON.parse(window.localStorage['selected_restaurants']))){
+    var li = '<li class= "empty-list"               \
            ">\
            List is empty\
             </li>'
@@ -380,38 +433,184 @@
 
  }
 
-$('#restouran-page').live('pageshow',function(event, ui){
-   console.log('---------refresh-----------------');
+$('#map-page').live('pageshow',function(event, ui){
 
-   $('#restouran-page #wrappen').height($('html').height() - 195);
-   myScroll.refresh();
+   $('#map-page #map').height($('html').height() -195);
+   var map = new GoogleMap();
+
+   var collection = JSON.parse(window.localStorage['map_collection']) ;
+   var user = 'none';
+   map.initialize(collection, user);
  })
+
+ $('#restouran-page').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+
+    $('#restouran-page #wrappen').height($('html').height() - 130);
+    length = $('html').width() - 150 + 'px';
+    $('#restouran-page ul li a .container').css('max-width', length);
+    $('#restouran-page ul li a .container').css('overflow','hidden');
+    $('#restouran-page ul li a .container').css('text-overflow','ellipsis');
+
+    if(localStorage.selected_restaurants){
+      set_rest_list();
+    }
+
+
+    myScroll.refresh();
+  })
+
+ $(' #search').live('pageshow',function(event, ui){
+     searchScroll.refresh();
+     set_search_selects();
+
+      $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
+    // var cityScroll = new iScroll('city_scroller', {vScrollbar: false,  onBeforeScrollStart: null});
+
+
+  })
+
+ $('#home').live('pageshow',function(event, ui){
+     try{
+
+       homeScroll.refresh();
+     }catch(err){
+
+      }
+  })
+
+$('#promotion').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    promotionScroll.refresh();
+  })
+
+
+$('#my-orders').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    if(localStorage.orders){
+      set_order_list();
+    }
+
+    orderScroll.refresh();
+  })
+
+
+
+$('#register').live('pageshow resize',function(event, ui){
+    console.log('---------refresh-----------------');
+    singScroll.refresh();
+  })
+
+
+
+$('#help-page').live('pageshow',function(event, ui){
+    console.log('---------refresh-----resize------------');
+    promotionScroll.refresh();
+  })
+
+
+
+$('#how_work').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    workScroll.refresh();
+  })
+
+
+$('#settings').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    settingScroll.refresh();
+  })
+
+
+$('#policy').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    policyScroll.refresh();
+  })
+
+$('#careers-page').live('pageshow',function(event, ui){
+    console.log('---------refresh-----------------');
+    careerScroll.refresh();
+  })
 
 $(' #menu-group').live('pageshow',function(event, ui){
-   console.log('---------refresh-----------------');
+    console.log('---------refresh-----------------');
 
-   $('#menu-group #menuscroll').height($('html').height() - 195);
-   menuScroll.refresh();
- })
+    if(localStorage.menu){
+      create_menu_list();
+    }
 
-$('#menu-item-page').live('pageshow',function(event, ui){
-   console.log('---------refresh-----------------');
+    $('#menu-group #menuscroll').height($('html').height() - 130);
+    menuScroll.refresh();
+  })
 
-   $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
-  menuItemScroll.refresh();
- })
+$(' #log_in').live('pageshow',function(event, ui){
+    console.log('----log in -----refresh-----------------');
+    $('#log_in [data-role="header"]').width($('#log_in [data-role="content"]').width()-1.8);
+    doResize;
+    loginScroll.refresh();
+  })
 
-$('#ordering-page').live('pageshow',function(event, ui){
-   console.log('---------refresh-----------------');
+$(' #profile-info').live('pageshow',function(event, ui){
+    console.log('----log in -----refresh-----------------');
+    set_profile_info();
+    logupScroll.refresh();
+  })
 
-   $('#ordering-page #order-scroll').height($('html').height() - 240);
-   orderScroll.refresh();
- })
+ $('#menu-item-page').live('pageshow',function(event, ui){
+    console.log('---------menu items---------------');
+
+    $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
+
+     if(localStorage.menu){
+        build_items_page();
+      }
+   menuItemScroll.refresh();
+  })
+
+
+
+
+
+ $('#restouran-card').live('pageshow',function(event, ui){
+    console.log('---------card--------------');
+    if(localStorage.current_restaurant){
+       console.log('---------current--------------');
+     show_restaurant_local();
+    };
+    $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
+   menuItemScroll.refresh();
+  })
+
+   function show_restaurant_local(){
+     restaurant = JSON.parse(window.localStorage['current_restaurant']);
+     $('#restouran-card .right-column h3.title').html(restaurant['name']);
+     $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+
+    $('#restouran-card .right-column h3.title').html(restaurant['name']);
+    $('#restouran-card .right-column .address').html(restaurant["address"]);
+    $('#restouran-card .contecst-area .content').html(restaurant["description"]);
+    $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating']));
+    $("#restouran-card .control .set_menu, #restouran-card .control .show_rest_location ").attr('id',restaurant.id );
+   }
+
+
+ $('#ordering-page').live('pageshow',function(event, ui){
+    console.log('---------ordering----------------');
+     write_local_storage(localStorage);
+
+     var result =  read_storage();
+
+    if(localStorage.user_cart && JSON.parse(localStorage.user_cart != {})){
+      set_order();
+    }
+    $('#ordering-page #order-scroll').height($('html').height() - 240);
+    orderpageScroll.refresh();
+  })
 
  function set_rating(rating){
-    active_star = '<img class="star" src="assets/images/superstar.png" >';
-    pasive_star = '<img class="star" src="assets/images/star.png" >';
-      full_rating = '';
+    var active_star = '<img class="star" src="assets/images/superstar.png" >';
+    var pasive_star = '<img class="star" src="assets/images/star.png" >';
+    var   full_rating = '';
 
       for( i=0;i< rating;i++){full_rating = full_rating + active_star};
       for( i=0;i< (5-rating);i++){full_rating = full_rating + pasive_star};
@@ -434,12 +633,12 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
  function find_by_city(city, arr, object, previus_list){
 
-    local_array = [];
-    rest_list = {};
-    restaurant = {};
+    var local_array = [];
+    var rest_list = {};
+    var restaurant = {};
     if($.trim(city.val()) != ''){
-     localStorage.removeItem('selected_restaurants');
-     localStorage['selected_restaurants'] = JSON.stringify({});
+     window.localStorage.removeItem('selected_restaurants');
+     window.localStorage['selected_restaurants'] = JSON.stringify({});
 
 
     for (key in arr){
@@ -448,7 +647,7 @@ $('#ordering-page').live('pageshow',function(event, ui){
          local_array.push(key);
 
          restaurant[key] = restaurants[key];
-         localStorage['selected_restaurants'] = JSON.stringify(restaurant);
+         window.localStorage['selected_restaurants'] = JSON.stringify(restaurant);
             rest_list[key]='';
 
          $('.found-result-count .result').html(local_array.length);
@@ -474,11 +673,14 @@ $('#ordering-page').live('pageshow',function(event, ui){
      $(document).on("click", "#restouran-card .control .set_menu", set_menu);
 
  function select_restaurant(){
-  rest_id = $(this).attr('id');
-  arr =   JSON.parse(localStorage['selected_restaurants']);
-  restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
-  localStorage['current_restaurant'] = JSON.stringify( restaurant);
+  var rest_id = $(this).attr('id');
+  var arr =   JSON.parse(window.localStorage['selected_restaurants']);
+  var restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
+  window.localStorage['current_restaurant'] = JSON.stringify( restaurant);
   $('#restouran-card .right-column h3.title').html(restaurant['name']);
+ $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+
+  $('#restouran-card #logo-contqainer').css('background-size', 'contain');
   $('#restouran-card .right-column .address').html(restaurant["address"]);
   $('#restouran-card .contecst-area .content').html(restaurant["description"]);
   $('#restouran-card .contecst-area .footer-section .avarage_rating').html( set_rating(restaurant['rating']));
@@ -490,12 +692,13 @@ $('#ordering-page').live('pageshow',function(event, ui){
     api.set_menu();
   }
   function create_menu_list(){
+  console.log('set menu');
    $('#menu-group ul.menu-list').html('');
-   menu = JSON.parse(localStorage['menu']);
+   var menu = JSON.parse(window.localStorage['menu']);
    for(dish in menu){
-     name = menu[dish]['name'];
-     id = menu[dish]['id'];
-     li = '<li data-theme="c" style = "border: none;">\
+     var name = menu[dish]['name'];
+     var id = menu[dish]['id'];
+     var li = '<li data-theme="c" style = "border: none;">\
                <a href="#menu-item-page" id = "'+id +'" data-transition="slide"style = "display: block;" class = "menu-items">\
                    <img class="r-logo" src="assets/images/First courses.png" >\
                    <span class="text" style="padding-right: 30px;">'+ name +' </span>\
@@ -510,15 +713,26 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
 // menu group -----------------------------------------------------------------------------------------------
 
-      $(document).on("click", "#menu-group ul.menu-list li a", set_items);
+      $(document).on("click", "#menu-group ul.menu-list li a", set_items );
 
-      function set_items(){
-       item_id = $(this).attr('id');
-       items = jQuery.grep(menu, function(n){ return(n.id == item_id );})[0]['products'];
-       menu = JSON.parse(localStorage['menu']);
-       name = jQuery.grep(menu, function(n){ return(n.id == item_id );})[0]['name'];
+
+    function set_items(){
+      localStorage.menu_id = $(this).attr('id');
+
+    }
+    function build_items_page(){
+      // var itemId= var needToSetId = localStorage.menu_id == e.attr("id") ? $(this).attr('id') : "";
+
+       var item_id = parseInt(localStorage.menu_id);
+
+
+       var menu = JSON.parse(localStorage.menu);
+       var items = jQuery.grep(menu, function(n){ return(n.id == item_id );})[0]['products'];
+       var menu = JSON.parse(window.localStorage['menu']);
+       var name = jQuery.grep(menu, function(n){ return(n.id == item_id );})[0]['name'];
 
        $('#menu-item-page ul.items-list').html('');
+
 
 
        $('#menu-item-page ul.list-item-header li a img').attr('src',"assets/images/First courses.png");
@@ -528,8 +742,8 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
 
 //       if(! jQuery.isEmptyObject(previus_list)){
-           item = 0;
-            cart = JSON.parse(localStorage['user_cart']);
+           var item = 0;
+            var cart = JSON.parse(window.localStorage['user_cart']);
             for(i in cart){
               if(i == key){
                 item = cart[i]['item'];
@@ -539,11 +753,11 @@ $('#ordering-page').live('pageshow',function(event, ui){
 //       };
 
 
-       li = '<li data-theme="c" data-corners="false" data-shadow="false" style= "padding: 0; border: none;"\
-           data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
-       data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
-       ui-li ui-first-child ui-btn-up-c"><div class="ui-btn-inner ui-li">\
-       <div class="ui-btn-text">\
+       var li = '<li data-theme="c" data-corners="false" data-shadow="false" style= "padding: 0; border: none;"\
+                  data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
+                data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
+                  ui-li ui-first-child ui-btn-up-c"><div class="ui-btn-inner ui-li">\
+                  <div class="ui-btn-text">\
                    <a href="#" data-transition="slide" id = "'+value['product_id']+'" class="ui-link-inherit">\
                        <span class="item-name" style=" overflow: hidden;text-overflow: ellipsis; ">\
                        '+value['name']+'\
@@ -567,52 +781,58 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
 
        $('#menu-item-page ul.items-list').append(li);
-       $('#menu-item-page ul.items-list li span.item-name').width(($('html').width()-175) + 'px');
+       $('#menu-item-page ul.items-list li span.item-name').width(($('html').width()-190) + 'px');
        });
    }
 
 // menu item add to card
 
+  $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
   $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
   function add_to_card(){
-    item_name = $.trim(jQuery(".item-name", this).html());
-    item_price = $.trim(jQuery(".insert.price", this).html());
-    item_item = parseInt(jQuery(".insert.item", this).html());
-    user_cart = JSON.parse(localStorage['user_cart']);
+    console.log('add to cart');
+    var item_name = $.trim(jQuery(".item-name", this).html());
+    var item_price = $.trim(jQuery(".insert.price", this).html());
+    var item_item = parseInt(jQuery(".insert.item", this).html());
+    var user_cart = JSON.parse(window.localStorage['user_cart']);
+
+
     item_item = item_item +1;
 
-    product_id = $(this).attr('id');
+    var product_id = $(this).attr('id');
 
      user_cart[item_name] = { price: item_price, item: item_item, product_id: product_id};
      // set item
 
      parseInt(jQuery(".insert.item", this).html(item_item));
-     localStorage['user_cart'] = JSON.stringify(user_cart);
+     window.localStorage['user_cart'] = JSON.stringify(user_cart);
      //set total price
-     cart = JSON.parse(localStorage['user_cart']);
+     var cart = JSON.parse(window.localStorage['user_cart']);
      cart['total'] = total_price(cart);
-     localStorage['user_cart'] = JSON.stringify(cart);
+     window.localStorage['user_cart'] = JSON.stringify(cart);
 
   }
 
   $(document).on('click',".set-user-cart-oder",set_order);
-
+  console.log('set order');
+  console.log('set order');
   function set_order(){
 
-    user_cart = JSON.parse(localStorage['user_cart']);
-    user = JSON.parse(localStorage['user']);
-    loc_id = JSON.parse(localStorage['current_restaurant'])['location_id'];
+    var user_cart = JSON.parse(window.localStorage['user_cart']);
+    var user = JSON.parse(window.localStorage['user']);
+    var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
     //set url
-    $('#ordering-page #create_cart_link').attr('href',(url + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
+
+    console.log(loc_id);
+    console.log(+user['token']);
+   // $('#ordering-page #create_cart_link').attr('href',('http://perechin.net:3000' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
 
     $('#ordering-page ul.items-list').html('');
     $.each(user_cart, function(dish, info){
       if(dish == 'total'){
-          div = '<span class = "total-fed">Feed: </span>\
-                  <span class = "fed-price"></span>     \
-                  <br />                                  \
+         var  div = ' <br />                                  \
                   <span class = "total-sume">Total: </span>\
                   <span class = "total-price"></span>'
        $('#ordering-page .total').html(div);
@@ -620,7 +840,7 @@ $('#ordering-page').live('pageshow',function(event, ui){
       }
       else{
 
-           li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0; border: none;"   \
+           var li = '<li data-theme="c" data-corners="false" data-shadow="false" style = "padding: 0; border: none;"   \
             data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" \
             data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow \
             ui-li ui-first-child ui-btn-up-c">\
@@ -643,17 +863,17 @@ $('#ordering-page').live('pageshow',function(event, ui){
                   </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;\
                   </span></div></li>'
                $('#ordering-page ul.items-list').append(li);
-               $('#ordering-page ul.items-list li span.item-name').width(($('html').width()-175) + 'px');
+               $('#ordering-page ul.items-list li span.item-name').width(($('html').width()-190) + 'px');
                $(".check-order").css('display', 'block');
                $("#reset-cart").css('display', 'block');
        }
         $('#ordering-page .total .total-price').html(user_cart['total'] + '$');
-        delivery_fee = JSON.parse(localStorage['current_restaurant'])['delivery_fee'];
-        $('#ordering-page .total .fed-price').html( delivery_fee+ '$');
+       // delivery_fee = JSON.parse(window.localStorage['current_restaurant'])['delivery_fee'];
+        //$('#ordering-page .total .fed-price').html( delivery_fee+ '$');
        });
 
-       if(  jQuery.isEmptyObject( JSON.parse(localStorage['user_cart']))){
-          li = '<li class = "empty-list">\
+       if(  jQuery.isEmptyObject( JSON.parse(window.localStorage['user_cart']))){
+          var li = '<li class = "empty-list">\
                       Cart is empty\
                    </li>'
           $('#ordering-page ul.items-list').append(li);
@@ -696,89 +916,91 @@ $('#ordering-page').live('pageshow',function(event, ui){
     }
 
 
- $(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
- $(document).on('click',"#ordering-page #reset-cart",reset_cart);
+ $(document).on('touchend',"#ordering-page ul.items-list li a",remove_from_card);
+ //$(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
+ $(document).on('touchend',"#ordering-page #reset-cart",reset_cart);
 
  function reset_cart(){
 
-        user_cart = JSON.parse(localStorage['user_cart']);
+      var   user_cart = JSON.parse(window.localStorage['user_cart']);
        user_cart = {};
-        localStorage['user_cart'] = JSON.stringify(user_cart);
+        window.localStorage['user_cart'] = JSON.stringify(user_cart);
        $('#ordering-page ul.items-list').html('');
        arr = $('#menu-item-page ul.items-list li a');
        for(i=0; i<arr.length; i++){$('.insert.item',arr[i]).html(0)};
 
-        li = '<li class = "empty-list">\
+       var li = '<li class = "empty-list">\
                  Cart is empty\
               </li>'
        $('#ordering-page ul.items-list').append(li);
        $(".check-order").css('display', 'none');
        $("#reset-cart").css('display', 'none');
+        $('#ordering-page .total .total-price').html('0$');
 
 
 
  }
  function remove_from_card(){
 
-    item_name = $.trim(jQuery(".item-name", this).html());
-    item_item = parseInt(jQuery(".insert.item", this).html());
+    var item_name = $.trim(jQuery(".item-name", this).html());
+    var item_item = parseInt(jQuery(".insert.item", this).html());
 
 
     item_item = item_item - 1;
 
-       user_cart = JSON.parse(localStorage['user_cart']);
+       var user_cart = JSON.parse(window.localStorage['user_cart']);
        user_cart[item_name]['item'] = item_item;
 
        // set item
        parseInt(jQuery(".insert.item", this).html(item_item));
-       localStorage['user_cart'] = JSON.stringify(user_cart);
+       window.localStorage['user_cart'] = JSON.stringify(user_cart);
 
        if(item_item < 1){
 
         $(this).parents('li').remove();
-        arr = $('#menu-item-page ul.items-list li a');
+        var arr = $('#menu-item-page ul.items-list li a');
 
         for(i=0; i<arr.length; i++){
-             user_cart = JSON.parse(localStorage['user_cart']);
+             var user_cart = JSON.parse(window.localStorage['user_cart']);
 
              if(user_cart[$.trim($('.item-name', arr[i]).text())]){
 
-              item = user_cart[$.trim($('.item-name', arr[i]).text())]['item'];
+              var item = user_cart[$.trim($('.item-name', arr[i]).text())]['item'];
               $('.insert.item', arr[i]).html(item);
 
          }
-              localStorage['user_cart'] = JSON.stringify(user_cart);
+              window.localStorage['user_cart'] = JSON.stringify(user_cart);
 
          };
 
-       user_cart = JSON.parse(localStorage['user_cart']);
+       user_cart = JSON.parse(window.localStorage['user_cart']);
        delete user_cart[item_name];
-       localStorage['user_cart'] = JSON.stringify(user_cart);
+       window.localStorage['user_cart'] = JSON.stringify(user_cart);
 
     }else{
-      arr = $('#menu-item-page ul.items-list li a');
+      var arr = $('#menu-item-page ul.items-list li a');
 
         for(i=0; i<arr.length; i++){
-             user_cart = JSON.parse(localStorage['user_cart']);
+            var  user_cart = JSON.parse(window.localStorage['user_cart']);
 
              if(user_cart[$.trim($('.item-name', arr[i]).text())]){
 
-              item = user_cart[$.trim($('.item-name', arr[i]).text())]['item'];
+              var item = user_cart[$.trim($('.item-name', arr[i]).text())]['item'];
               $('.insert.item', arr[i]).html(item);
 
          }
 
        }
     }
-       if(  jQuery.isEmptyObject( JSON.parse(localStorage['user_cart']))){
+       if(  jQuery.isEmptyObject( JSON.parse(window.localStorage['user_cart']))){
 
-               li = '<li class = "empty-list">\
+               var li = '<li class = "empty-list">\
                         Cart is empty\
                      </li>'
               $('#ordering-page ul.items-list').append(li);
               $(".check-order").css('display', 'none');
               $("#reset-cart").css('display', 'none');
-             arr = $('#menu-item-page ul.items-list li a');
+             var arr = $('#menu-item-page ul.items-list li a');
               for(i=0; i<arr.length; i++){
               $('.insert.item',arr[i]).html(0);
 
@@ -788,9 +1010,10 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
 
     //set total price
-    cart = JSON.parse(localStorage['user_cart']);
+    var cart = JSON.parse(window.localStorage['user_cart']);
     cart['total'] = total_price(cart);
-    localStorage['user_cart'] = JSON.stringify(cart);
+    window.localStorage['user_cart'] = JSON.stringify(cart);
+    return false;
 
  }
 
@@ -798,11 +1021,14 @@ $('#ordering-page').live('pageshow',function(event, ui){
 
 
  function show_restaurant(e){
-  rest_id = e.attr('id');
-  arr =   JSON.parse(localStorage['selected_restaurants']);
-  restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
+  var rest_id = e.attr('id');
+  var arr =   JSON.parse(window.localStorage['selected_restaurants']);
+  var restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
 
-  localStorage['current_restaurant'] = JSON.stringify( restaurant);
+  window.localStorage['current_restaurant'] = JSON.stringify( restaurant);
+    $('#restouran-card .right-column h3.title').html(restaurant['name']);
+   $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+
   $('#restouran-card .right-column h3.title').html(restaurant['name']);
   $('#restouran-card .right-column .address').html(restaurant["address"]);
   $('#restouran-card .contecst-area .content').html(restaurant["description"]);
@@ -815,39 +1041,37 @@ $('#ordering-page').live('pageshow',function(event, ui){
  $(document).on('click', '#restouran-card .show_rest_location', show_rest_location);
 
  function  show_rest_location(){
-   id = $(this).attr('id');
-   rests =   JSON.parse(localStorage['selected_restaurants']);
-   rest = jQuery.grep(rests, function(n){ return(n.id == id );});
-    var map = new GoogleMap();
-    $ ('#map-page').css('display','block');
-    collection = rest;
-    localStorage['map_collection'] = JSON.stringify(collection);
-    user = 'none';
-    map.initialize(collection, user);
+   var id = $(this).attr('id');
+   var rests =   JSON.parse(window.localStorage['selected_restaurants']);
+   var rest = jQuery.grep(rests, function(n){ return(n.id == id );});
+
+   var collection = rest;
+    window.localStorage['map_collection'] = JSON.stringify(collection);
+
 
  }
 
 
 // set my location
 function  set_my_location(){
-  user = new User();
+  var user = new User();
+
   user.location();
-  var map = new GoogleMap();
-  collection = JSON.parse(localStorage['map_collection']);
-  map.initialize(collection, 'set');
+
+
 
 }
 
 // set location for search
 
-$(document).on('click', "#search #location-label", function(){
+$(document).on('touchend', "#search #location-label", function(){
    pervios_state = $('#in-location').is(':checked');
 
    if(pervios_state == false){
-       user = new User();
-       user.location();
+       var user = new User();
+       user.set_coord();
 
-       coord = JSON.parse(localStorage['user_location']);
+       var coord = JSON.parse(window.localStorage['user_location']);
        if(coord.length == 0){
        };
    }else{
@@ -857,26 +1081,26 @@ $(document).on('click', "#search #location-label", function(){
 
  });
 
-$(document).on("touchstart","#map-page #search-map-button",function(ev){
-     console.log('------------tach----------------'); // says ev.touches is undefined
-     console.log(ev.touches); // says ev.touches is undefined
-});
 
-$(document).on("click touchstart","#map-page #search-map-button",function(ev){
-     console.log('------------tach----------------'); // says ev.touches is undefined
-     arr = JSON.parse(localStorage['selected_restaurants'])
-     param = $(" #map-page #search-value-map").val();
-     collection = filter_result(arr, param);
-     console.log( collection );
-   var map = new GoogleMap();
-   localStorage['map_collection'] = JSON.stringify(collection);
-   user = 'none';
-   map.initialize(collection, user);
+$(document).on("click touchend","#map-page #search-map-button",function(ev){
+
+     var arr = JSON.parse(window.localStorage['selected_restaurants'])
+    var  param = $(" #map-page #search-value-map").val();
+     var collection = filter_result(arr, param);
+
+      var map = new GoogleMap();
+      window.localStorage['map_collection']= JSON.stringify(collection) ;
+      var user = 'none';
+      map.initialize(collection, user);
+
+
+   window.localStorage['map_collection'] = JSON.stringify(collection);
+
 });
 
 function filter_result(arr, param){
-   collection  = jQuery.grep(arr, function(n){
-     reg = new RegExp(".*" + param + ".*","i");
+   var collection  = jQuery.grep(arr, function(n){
+     var reg = new RegExp(".*" + param + ".*","i");
      return n.name.match(reg) || n.rating == param || n.city == param || n.cuisine == param;
    });
      return collection ;

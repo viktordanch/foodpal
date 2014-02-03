@@ -1067,7 +1067,7 @@ module.exports = {
         cordova.addDocumentEventHandler('menubutton');
         cordova.addDocumentEventHandler('searchbutton');
 
-        // Figure out if we need to shim-in localStorage and WebSQL
+        // Figure out if we need to shim-in window.localStorage and WebSQL
         // support from the native side.
         var storage = require('cordova/plugin/android/storage');
 
@@ -1103,9 +1103,9 @@ module.exports = {
             };
         }
 
-        // Patch localStorage if necessary
-        if (typeof window.localStorage == 'undefined' || window.localStorage === null) {
-            window.localStorage = new storage.CupcakeLocalStorage();
+        // Patch window.localStorage if necessary
+        if (typeof window.window.localStorage == 'undefined' || window.window.localStorage === null) {
+            window.window.localStorage = new storage.Cupcakewindow.localStorage();
         }
 
         // Let native code know we are all done on the JS side.
@@ -4213,21 +4213,21 @@ var DroidDB_openDatabase = function(name, version, display_name, size) {
 };
 
 /**
- * For browsers with no localStorage we emulate it with SQLite. Follows the w3c api.
+ * For browsers with no window.localStorage we emulate it with SQLite. Follows the w3c api.
  * TODO: Do similar for sessionStorage.
  * @constructor
  */
-var CupcakeLocalStorage = function() {
+var Cupcakewindow.localStorage = function() {
     channel.waitForInitialization("cupcakeStorage");
 
     try {
 
-      this.db = openDatabase('localStorage', '1.0', 'localStorage', 2621440);
+      this.db = openDatabase('window.localStorage', '1.0', 'window.localStorage', 2621440);
       var storage = {};
       this.length = 0;
       function setLength (length) {
         this.length = length;
-        localStorage.length = length;
+        window.localStorage.length = length;
       }
       this.db.transaction(
         function (transaction) {
@@ -4301,7 +4301,7 @@ var CupcakeLocalStorage = function() {
 
 module.exports = {
   openDatabase:DroidDB_openDatabase,
-  CupcakeLocalStorage:CupcakeLocalStorage,
+  Cupcakewindow.localStorage:Cupcakewindow.localStorage,
   failQuery:failQuery,
   completeQuery:completeQuery
 };

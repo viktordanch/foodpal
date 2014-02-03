@@ -4,20 +4,52 @@
 
 function doResize() {
     var winhight = $.mobile.getScreenHeight();
+    var scroller = $('#register div[data-role="content"]');
+    scroller.css('margin-top', '25px');
     var headhight = $('[data-role="header"]').first().outerHeight();
     var foothight = $('[data-role="footer"]').first().outerHeight();
     var $content=$('[data-role="content"]');
+    var $pagecontent=$('[data-role="page"]');
     newhight = winhight - headhight - foothight - 10;
+
     $content.css('min-height',newhight + 'px');
+
 }
 $(document).bind('pageload', doResize);
+$(document).bind('pageload', checkStorage);
+
 $(document).bind('pageshow', doResize);
+$(document).bind('pageshow', checkStorage);
+
 $(document).bind("touchmove",function(event){
 	event.preventDefault();
    });
 
 
-//$(window).bind('resize, orientationchange', doResize);
+$(window).bind('orientationchange, resize', doResizeSize);
+
+function doResizeSize(){
+    doResize();
+    try{
+    homeScroll.refresh();
+    searchScroll.refresh();
+    }catch(err){
+
+    }
+}
+
+function checkStorage(){
+  //read_storage();
+
+
+  //write_local_storage(localStorage);
+
+
+
+ //alert(localStorage.user_cart);
+ // alert(localStorage.user_cart);
+
+}
 
 // include this file before your jquery-mobile script tag
 $(document).delegate('.ui-navbar ul li > a', 'click', function() {

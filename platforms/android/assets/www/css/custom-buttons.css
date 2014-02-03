@@ -82,3 +82,7 @@ background: -webkit-linear-gradient(top, #8dc86e 0%,#89c669 6%,#84c665 9%,#7ec55
 	border: solid 2px white;
 	z-index: 100;
 	}
+
+div[data-role="content"]{
+
+}

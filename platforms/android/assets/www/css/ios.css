@@ -8,7 +8,7 @@ body{margin:0;overflow:hidden;}
 .ui-footer{bottom:0; position:fixed;}
 img.t_btn:hover{-webkit-filter:grayscale(100%);}
 img.t_btn{display:block;height:138px;width:138px;}
-.pad{bottom:0;left:0;margin:auto;position:relative;right:10%;top:70px; display: block; width: 275px;}
+.pad{bottom:0;left:0;margin:auto;position:relative;right:10%;top:42px; display: block; width: 275px;}
 img.logo{height:43px;margin-left:5px;margin-top:2px;}
 .grayheader{
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1d1d1d), color-stop(1%,#d9d9d9), color-stop(2%,#fefefe), color-stop(47%,#ebebeb), color-stop(66%,#e7e7e7), color-stop(96%,#e9e9e9), color-stop(100%,#fbfbfb));
@@ -134,7 +134,7 @@ width: 60%; margin-left: 15px;margin-top: 15px;
 width: 30%; margin-left: 5px;margin-top: 15px;
 }
 #login, .registration-page {
-margin-top: 70px;
+
 }
 .howto {
 color: #ffffff;

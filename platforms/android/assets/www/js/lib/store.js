@@ -23,18 +23,18 @@ var Store = function(name, options) {
     this._updated_at    = options.updated_at_field_name || 'updated_at';
 
     // Init the persistant storage
-    if (localStorage.getItem(this._name) == null) {
+    if (window.localStorage.getItem(this._name) == null) {
         // This is our first visit, so insert any seed records into local storage
-        localStorage.setItem(this._name, JSON.stringify(this._records));
+        window.localStorage.setItem(this._name, JSON.stringify(this._records));
     } else {
         // We've been here before, so overwrite any seed records with what's in local storage
-        this._records = JSON.parse(localStorage.getItem(this._name));
+        this._records = JSON.parse(window.localStorage.getItem(this._name));
     }
 }
 
 Store.prototype = {
     _commit: function() {
-        localStorage.setItem(this._name, JSON.stringify(this._records));
+        window.localStorage.setItem(this._name, JSON.stringify(this._records));
     },
     _id: function () { // Brazenly stolen from Lawnchair.js ;)
         var S4 = function () {
@@ -94,7 +94,7 @@ Store.prototype = {
     },
     drop: function() {
         this._records = undefined;
-        localStorage.removeItem(this._name);
+        window.localStorage.removeItem(this._name);
         this._trigger('drop');
         return true;
     },

@@ -11,16 +11,22 @@
     <access origin="*" />
     <access origin="http://google.com" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="exit-on-suspend" value="true" />
     <feature name="App">
         <param name="android-package" value="com.foodpal.foodpal.App" />
     </feature>
     <author email="info@foodpal.com" href="http://foodpal.com">
         Apache Cordova Team
     </author>
+    <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
+    <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
     <content src="index.html" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <feature name="Device">
         <param name="android-package" value="com.foodpal.foodpal.device.Device" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.InAppBrowser" />
     </feature>
 </widget>
