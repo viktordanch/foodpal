@@ -1129,7 +1129,7 @@
                    data-corners="true" data-shadow="true" data-iconshadow="true"
                    data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                         class="ui-btn-text"
-                        style=" font-weight: bold;"> Restaurant Menu</span></span></a>
+                        style=" font-weight: bold;"> Menu</span></span></a>
             </div>
 
             <div class="ui-block-b control" style='width: 50%;'>
@@ -1138,7 +1138,7 @@
                    data-corners="true" data-shadow="true" data-iconshadow="true"
                    data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                         class="ui-btn-text"
-                        style=" font-weight: bold;"> Show location</span></span></a>
+                        style=" font-weight: bold;"> Location</span></span></a>
             </div>
         </div>
 
@@ -1369,6 +1369,26 @@
     #ordering-page .total span{
     font-weight: bold;
     }
+    #ordering-page #spiner{
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: 6;
+    opacity: 1;
+   // display:none;
+
+    }
+    #ordering-page #black{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    background: black;
+    //display:none;
+    }
 
 </style>
 <script type="text/javascript" charset="utf-8">
@@ -1390,6 +1410,10 @@
                     </span></a>
         </h1>
     </div>
+    <img src="assets/images/loading.gif" id="spiner">
+
+    <div id="black">
+    </div>
 
     <div data-role="content" class='body-container'>
         <a data-role="button" class='back-button' data-transition="slide" href="#menu-item-page"
@@ -1403,21 +1427,6 @@
                 </li>
             </ul>
         </div>
-        <!--<div class='alert-warning' style='z-index: 1000'>-->
-        <!--<h1 style='text-align: center; font-size: 18px;'>Order Warning </h1>-->
-        <!--The minimum Order for Delivery is $10-->
-        <!--<a data-role="button" href="#page1" onclick='order_warning_cancel();'-->
-        <!--data-role="button" data-theme="reset"-->
-        <!--class="ios green  ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
-        <!--data-corners="true" data-shadow="true" data-iconshadow="true"-->
-        <!--data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span-->
-        <!--class="ui-btn-text"-->
-        <!--style=" font-weight: bold;">Cancel</span></span>-->
-
-        <!--</a>-->
-
-        <!--</div>-->
-
 
         <div class="total">
 
@@ -1437,7 +1446,7 @@
     </div>
 
     <div data-role="footer" data-id="tab1">
-
+    <a href="#" onclick="openInAppBrowserBlank('http://192.168.1.52:3000/orders/index');">open InAppBrowser</a>
 
         <div data-role="navbar" class="tab-bar">
             <ul>

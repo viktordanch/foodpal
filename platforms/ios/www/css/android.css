@@ -51,8 +51,10 @@
 
     }
    #search h4.found-result-count{
-   text-shadow: 1px 1px 13px black, 0 0 1em #A89EA3!important;
-   font-weight: bold;
+       font-size: 30px;
+       margin: 10px;
+       color: #273A14;
+       font-weight: bold;
 
     }
     #select-menu .ui-btn-text{

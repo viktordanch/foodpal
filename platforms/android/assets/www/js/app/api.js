@@ -301,7 +301,8 @@ function Api(){
  this.set_params_for_search = function(){
  console.log("-------------set_params_for_search------------------------");
   var cusines = [];
-  spiner_on();
+  var page = '#search'
+  spiner_on(page);
 
    $.ajax({
                  //url: 'http://perechin.net:3000/api/restaurants/set_select_params',
@@ -322,11 +323,11 @@ function Api(){
                      window.localStorage['city'] = JSON.stringify(answer['cities']);
 
                      set_search_selects();
-                     spiner_off();
+                     spiner_off('#search');
 
                  },
                  error: function(data) {
-                 spiner_off();
+                 spiner_off('search');
                     alert('No connection with server');
                   }
 
@@ -346,7 +347,7 @@ function Api(){
      window.location.href = "";
 
    }else{
-        spiner_on();
+        spiner_on('#search');
         var parametr = $('#search-value').val();
         console.log( parametr);
         console.log( parametr);
@@ -372,7 +373,7 @@ function Api(){
                 type: 'GET',
                 data: data ,
                 success: function(data) {
-                  spiner_off();
+                  spiner_off('#search');
                    var  answer = data;
                     answer.locations
                      window.localStorage['received_restaurants'] = JSON.stringify(answer.locations);
@@ -381,7 +382,7 @@ function Api(){
 
                     console.log(data)  },
                 error: function(data) {
-                spiner_off();
+                spiner_off('#search');
                    console.log(data['responseText']);
                  }
             });
@@ -416,8 +417,17 @@ function Api(){
      //resr_id = $("#restouran-card .control .set_menu").attr('id' );
 
      if( window.localStorage.user && window.localStorage.user_cart ){
-         var user = JSON.parse(window.localStorage['user']);
-        var  cart = JSON.parse(window.localStorage['user_cart']);
+
+
+           spiner_on('#ordering-page');
+           var   user = JSON.parse(window.localStorage['user']);
+         var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
+        //var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+           url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+           console.log(url);
+           alert('pleas wait a few minutes');
+            window.open(url, '_blank', 'location=yes');
+            //window.open(url, "_system")
 
            $.ajax({
                       type: 'GET',
@@ -426,7 +436,7 @@ function Api(){
                        dataType: 'json',
                        data: {authentication_token: user['token'], cart: cart } ,
                        success: function(data) {
-                          alert('ok!');
+                         spiner_off('#ordering-page');
                           try {
                                var answer = data;
                               var  user_cart = JSON.parse(window.localStorage['user_cart']);
@@ -436,19 +446,19 @@ function Api(){
                                //url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
                                console.log(url);
                                alert('pleas wait a few minutes');
-                                //window.open(url, '_blank', 'location=yes');
-                                window.open(url, "_system")
+
 
 
 
                            } catch(e) {
-                           alert('catch');
+
                            alert('connection wrong');
                            return false;
                          }
 
                             },
                        error: function(data) {
+                       spiner_off('#ordering-page');
                              console.log('error');
                              console.log('error');
                              console.log('error');

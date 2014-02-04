@@ -1,11 +1,41 @@
+    var ref = null;
+function openInAppBrowserBlank(url)
+{
+    try {
+ref = window.open(encodeURI(url),'_blank','location=no'); //encode is needed if you want to send a variable with your link if not you can use ref = window.open(url,'_blank','location=no');
+         ref.addEventListener('loadstop', LoadStop);
+         ref.addEventListener('exit', Close);
+    }
+    catch (err)
+    {
+        alert(err);
+    }
+}
+function LoadStop(event) {
+         if(event.url == "http://www.mypage.com/closeInAppBrowser.html"){
+            // alert("fun load stop runs");
+             ref.close();
+         }
+    }
+function Close(event) {
+         ref.removeEventListener('loadstop', LoadStop);
+         ref.removeEventListener('exit', Close);
+    }
+
+
+
+
+
    // city, country, rating list
-  function spiner_on(){
-     $('#search  #spiner').css('display', 'block');
-     $('#search  #black').css('display', 'block');
+  function spiner_on(page){
+      console.log(page);
+
+     $(page+'  #spiner').css('display', 'block');
+     $(page+'  #black').css('display', 'block');
   }
-  function spiner_off(){
-     $('#search  #spiner').css('display', 'none');
-     $('#search  #black').css('display', 'none');
+  function spiner_off(page){
+     $(page+'  #spiner').css('display', 'none');
+     $(page+'  #black').css('display', 'none');
   }
 
   function write_local_storage(storage){
@@ -128,7 +158,7 @@ $(document).on('click', '#search .cuisine-select a', function(e){
     e.preventDefault();
      return false;
 } );
-  $(document).on('click', '.cuisine-select a', function(e){
+  $(document).on('touchend', '.cuisine-select a', function(e){
     if( $('#selectCuisine-listbox-popup')){
       $('#selectCuisine-listbox').popup('open');
       $(document).on('click','#selectCuisine-listbox li a', function(){
@@ -142,7 +172,7 @@ $(document).on('click', '#search .rating-select a', function(e){
     e.preventDefault();
      return false;
 } );
- $(document).on('click', '.rating-select a', function(e){
+ $(document).on('touchend', '.rating-select a', function(e){
    if( $('#selectRating-listbox-popup')){
      $('#selectRating-listbox').popup('open');
      $(document).on('click','#selectRating-listbox li a', function(){
@@ -159,8 +189,9 @@ $(document).on('click', '#search .rating-select a', function(e){
     $('#selectCity-dialog [role="dialog"]').height($('html').height() - 50);
     $('#selectCity-dialog [role="dialog"]').css('overflow', 'hidden');
     $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
-    var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
-
+    if($('#city_scroller')){
+      var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+    }
   });
 
 
@@ -214,20 +245,20 @@ if(city_id != '' && city_id != '0'){
   }
   arr = JSON.parse(window.localStorage['received_restaurants']);
   var statement = $('#in-location').is(':checked');
-  if(statement){
-
-    var collection = jQuery.grep(arr, function(n){
-   var location = JSON.parse(window.localStorage['user_location'] )
-    var lang_offset = location[0];
-    var lant_offset = location[1];
-
-     return ((lang_offset - 0.027)<=  n.longitude <= (lang_offset + 0.027) ) &&((lant_offset - 0.027)<=  n.latitude <= (lant_offset + 0.027) ) &&(n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
-  });
-  }else{
+//if(statement){
+//
+//  var collection = jQuery.grep(arr, function(n){
+// var location = JSON.parse(window.localStorage['user_location'] )
+//  var lang_offset = location[0];
+//  var lant_offset = location[1];
+//
+//   return ((lang_offset - 0.027)<=  n.longitude <= (lang_offset + 0.027) ) &&((lant_offset - 0.027)<=  n.latitude <= (lant_offset + 0.027) ) &&(n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
+//});
+//  }else{
      var collection = jQuery.grep(arr, function(n){
          return (n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
       });
-  }
+//  }
   window.localStorage['selected_restaurants'] = JSON.stringify(collection)
   if(window.localStorage.user_location){
       var user_location = JSON.parse(window.localStorage['user_location']);
@@ -869,7 +900,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
- // $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
   function add_to_card(){
