@@ -22,9 +22,20 @@ function Close(event) {
          ref.removeEventListener('exit', Close);
     }
 
+// open win and turn off location
+function external(){
+    var ref = window.open('http://192.168.1.52:3000/orders/index', '_blank', 'location=no');
 
+    // attach listener to loadstart
+    ref.addEventListener('loadstart', function(event) {
+        alert('close');
+        var urlSuccessPage = "http://myloginapp/success/";
+        if (event.url == urlSuccessPage) {
+        ref.close();
+        }
+    });
 
-
+}
 
    // city, country, rating list
   function spiner_on(page){
@@ -900,7 +911,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
-  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+  //$(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
   function add_to_card(){

@@ -12,11 +12,9 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/drinks.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/first_cosine.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/main-courses.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/api.js" afterPath="$PROJECT_DIR$/assets/www/js/app/api.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/app.js" afterPath="$PROJECT_DIR$/assets/www/js/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/index.html" afterPath="$PROJECT_DIR$/assets/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,7 +81,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1448" column="48" selection-start="52171" selection-end="52171" vertical-scroll-proportion="-4.1153846" vertical-offset="21506" max-vertical-offset="59040">
+            <state line="1448" column="35" selection-start="52158" selection-end="52158" vertical-scroll-proportion="-4.1153846" vertical-offset="21506" max-vertical-offset="59040">
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -178,7 +176,7 @@
       <file leaf-file-name="api.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="473" column="81" selection-start="16120" selection-end="16157" vertical-scroll-proportion="-14.392858" vertical-offset="6692" max-vertical-offset="7815">
+            <state line="473" column="44" selection-start="16120" selection-end="16157" vertical-scroll-proportion="-14.392858" vertical-offset="6692" max-vertical-offset="7815">
               <folding />
             </state>
           </provider>
@@ -214,7 +212,7 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="5" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.6909361" vertical-offset="2430" max-vertical-offset="18480">
+            <state line="913" column="4" selection-start="29932" selection-end="29932" vertical-scroll-proportion="0.3551263" vertical-offset="13456" max-vertical-offset="18645">
               <folding />
             </state>
           </provider>
@@ -937,14 +935,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app/api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="473" column="81" selection-start="16120" selection-end="16157" vertical-scroll-proportion="-14.392858" vertical-offset="6692" max-vertical-offset="7815">
+        <state line="473" column="44" selection-start="16120" selection-end="16157" vertical-scroll-proportion="-14.392858" vertical-offset="6692" max-vertical-offset="7815">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1448" column="48" selection-start="52171" selection-end="52171" vertical-scroll-proportion="-4.1153846" vertical-offset="21506" max-vertical-offset="59040">
+        <state line="1448" column="35" selection-start="52158" selection-end="52158" vertical-scroll-proportion="-4.1153846" vertical-offset="21506" max-vertical-offset="59040">
           <folding>
             <element signature="n#style#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1037,7 +1035,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="5" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.6909361" vertical-offset="2430" max-vertical-offset="18480">
+        <state line="913" column="4" selection-start="29932" selection-end="29932" vertical-scroll-proportion="0.3551263" vertical-offset="13456" max-vertical-offset="18645">
           <folding />
         </state>
       </provider>
