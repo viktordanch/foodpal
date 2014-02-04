@@ -20,6 +20,7 @@
     </author>
     <plugin name="SplashScreen" value="org.apache.cordova.SplashScreen"/>
     <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
+    <plugin name="ChildBrowser" value="com.phonegap.plugins.childBrowser.ChildBrowser"/>
     <content src="index.html" />
     <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />

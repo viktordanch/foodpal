@@ -313,10 +313,13 @@ function Api(){
                  data: {},
                  success: function(data) {
                      var answer = data;
-
                      answer['cuisines'].unshift('Cuisine');
+                     answer['cuisines'].unshift('Close');
+
                     console.log(answer['cuisines']);
                      answer['cities'].unshift('City');
+
+                     answer['cities'].unshift('Close');
                     delete window.localStorage.cusines;
                      window.localStorage['cusines'] = JSON.stringify(answer['cuisines']);
                      delete window.localStorage.city;

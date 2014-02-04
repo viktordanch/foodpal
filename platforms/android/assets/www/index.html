@@ -20,6 +20,7 @@
             src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
     <script type="text/javascript" src="js/app/iscroll.js"></script>
+    <script type="text/javascript" src="js/lib/ChildBrouser.js"></script>
     <script src="js/lib/jquery.js"></script>
     <script src="js/app/user.js"></script>
     <script src="js/app/ios.js"></script>
@@ -326,7 +327,7 @@
                                 </option>
                             </select>
                         </li>
-                        <li data-theme="c" class='cuisine-select'>
+                        <li data-theme="c" data-native-menu="false" name="" data-theme="a">
                             <select id="selectCuisine" data-native-menu="false" name=""
                                     data-theme="a">
                                 <option value="">
@@ -1446,7 +1447,8 @@
     </div>
 
     <div data-role="footer" data-id="tab1">
-    <a href="#" onclick="external();">open InAppBrowser</a>
+    <!--<a href="#" onclick="window.plugins.childBrowser.showWebPage('http://google.com');">open InAppBrowser</a>-->
+    <a href="#http://google.com" data-rel="dialog" >open InAppBrowser</a>
 
         <div data-role="navbar" class="tab-bar">
             <ul>

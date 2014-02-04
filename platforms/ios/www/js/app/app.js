@@ -1,3 +1,9 @@
+function loadstart(){
+  alert('start');
+  return false;
+}
+
+
     var ref = null;
 function openInAppBrowserBlank(url)
 {
@@ -24,9 +30,13 @@ function Close(event) {
 
 // open win and turn off location
 function external(){
-    var ref = window.open('http://192.168.1.52:3000/orders/index', '_blank', 'location=no');
+    alert('external');
+
+    var ref = window.open('http://192.168.1.52:3000/orders/index', '_system', 'location=no');
 
     // attach listener to loadstart
+    $(ref);
+    alert(ref.back = function(){alert('Back')});
     ref.addEventListener('loadstart', function(event) {
         alert('close');
         var urlSuccessPage = "http://myloginapp/success/";
@@ -165,33 +175,39 @@ function external(){
 
 
 
-$(document).on('click', '#search .cuisine-select a', function(e){
-    e.preventDefault();
-     return false;
-} );
-  $(document).on('touchend', '.cuisine-select a', function(e){
-    if( $('#selectCuisine-listbox-popup')){
-      $('#selectCuisine-listbox').popup('open');
-      $(document).on('click','#selectCuisine-listbox li a', function(){
+// $(document).on('click', '#search .cuisine-select a', function(e){
+//     e.preventDefault();
+//      return false;
+// } );
+//  // $(document).on('touchend', '.cuisine-select a', function(e){
+//   $(document).on('click', '.cuisine-select a', function(e){
+//     if( $('#selectCuisine-listbox-popup')){
+//
+//       setTimeout(function(){ $('#selectCuisine-listbox').popup('open');},300)
+//       $(document).on('click','#selectCuisine-listbox li a', function(){
+//         console.log('------------------close popub---------------');
+//         $('#selectCuisine-listbox').popup('close');
+//       })
+//     }
+//   })
 
-        $('#selectCuisine-listbox').popup('close');
-      })
-    }
-  })
+    $(document).on('click', '#search .rating-select a', function(e){
+        e.preventDefault();
+         return false;
+    } );
+       $(document).on('touchend', '.rating-select a', function(e){
 
-$(document).on('click', '#search .rating-select a', function(e){
-    e.preventDefault();
-     return false;
-} );
- $(document).on('touchend', '.rating-select a', function(e){
-   if( $('#selectRating-listbox-popup')){
-     $('#selectRating-listbox').popup('open');
-     $(document).on('click','#selectRating-listbox li a', function(){
 
-       $('#selectRating-listbox').popup('close');
-     })
-   }
- })
+          if( $('#selectRating-listbox-popup')){
+             setTimeout(function(){ $('#selectRating-listbox').popup('open');},300)
+
+            $(document).on('click','#selectRating-listbox li a', function(e){
+                  e.preventDefault();
+                   return false;
+              $('#selectRating-listbox').popup('close');
+            })
+          }
+    })
 
  $('#selectCity-dialog').live('pageshow', function(event, ui){
 
@@ -201,7 +217,10 @@ $(document).on('click', '#search .rating-select a', function(e){
     $('#selectCity-dialog [role="dialog"]').css('overflow', 'hidden');
     $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
     if($('#city_scroller')){
-      var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+      setTimeout(function(){
+        var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+      },100)
+
     }
   });
 
@@ -211,7 +230,10 @@ $(document).on('click', '#search .rating-select a', function(e){
     $('#selectCuisine-dialog [role="dialog"]').height($('html').height() - 50);
     $('#selectCuisine-dialog [role="dialog"]').css('overflow', 'hidden');
     $('#selectCuisine-dialog [data-role="content"]').attr('id', 'cuisine_scroller');
-    var cuisineScroll = new iScroll('cuisine_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+
+     setTimeout(function(){
+       var cuisineScroll = new iScroll('cuisine_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+      },100)
 
   });
 
@@ -297,21 +319,28 @@ if(city_id != '' && city_id != '0'){
 
  //set list cusines and cities
  $(document).on('click', '#home  #link-to-search', set_select_params);
+  function aler_you(){
+    $('#selectCuisine-listbox').popup('close');
 
+  };
   //////set select cusine and city
   function set_search_selects(){
+      //alert('-----set params---------------');
+
 
         var cusines = JSON.parse(window.localStorage['cusines']);
       $('#selectCuisine-listbox-popup ul#selectCuisine-menu').html('');
+   //   $('#search #select-menu #selectCuisine').html('');
       $('#search #select-menu #selectCuisine').html('');
       for (var i=0;i<cusines.length;i++)
       {
-         var li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
+         var li = '<li data-option-index="'+(i)+'" data-icon="false"\
                 class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
                 data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
                 data-iconpos="right" data-theme="a" aria-selected="false">\
                   <div class="ui-btn-inner ui-li">\
-                  <div class="ui-btn-text"><a href="#" tabindex="1" class="ui-link-inherit">\
+                  <div class="ui-btn-text"><a href="#search-page" tabindex="-1" class="ui-link-inherit"\
+                  onclick= "aler_you();"">\
                   '+cusines[i]+'\
                 </a></div></div></li>';
 
@@ -319,33 +348,51 @@ if(city_id != '' && city_id != '0'){
        $('#search #select-menu #selectCuisine').append(
        "<option value="+(i)+">"+cusines[i]+"</option>");
         $('#selectCuisine-listbox-popup ul#selectCuisine-menu').append(li);
+  //       $('#selectCuisine-dialog ul#selectCuisine-menu').append(li);
 
         $('#selectCuisine-listbox > .ui-header').css('width','103px');
 
       }
+ //    $('#selectCity-dialog ul li a').click(function(e){e.preventDefault();});
+ //   $(document).on('click','#selectCuisine-listbox li a', function(){
+ //           console.log('------------------close popub---------------');
+ //           $('#selectCuisine-listbox').popup('close');
+ //   })
 
 
 
      var city = JSON.parse(window.localStorage['city']);
+  //    console.log($('#selectCity-listbox-popup ul#selectCity-menu li a ').text());
+  //    console.log($('#search #select-menu #selectCity option').text());
+
       $('#selectCity-listbox-popup ul#selectCity-menu').html('');
+      $('#selectCity-listbox-popup ul#selectCity-menu').html('');
+    //  $('#selectCity-dialog ul#selectCity-menu').html('');
+
       $('#search #select-menu #selectCity').html('');
      for (var i=0;i<city.length;i++)
      {
-      var li = '<li data-option-index="'+(i+1)+'" data-icon="false"\
+      var li = '<li data-option-index="'+(i)+'" data-icon="false"\
                class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
                data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
                data-iconpos="right" data-theme="a" aria-selected="false">\
                  <div class="ui-btn-inner ui-li">\
-                 <div class="ui-btn-text"><a href="#" tabindex="1" class="ui-link-inherit">\
+                 <div class="ui-btn-text"><a href="#search-page" tabindex="-1" class="ui-link-inherit">\
                  '+city[i]+'\
                </a></div></div></li>';
        $('#search #select-menu #selectCity').append(
-          '<option value='+(i+1)+'>'+city[i+1]+'</option>');
-          $('#selectCity-listbox-popup ul#selectCity-menu').append(li);
+          '<option value='+(i)+'>'+city[i]+'</option>');
+
+
+            $('#selectCity-listbox-popup ul#selectCity-menu').append(li);
+
+       //     $('#selectCity-dialog ul#selectCity-menu').append(li);
+
           $('#selectCuisine-listbox > .ui-header').css('width','103px');
 
      }
       //////set select cusine and city------------------end
+
 
 
 
