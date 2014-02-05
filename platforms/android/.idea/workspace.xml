@@ -12,6 +12,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/drinks.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/first_cosine.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/main-courses.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/api.js" afterPath="$PROJECT_DIR$/assets/www/js/app/api.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/app.js" afterPath="$PROJECT_DIR$/assets/www/js/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/index.html" afterPath="$PROJECT_DIR$/assets/www/index.html" />
     </list>
@@ -77,11 +78,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1450" column="0" selection-start="52143" selection-end="52143" vertical-scroll-proportion="-2.3653846" vertical-offset="21627" max-vertical-offset="59070">
-              <folding />
+            <state line="312" column="21" selection-start="12020" selection-end="12020" vertical-scroll-proportion="0.3109489" vertical-offset="4467" max-vertical-offset="59070">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,7 +112,7 @@
       <file leaf-file-name="api.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="321" column="52" selection-start="9778" selection-end="9778" vertical-scroll-proportion="0.0" vertical-offset="4522" max-vertical-offset="7860">
+            <state line="9" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="-4.821429" vertical-offset="0" max-vertical-offset="7680">
               <folding />
             </state>
           </provider>
@@ -124,10 +127,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="966" column="2" selection-start="31704" selection-end="31704" vertical-scroll-proportion="0.35401973" vertical-offset="14239" max-vertical-offset="19440">
+            <state line="22" column="0" selection-start="505" selection-end="505" vertical-scroll-proportion="81.42857" vertical-offset="2610" max-vertical-offset="17115">
               <folding />
             </state>
           </provider>
@@ -191,13 +194,13 @@
         <option value="$PROJECT_DIR$/assets/www/css/custom-buttons.css" />
         <option value="$PROJECT_DIR$/assets/www/css/android.css" />
         <option value="$PROJECT_DIR$/assets/www/js/app/user.js" />
-        <option value="$PROJECT_DIR$/assets/www/js/app/api.js" />
         <option value="$PROJECT_DIR$/res/xml/config.xml" />
         <option value="$PROJECT_DIR$/assets/www/js/lib/ChildBrouser.js" />
         <option value="$PROJECT_DIR$/src/com/phonegap/plugins/childBrowser/ChildBrowser.java" />
         <option value="$PROJECT_DIR$/src/com/foodpal/foodpal/Foodpal.java" />
-        <option value="$PROJECT_DIR$/assets/www/index.html" />
         <option value="$PROJECT_DIR$/assets/www/js/app/app.js" />
+        <option value="$PROJECT_DIR$/assets/www/js/app/api.js" />
+        <option value="$PROJECT_DIR$/assets/www/index.html" />
       </list>
     </option>
   </component>
@@ -674,24 +677,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="505" selection-end="505" vertical-scroll-proportion="81.42857" vertical-offset="2610" max-vertical-offset="17115">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app/api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="321" column="52" selection-start="9778" selection-end="9778" vertical-scroll-proportion="0.0" vertical-offset="4522" max-vertical-offset="7860">
+        <state line="9" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="-4.821429" vertical-offset="0" max-vertical-offset="7680">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1450" column="0" selection-start="52143" selection-end="52143" vertical-scroll-proportion="-2.3653846" vertical-offset="21627" max-vertical-offset="59070">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="966" column="2" selection-start="31704" selection-end="31704" vertical-scroll-proportion="0.35401973" vertical-offset="14239" max-vertical-offset="19440">
-          <folding />
+        <state line="312" column="21" selection-start="12020" selection-end="12020" vertical-scroll-proportion="0.3109489" vertical-offset="4467" max-vertical-offset="59070">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

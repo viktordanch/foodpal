@@ -1,55 +1,5 @@
-function loadstart(){
-  alert('start');
-  return false;
-}
-
-
-    var ref = null;
-function openInAppBrowserBlank(url)
-{
-    try {
-ref = window.open(encodeURI(url),'_blank','location=no'); //encode is needed if you want to send a variable with your link if not you can use ref = window.open(url,'_blank','location=no');
-         ref.addEventListener('loadstop', LoadStop);
-         ref.addEventListener('exit', Close);
-    }
-    catch (err)
-    {
-        alert(err);
-    }
-}
-function LoadStop(event) {
-         if(event.url == "http://www.mypage.com/closeInAppBrowser.html"){
-            // alert("fun load stop runs");
-             ref.close();
-         }
-    }
-function Close(event) {
-         ref.removeEventListener('loadstop', LoadStop);
-         ref.removeEventListener('exit', Close);
-    }
-
-// open win and turn off location
-function external(){
-    alert('external');
-
-    var ref = window.open('http://192.168.1.52:3000/orders/index', '_system', 'location=no');
-
-    // attach listener to loadstart
-    $(ref);
-    alert(ref.back = function(){alert('Back')});
-    ref.addEventListener('loadstart', function(event) {
-        alert('close');
-        var urlSuccessPage = "http://myloginapp/success/";
-        if (event.url == urlSuccessPage) {
-        ref.close();
-        }
-    });
-
-}
-
-   // city, country, rating list
   function spiner_on(page){
-      console.log(page);
+
 
      $(page+'  #spiner').css('display', 'block');
      $(page+'  #black').css('display', 'block');
@@ -59,89 +9,15 @@ function external(){
      $(page+'  #black').css('display', 'none');
   }
 
-  function write_local_storage(storage){
-    var foodpal = openDatabase('foodpalDB', '', 'foodpall first database', 9 * 1024 * 10, function(db) {});
 
 
-     foodpal.transaction(function(tx) {
-       tx.executeSql('CREATE TABLE IF NOT EXISTS ' +
-           'session(id INTEGER PRIMARY KEY ASC, session TEXT)');
-       tx.executeSql(
-         'DELETE FROM session');
-       var lstorage = JSON.stringify(storage);
-       tx.executeSql(
-         'INSERT INTO session(session) VALUES (?)', [lstorage]);
-     });
 
-   }
-
-  function read_storage(){
-    function renderFunc(tx, results) {
-              // results.insertId: last row inserted in db.
-              // results.rowsAffected: num of rows changed by the SQL statement.
-         var len = results.rows.length;
-         console.log(results );
-         console.log(len);
-
-       //  localStorage.clear();
-        var local = JSON.parse(results.rows.item(0).session);
-        console.log(local);
-        for(key in local ){
-       //   localStorage[key] = local[key];
-        }
-        // for (var i = 0; i < len; ++i) {
-        //
-        //   var row = results.rows.item(i);
-        //   alert(row);
-         //       alert(row.task, row.added_on);
-         //     }
-    }
-   var foodpal = openDatabase('foodpalDB', '', 'foodpall first database', 9 * 1024 * 10, function(db) {});
-   foodpal.transaction(function(tx) {
-     tx.executeSql('SELECT * FROM session', [], renderFunc);
-   });
-  }
-
-
-//   window.localStorage['map_collection'] = window.window.localStorage['user_location'] = JSON.stringify([])
    url = 'http://perechin.net:3000'
    var city = [];
-//   window.window.localStorage['counties'] = city;
    var cart = ['item1', 'item2', 'item2', 'item3'];
    var cusines = [];
-//   window.window.localStorage['cusines'] = cusines;
-   var rating = ['Rating', 1, 2, 3, 4, 5 ];
+  var rating = ['Rating', 1, 2, 3, 4, 5 ];
    window.window.localStorage['rating'] = JSON.stringify(rating);
-
-   // restaurant list
-//   var restaurant = {};
-
-//   window.window.localStorage['rest_menu'] = JSON.stringify({});
-
-
-
-   // restaurant card
-
-
-
-   // user cart
-
-
-//  window.window.localStorage['user_cart'] = JSON.stringify({});
-
-
-//   window.window.localStorage['rest'] = JSON.stringify({});
-//   window.window.localStorage['restaurant'] = JSON.stringify({});
-//   window.window.localStorage['selected_restaurants'] = JSON.stringify({});
-
-
- //  window.window.localStorage['user'] = JSON.stringify({});
-
- //   window.window.localStorage['orders'] = JSON.stringify({});
-
-// page  search
-
-
 
 
  $(document).ready(function(){
@@ -175,21 +51,7 @@ function external(){
 
 
 
-// $(document).on('click', '#search .cuisine-select a', function(e){
-//     e.preventDefault();
-//      return false;
-// } );
-//  // $(document).on('touchend', '.cuisine-select a', function(e){
-//   $(document).on('click', '.cuisine-select a', function(e){
-//     if( $('#selectCuisine-listbox-popup')){
-//
-//       setTimeout(function(){ $('#selectCuisine-listbox').popup('open');},300)
-//       $(document).on('click','#selectCuisine-listbox li a', function(){
-//         console.log('------------------close popub---------------');
-//         $('#selectCuisine-listbox').popup('close');
-//       })
-//     }
-//   })
+
 
     $(document).on('click', '#search .rating-select a', function(e){
         e.preventDefault();
@@ -247,16 +109,15 @@ function external(){
   var city_id = $('#selectCity').val();
   var cuisine_id = $('#selectCuisine').val();
   var rating_id = $('#selectRating').val();
-  console.log(city_id);
-  console.log(cuisine_id);
-  console.log(rating_id);
+
 
 
 
 if(city_id != '' && city_id != '0'){
     var cities = JSON.parse(window.localStorage['city']);
    var  city = cities[parseInt(city_id)];
-    console.log('okey------ci-----------');
+
+
   }else{
     var city = '';
   }
@@ -264,7 +125,7 @@ if(city_id != '' && city_id != '0'){
   if(cuisine_id != '' && cuisine_id != '0'){
      var cusines = JSON.parse(window.localStorage['cusines']);
      var cuisine  = cusines[parseInt(cuisine_id)];
-     console.log('okey-------cu----------');
+
   }else{
     var cuisine = '';
   }
@@ -272,33 +133,24 @@ if(city_id != '' && city_id != '0'){
   if(rating_id != '' && rating_id != '0'){
     var ratings = JSON.parse(window.localStorage['rating']);
     var rating= ratings[parseInt(rating_id)];
-    console.log('okey------ra-----------');
+
   }else{
     var rating = '';
   }
   arr = JSON.parse(window.localStorage['received_restaurants']);
   var statement = $('#in-location').is(':checked');
-//if(statement){
-//
-//  var collection = jQuery.grep(arr, function(n){
-// var location = JSON.parse(window.localStorage['user_location'] )
-//  var lang_offset = location[0];
-//  var lant_offset = location[1];
-//
-//   return ((lang_offset - 0.027)<=  n.longitude <= (lang_offset + 0.027) ) &&((lant_offset - 0.027)<=  n.latitude <= (lant_offset + 0.027) ) &&(n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
-//});
-//  }else{
      var collection = jQuery.grep(arr, function(n){
          return (n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
       });
-//  }
+
   window.localStorage['selected_restaurants'] = JSON.stringify(collection)
   if(window.localStorage.user_location){
       var user_location = JSON.parse(window.localStorage['user_location']);
       $('.found-result-count .result').html(collection.length);
   }
 
-  console.log( city +  cuisine + rating + user_location)
+
+
   }
 
  // set and create cart
@@ -964,11 +816,11 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
-  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+
 
 
   function add_to_card(){
-    console.log('add to cart');
+
     var item_name = $.trim(jQuery(".item-name", this).html());
     var item_price = $.trim(jQuery(".insert.price", this).html());
     var item_item = parseInt(jQuery(".insert.item", this).html());
@@ -992,8 +844,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
   }
 
   $(document).on('click',".set-user-cart-oder",set_order);
-  console.log('set order');
-  console.log('set order');
+
   function set_order(){
 
     var user_cart = JSON.parse(window.localStorage['user_cart']);
@@ -1001,12 +852,6 @@ $(' #profile-info').live('pageshow',function(event, ui){
     if(window.localStorage.user){
          var user = JSON.parse(window.localStorage['user']);
           var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-          //set url
-
-          console.log(loc_id);
-          console.log(+user['token']);
-         // $('#ordering-page #create_cart_link').attr('href',('http://perechin.net:3000' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
-
 
     }
 

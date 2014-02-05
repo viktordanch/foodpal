@@ -7,7 +7,7 @@ function Api(){
     var name = $('#log_in form#login #user_login').val();
     var password = $('#log_in form#login #user_password').val();
 
-    console.log(name+' '+ password);
+
     var answer= {};
     var user = {};
     console.log(window.location['hash']== "#ordering-page&ui-state=dialog");
@@ -54,7 +54,7 @@ function Api(){
                error: function(data) {
 
                    var answer = data;
-                   console.log(data);
+
                    var user = {};
                    var message = '';
                    var errors = JSON.parse(answer['responseText']);
@@ -69,8 +69,6 @@ function Api(){
 
                    alert(message);
 
-
-                   console.log(data['responseText'])
                    return false;
                }
 
@@ -82,7 +80,7 @@ function Api(){
 }
 
   this.log_out = function(name, password){
-    console.log('log out');
+
     user = JSON.parse(window.localStorage['user'])
          $.ajax({
                     type: 'POST',
@@ -96,7 +94,7 @@ function Api(){
                      },
                     error: function(data) {
                        var answer = data;
-                       console.log(data);
+
                        var user = {};
                        var message = '';
                        var errors = JSON.parse(answer['responseText']);
@@ -112,7 +110,7 @@ function Api(){
                        alert(message);
 
 
-                       console.log(data['responseText'])
+
                        return false; },
 
 
@@ -147,7 +145,7 @@ function Api(){
                    window.location.href = "#profile-info";
                    alert('sign up success');
 
-              console.log(data) },
+             },
               error: function(data) {
 
                var answer = data;
@@ -167,7 +165,7 @@ function Api(){
                alert(message);
 
 
-               console.log(data['responseText'])
+
                return false;
               },
 
@@ -190,10 +188,7 @@ function Api(){
    user['password_confirmation']= $('#password', form).val();
    user['email'] =  $('#email', form).val();
    token = JSON.parse(window.localStorage['user'])["token"];
-   console.log('--------------------token-----------------');
-   console.log(token);
-      console.log('--------------------user-----------------');
-   console.log(user);
+
 
    $.ajax({
            type: 'GET',
@@ -205,14 +200,14 @@ function Api(){
               },
 
            success: function(data) {
-            console.log(data)
+
 
              window.localStorage['user'] = JSON.stringify(user);
              alert('perofile updated success');
             },
            error: function(data) {
                var answer = data;
-                console.log(data);
+
                 var user = {};
                 var message = '';
                 var errors = JSON.parse(answer['responseText']);
@@ -228,7 +223,7 @@ function Api(){
                 alert(message);
 
 
-                console.log(data['responseText'])
+
                 return false;
 
            },
@@ -245,14 +240,14 @@ function Api(){
   this.orders = function(){
   var user_session = JSON.parse(window.localStorage['user']);
   var orders = [];
-    console.log(user_session['token']);
+
 
     $.ajax({
                type: 'POST',
                url:'http://192.168.1.52:3000/api/users/orders',
                data:  {authentication_token: user_session['token']},
                success: function(data) {
-                console.log(data) ;
+
                 window.localStorage['orders'] = JSON.stringify(data);
                 set_order_list();
                },
@@ -272,14 +267,14 @@ function Api(){
 
   var orders = [];
 
-   console.log(user_session['token']);
+
 
     $.ajax({
                type: 'POST',
                url: ('http://192.168.1.52:3000/api/users/orders'),
                data:  {authentication_token: user_session['token']},
               success: function(data) {
-                  console.log(data);
+
                   window.localStorage['orders'] = JSON.stringify(data);
                   set_order_list()
                   alert('update success');
@@ -299,7 +294,7 @@ function Api(){
   }
 
  this.set_params_for_search = function(){
- console.log("-------------set_params_for_search------------------------");
+
   var cusines = [];
   var page = '#search'
   spiner_on(page);
@@ -316,7 +311,7 @@ function Api(){
                      answer['cuisines'].unshift('Cuisine');
                      answer['cuisines'].unshift('Close');
 
-                    console.log(answer['cuisines']);
+
                      answer['cities'].unshift('City');
 
                      answer['cities'].unshift('Close');
@@ -343,7 +338,7 @@ function Api(){
  }
 
  this.search_by_params = function(){
-  console.log("-------------_search--------fgh----------------");
+
 
    if(window.localStorage['cusines'] == "" || window.localStorage['city'] == ""){
      alert('Pleas try again');
@@ -352,8 +347,7 @@ function Api(){
    }else{
         spiner_on('#search');
         var parametr = $('#search-value').val();
-        console.log( parametr);
-        console.log( parametr);
+
         var cities = JSON.parse(window.localStorage['city']);
         var city = cities[parseInt($('#selectCity option:selected').val())];
         var  cusines = JSON.parse(window.localStorage['cusines']);
@@ -383,10 +377,10 @@ function Api(){
                      window.localStorage['selected_restaurants'] = window.localStorage['received_restaurants'];
                     $('h4.found-result-count .result').html(answer.locations.length);
 
-                    console.log(data)  },
+                     },
                 error: function(data) {
                 spiner_off('#search');
-                   console.log(data['responseText']);
+
                  }
             });
 
@@ -406,17 +400,15 @@ function Api(){
                    var answer = data['menu'];
                    window.localStorage['menu']= JSON.stringify(answer);
                    create_menu_list();
-                   console.log(data)  },
+                     },
                error: function(data) {
-                  console.log(data['responseText']);
+
                 }
            });
      }
 
      this.create_cart = function(){
-     console.log('create cart');
-     console.log(window.localStorage.user);
-     console.log(window.localStorage.user_cart);
+
      //resr_id = $("#restouran-card .control .set_menu").attr('id' );
 
      if( window.localStorage.user && window.localStorage.user_cart ){
@@ -427,10 +419,10 @@ function Api(){
          var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
         //var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
            url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-           console.log(url);
+
            alert('pleas wait a few minutes');
             window.open(url, '_blank', 'location=yes');
-            //window.open(url, "_system")
+
 
            $.ajax({
                       type: 'GET',
@@ -447,7 +439,7 @@ function Api(){
                              var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
                             var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
                                //url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                               console.log(url);
+
                                alert('pleas wait a few minutes');
 
 
@@ -462,11 +454,9 @@ function Api(){
                             },
                        error: function(data) {
                        spiner_off('#ordering-page');
-                             console.log('error');
-                             console.log('error');
-                             console.log('error');
+
                             var  answer = data;
-                              console.log(data);
+
                              var  user = {};
                              var  message = '';
                               if(answer.responseText == 'success'){
@@ -481,18 +471,16 @@ function Api(){
                               }else{
                                 try {
                                  var    errors = JSON.parse(answer['responseText']);
-                                    console.log( answer['responseText']);
-                                    console.log( errors == '');
+
                                     for(key in errors  ){
                                     error = errors[key][0];
                                     message = message  +key+': ' +error + '\n';
                                     }
                                      alert('Pleas sign in before');
-                                     console.log(data['responseText'])
+
                                      return false;
                                   } catch(e) {
-                                    console.log('error')
-                                    console.log(e)
+
                                     return false;
                                   }
 
