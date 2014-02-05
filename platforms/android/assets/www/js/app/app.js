@@ -12,7 +12,7 @@
 
 
 
-   url = 'http://perechin.net:3000'
+   url = 'http://foodpal.com'
    var city = [];
    var cart = ['item1', 'item2', 'item2', 'item3'];
    var cusines = [];
@@ -57,6 +57,128 @@
         e.preventDefault();
          return false;
     } );
+
+
+     $(document).on('click', '#search #selectCuisine-button', function(e){
+        e.preventDefault();
+        return false;
+    } );
+
+     $(document).on('click', '#search #selectCuisine-button', function(e){
+         $.mobile.changePage('#Cuisine_select', { transition: 'pop', role: 'dialog' });
+    } );
+
+    function set_cuisine_select(){
+           if(window.localStorage.cusines){
+           var cusines = JSON.parse(window.localStorage['cusines']);
+            $('#Cuisine_select #Cuisinescroller ul').html('');
+
+            for (var i=0;i<cusines.length;i++)
+            {
+               var li = '<li data-option-index="'+(i)+'" data-icon="false"\
+                      class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
+                      data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
+                      data-iconpos="right" data-theme="a" aria-selected="false">\
+                        <div class="ui-btn-inner ui-li">\
+                        <div class="ui-btn-text"><a href="#search-page" tabindex="-1" class="ui-link-inherit"\
+                        onclick= "aler_you();"">\
+                        '+cusines[i]+'\
+                      </a></div></div></li>';
+
+
+             $('#search #select-menu #selectCuisine').append(
+             "<option value="+(i)+">"+cusines[i]+"</option>");
+
+              $('#Cuisine_select #Cuisinescroller ul').append(li);
+
+            }
+
+     }
+
+    }
+
+    $(document).on('click','#Cuisine_select #Cuisinescroller ul li a' , function(e){
+       $(this).parent().parent().parent().attr('data-option-index');
+
+      $('#selectCuisine-button span span span').text($.trim($(this).text()));
+
+      $('#Cuisine_select').dialog('close');
+      filter_on_search();
+    });
+
+    $('#Cuisine_select').live('pageshow', function(event, ui){
+
+       $('#Cuisine_select .content').css('max-height',$('#City_select [data-role="content"]').height()-40)
+       $('#Cuisinescroller').css('max-height',($('html').height()-87) +'px');
+       set_cuisine_select();
+       cuisine_selectScroll.refresh();
+
+     });
+
+
+
+
+
+     $(document).on('click', '#search #selectCity-button', function(e){
+        e.preventDefault();
+        return false;
+    } );
+
+   function set_city_select(){
+      if(window.localStorage.city){
+         var city = JSON.parse(window.localStorage['city']);
+          $('#City_select #Cityscroller ul').html('');
+
+           for (var i=0;i<city.length;i++)
+           {
+            var li = '<li data-option-index="'+(i)+'" data-icon="false"\
+                     class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option"\
+                     data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"\
+                     data-iconpos="right" data-theme="a" aria-selected="false">\
+                       <div class="ui-btn-inner ui-li">\
+                       <div class="ui-btn-text"><a href="#search-page" tabindex="-1" class="ui-link-inherit">\
+                       '+city[i]+'\
+                     </a></div></div></li>';
+             $('#search #select-menu #selectCity').append(
+                '<option value='+(i)+'>'+city[i]+'</option>');
+
+                  $('#City_select #Cityscroller ul').append(li);
+
+
+
+          //      $('#selectCuisine-listbox > .ui-header').css('width','103px');
+
+           }
+       }
+   }
+
+
+
+
+
+
+    $(document).on('click', '#search #selectCity-button', function(e){
+
+       $.mobile.changePage('#City_select', { transition: 'pop', role: 'dialog' });
+    } );
+
+       $(document).on('click','#City_select #Cityscroller ul li a' , function(e){
+        $(this).parent().parent().parent().attr('data-option-index');
+
+        $('#selectCity-button span span span').text($.trim($(this).text()));
+
+        $('#City_select').dialog('close');
+         filter_on_search();
+      });
+        $('#City_select').live('pageshow', function(event, ui){
+        $('#Cityscroller').css('max-height',($('html').height()-87) +'px');
+         // $('#City_select .content').css('max-height',$('#City_select [data-role="content"]').height()-40)
+            set_city_select();
+            city_selectScroll.refresh();
+
+         });
+
+
        $(document).on('touchend', '.rating-select a', function(e){
 
 
@@ -70,6 +192,8 @@
             })
           }
     })
+
+
 
  $('#selectCity-dialog').live('pageshow', function(event, ui){
 
@@ -103,6 +227,7 @@
 
 
   function filter_on_search(){
+   console.log('-----------futs----------------');
 
 
 
@@ -110,25 +235,17 @@
   var cuisine_id = $('#selectCuisine').val();
   var rating_id = $('#selectRating').val();
 
+  var  city = $.trim(  $('#selectCity-button span span span').text());
 
+   if(city == 'City'){
+     city = '';
+   }
+  var cuisine = $.trim(  $('#selectCuisine-button span span span').text());
 
+  if(cuisine == 'Cuisine'){
+     cuisine = '';
+   }
 
-if(city_id != '' && city_id != '0'){
-    var cities = JSON.parse(window.localStorage['city']);
-   var  city = cities[parseInt(city_id)];
-
-
-  }else{
-    var city = '';
-  }
-
-  if(cuisine_id != '' && cuisine_id != '0'){
-     var cusines = JSON.parse(window.localStorage['cusines']);
-     var cuisine  = cusines[parseInt(cuisine_id)];
-
-  }else{
-    var cuisine = '';
-  }
 
   if(rating_id != '' && rating_id != '0'){
     var ratings = JSON.parse(window.localStorage['rating']);
@@ -137,22 +254,26 @@ if(city_id != '' && city_id != '0'){
   }else{
     var rating = '';
   }
-  arr = JSON.parse(window.localStorage['received_restaurants']);
-  var statement = $('#in-location').is(':checked');
-     var collection = jQuery.grep(arr, function(n){
+  if(window.localStorage.received_restaurants){
+    arr = JSON.parse(window.localStorage['received_restaurants']);
+
+
+    var statement = $('#in-location').is(':checked');
+       var collection = jQuery.grep(arr, function(n){
          return (n.rating == rating || rating == '') &&(n.rating == rating || rating == '') && (n.city.city == city || city == '') && (jQuery.inArray(cuisine, n.cuisines)!==-1 || cuisine == '');
       });
 
-  window.localStorage['selected_restaurants'] = JSON.stringify(collection)
-  if(window.localStorage.user_location){
-      var user_location = JSON.parse(window.localStorage['user_location']);
-      $('.found-result-count .result').html(collection.length);
-  }
+     window.localStorage['selected_restaurants'] = JSON.stringify(collection);
+     $('.found-result-count .result').html(collection.length);
+    if(window.localStorage.user_location){
+        var user_location = JSON.parse(window.localStorage['user_location']);
 
+     }
+    }else{
 
-
-  }
-
+    window.localStorage['selected_restaurants'] = JSON.stringify([]);
+    }
+ }
  // set and create cart
  function check_and_create_cart(){
 
@@ -406,7 +527,7 @@ if(city_id != '' && city_id != '0'){
                   <div class="ui-btn-inner ui-li"><div class="ui-btn-text"> \
                 <a href="#restouran-card" data-transition="slide" class="ui-link-inherit" id = "'+ rest_id+'">\
                     <div class="r-logo" src="assets/images/magaz.png" style="width: 55px; height:55px; float:left;\
-                                                             background: url(http://perechin.net:3000/'+logo+') center no-repeat;\
+                                                             background: url(http://foodpal.com/'+logo+') center no-repeat;\
                                                             margin-top: 4px; margin-left: 5px; background-size: contain"></div>\
                     <span class="container" style = "float: left;">\
                           <span class="name">  '+name+' </span>\
@@ -608,7 +729,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
    function show_restaurant_local(){
      restaurant = JSON.parse(window.localStorage['current_restaurant']);
      $('#restouran-card .right-column h3.title').html(restaurant['name']);
-     $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+     $('#restouran-card #logo-contqainer').css('background' , 'url(http://foodpal.com/'+restaurant.logo+') center no-repeat');
 
     $('#restouran-card .right-column h3.title').html(restaurant['name']);
     $('#restouran-card .right-column .address').html(restaurant["address"]);
@@ -619,10 +740,8 @@ $(' #profile-info').live('pageshow',function(event, ui){
 
 
  $('#ordering-page').live('pageshow',function(event, ui){
-    console.log('---------ordering----------------');
-     write_local_storage(localStorage);
 
-     var result =  read_storage();
+
 
     if(localStorage.user_cart && JSON.parse(localStorage.user_cart != {})){
       set_order();
@@ -702,7 +821,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
   var restaurant  = jQuery.grep(arr, function(n){ return(n.id == rest_id );})[0];
   window.localStorage['current_restaurant'] = JSON.stringify( restaurant);
   $('#restouran-card .right-column h3.title').html(restaurant['name']);
- $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+ $('#restouran-card #logo-contqainer').css('background' , 'url(http://foodpal.com/'+restaurant.logo+') center no-repeat');
 
   $('#restouran-card #logo-contqainer').css('background-size', 'contain');
   $('#restouran-card .right-column .address').html(restaurant["address"]);
@@ -1053,7 +1172,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 
   window.localStorage['current_restaurant'] = JSON.stringify( restaurant);
     $('#restouran-card .right-column h3.title').html(restaurant['name']);
-   $('#restouran-card #logo-contqainer').css('background' , 'url(http://perechin.net:3000/'+restaurant.logo+') center no-repeat');
+   $('#restouran-card #logo-contqainer').css('background' , 'url(http://foodpal.com/'+restaurant.logo+') center no-repeat');
 
   $('#restouran-card .right-column h3.title').html(restaurant['name']);
   $('#restouran-card .right-column .address').html(restaurant["address"]);

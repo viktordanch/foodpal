@@ -16,8 +16,8 @@ function Api(){
     $.ajax({
 
                type: 'POST',
-               //url: 'http://perechin.net:3000/api/users/sign_in',
-               url: 'http://192.168.1.52:3000/api/users/sign_in',
+
+               url: 'http://foodpal.com/api/users/sign_in',
                dataType: 'json',
                data: {user: {login: name, password: password}},
                success: function(data) {
@@ -41,10 +41,10 @@ function Api(){
                       var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
                       //set url
                       //$('#ordering-page #create_cart_link').attr('href', '#');
-                      var url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                     // url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                      var url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                     // url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-                       // $('#ordering-page #create_cart_link').attr('href',('http://perechin.net:3000' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
+                       // $('#ordering-page #create_cart_link').attr('href',('http://foodpal.com' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
 
                       window.location['href'] = "#ordering-page";
                    }else{
@@ -84,7 +84,7 @@ function Api(){
     user = JSON.parse(window.localStorage['user'])
          $.ajax({
                     type: 'POST',
-                    url: 'http://perechin.net:3000/api/users/destroy',
+                    url: 'http://foodpal.com/api/users/destroy',
                     data:  {authentication_token: user['token']},
 
                     success: function(data) {
@@ -128,7 +128,7 @@ function Api(){
 
    $.ajax({
               type: 'POST',
-              url: 'http://perechin.net:3000/api/users/create',
+              url: 'http://foodpal.com/api/users/create',
               dataType: 'json',
               data:  {user: user},
               success: function(data) {
@@ -192,7 +192,7 @@ function Api(){
 
    $.ajax({
            type: 'GET',
-           url: 'http://perechin.net:3000/api/users/update',
+           url: 'http://foodpal.com/api/users/update',
 
            data:  {
                 authentication_token: token,
@@ -244,7 +244,7 @@ function Api(){
 
     $.ajax({
                type: 'POST',
-               url:'http://192.168.1.52:3000/api/users/orders',
+               url:'http://foodpal.com/api/users/orders',
                data:  {authentication_token: user_session['token']},
                success: function(data) {
 
@@ -271,7 +271,7 @@ function Api(){
 
     $.ajax({
                type: 'POST',
-               url: ('http://192.168.1.52:3000/api/users/orders'),
+               url: ('http://foodpal.com/api/users/orders'),
                data:  {authentication_token: user_session['token']},
               success: function(data) {
 
@@ -300,8 +300,8 @@ function Api(){
   spiner_on(page);
 
    $.ajax({
-                 //url: 'http://perechin.net:3000/api/restaurants/set_select_params',
-                 url: 'http://192.168.1.52:3000/api/restaurants/set_select_params',
+                 //url: 'http://foodpal.com/api/restaurants/set_select_params',
+                 url: 'http://foodpal.com/api/restaurants/set_select_params',
                  crossDomain: true,
                  dataType: 'json',
                  type: 'GET',
@@ -309,12 +309,12 @@ function Api(){
                  success: function(data) {
                      var answer = data;
                      answer['cuisines'].unshift('Cuisine');
-                     answer['cuisines'].unshift('Close');
+
 
 
                      answer['cities'].unshift('City');
 
-                     answer['cities'].unshift('Close');
+
                     delete window.localStorage.cusines;
                      window.localStorage['cusines'] = JSON.stringify(answer['cuisines']);
                      delete window.localStorage.city;
@@ -363,8 +363,8 @@ function Api(){
 
         $.ajax({
 
-                //url: ('http://perechin.net:3000/api/restaurants/search_by_params'),
-                url: ('http://192.168.1.52:3000/api/restaurants/search_by_params'),
+                //url: ('http://foodpal.com/api/restaurants/search_by_params'),
+                url: ('http://foodpal.com/api/restaurants/search_by_params'),
                 crossDomain: true,
                 dataType: 'json',
                 type: 'GET',
@@ -417,8 +417,8 @@ function Api(){
            spiner_on('#ordering-page');
            var   user = JSON.parse(window.localStorage['user']);
          var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-        //var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-           url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+        //var    url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+           url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
            alert('pleas wait a few minutes');
             window.open(url, '_blank', 'location=yes');
@@ -426,8 +426,8 @@ function Api(){
 
            $.ajax({
                       type: 'GET',
-                      // url: ('http://perechin.net:3000' + '/api/orders/create_cart'),
-                       url: ('http://192.168.1.52:3000' + '/api/orders/create_cart'),
+                      // url: ('http://foodpal.com' + '/api/orders/create_cart'),
+                       url: ('http://foodpal.com' + '/api/orders/create_cart'),
                        dataType: 'json',
                        data: {authentication_token: user['token'], cart: cart } ,
                        success: function(data) {
@@ -437,8 +437,8 @@ function Api(){
                               var  user_cart = JSON.parse(window.localStorage['user_cart']);
                              var   user = JSON.parse(window.localStorage['user']);
                              var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                            var    url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                               //url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                            var    url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                               //url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
                                alert('pleas wait a few minutes');
 
@@ -464,8 +464,8 @@ function Api(){
                                 alert('pleas wait a few minutes');
                                var    user = JSON.parse(window.localStorage['user']);
                                var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                               var   url = 'http://192.168.1.52:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                                 //url = 'http://perechin.net:3000/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                               var   url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+                                 //url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
                                  window.open(url, "_system");
 
                               }else{

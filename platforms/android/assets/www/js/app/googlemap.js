@@ -75,7 +75,7 @@ function GoogleMap(){
                                                                              margin-top: 10px;\
                                                                              float: left;\
                                                                           margin-right: 10px;\
-                                 background: url(http://perechin.net:3000'+rest['logo']+') center no-repeat;\
+                                 background: url(http://foodpal.com'+rest['logo']+') center no-repeat;\
                                                                                               background-size: contain;"></div>\
                                    <div style="float: left; padding: 0% 3% 3% 3%; width: 160px; max-height: 77px; overflow: hidden;">\
                                        <h1 class="title">'+rest['name']+'</h1><div class="address">'+rest['address']+'</div></div>\
