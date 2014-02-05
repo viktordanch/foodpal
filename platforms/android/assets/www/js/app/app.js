@@ -412,7 +412,12 @@ if(city_id != '' && city_id != '0'){
    }
    function set_to_map(){
 
+      if(window.localStorage['selected_restaurants']){
 
+      }else{
+
+       window.localStorage['selected_restaurants'] = JSON.stringify([])
+      }
         var collection = JSON.parse(window.localStorage['selected_restaurants']);
         window.localStorage['map_collection'] = JSON.stringify(collection);
 
@@ -584,10 +589,11 @@ $('#map-page').live('pageshow',function(event, ui){
 
    $('#map-page #map').height($('html').height() -195);
    var map = new GoogleMap();
-
+   if(localStorage.map_collection){
    var collection = JSON.parse(window.localStorage['map_collection']) ;
    var user = 'none';
    map.initialize(collection, user);
+   }
  })
 
  $('#restouran-page').live('pageshow',function(event, ui){
@@ -958,7 +964,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
-  //$(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
   function add_to_card(){
