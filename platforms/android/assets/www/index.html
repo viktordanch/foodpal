@@ -61,6 +61,7 @@
         var orderScroll;
         var city_selectScroll;
         var cuisine_selectScroll;
+        var rest_scrollScroll;
 
         function loaded() {
            myScroll = new iScroll('wrappen', { useTransition:true});
@@ -81,6 +82,7 @@
            orderScroll = new iScroll('order_scroller', {vScrollbar: false});
            city_selectScroll = new iScroll('Cityscroller', {vScrollbar: false,  useTransition:true});
            cuisine_selectScroll = new iScroll('Cuisinescroller', {vScrollbar: false,  useTransition:true});
+           rest_scrollScroll = new iScroll('rest_cardScroll', {vScrollbar: false,  useTransition:true});
 
 
           setTimeout(function () { myScroll.refresh(); }, 0);
@@ -1185,6 +1187,14 @@
 
 <!-- restaurant-card page -->
 <style>
+    #rest_cardScroll {
+
+    position:absolute;
+    z-index:1;
+    top:42px;; bottom:48px; left:3%;
+    width:94%;
+    overflow:auto;
+    }
 
 </style>
 <script>
@@ -1204,6 +1214,8 @@
     </div>
 
     <div data-role="content" class='body-container'>
+       <div id = 'rest_cardScroll'>
+       <div id = 'scroller'>
         <a data-role="button" class='back-button' data-transition="slide" href="#restouran-page"
            style='margin-left: 10px;'>
         </a>
@@ -1250,6 +1262,7 @@
             </div>
 
 
+
         </div>
 
         <div class="ui-grid-a">
@@ -1271,6 +1284,8 @@
                         style=" font-weight: bold;"> Location</span></span></a>
             </div>
         </div>
+       </div>
+       </div>
 
     </div>
 

@@ -17,11 +17,12 @@
        under the License.
  */
 
-package com.foodpal.foodpal;
+package ua.com.foodpal;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
+
 
 import org.apache.cordova.*;
 

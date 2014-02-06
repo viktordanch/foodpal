@@ -562,6 +562,13 @@ $('#map-page').live('pageshow',function(event, ui){
    }
  })
 
+
+
+  $('#restouran-card').live('pageshow',function(event, ui){
+    rest_scrollScroll.reload();
+  });
+
+
  $('#restouran-page').live('pageshow',function(event, ui){
 
 
