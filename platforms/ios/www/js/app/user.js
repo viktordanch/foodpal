@@ -6,7 +6,11 @@ function User(){
        user = {};
        response = {}
        response = api.log_in();
-
+   }else if(jQuery.isEmptyObject( JSON.parse(localStorage['user']))){
+          var api = new Api;
+          user = {};
+          response = {}
+          response = api.log_in();
 
    //    user['address'] = response['user']['field_addresses']['und']['0']['value'];
    //    user['uid'] = parseInt(response['user']['uid']);
@@ -41,34 +45,42 @@ function User(){
 
   this.log_up = function(){
 
-     password   = $('form#logup #password').val();
-     password_confirmation = $('form#logup #password_confirmation').val();
-     login       = $('form#logup #login_f').val();
-     mail       = $('form#logup #email').val();
-     console.log(password +'  '+ password_confirmation)
+     var password   = $('form#logup #password').val();
+     var password_confirmation = $('form#logup #password_confirmation').val();
+     var login       = $('form#logup #login_f').val();
+     var mail       = $('form#logup #email').val();
+
      if(password == password_confirmation){
 
          name   = $('form#logup #user_name').val();
 
-         if(jQuery.isEmptyObject( JSON.parse(window.localStorage['user']))){
-               var api = new Api;
-               api.log_up(login, name, mail, password, password_confirmation);
+            if(!window.localStorage.user){
+                var api = new Api;
 
-           }
 
-           else{
-             alert('user must sing out before');
-           }
+                api.log_up(login, name, mail, password, password_confirmation);
+
+            }else if(jQuery.isEmptyObject( JSON.parse(window.localStorage['user']))){
+
+                 var api = new Api;
+                 api.log_up(login, name, mail, password, password_confirmation);
+
+            }
+
+             else{
+               alert('user must sing out before');
+            }
 
          }
          else{
            alert('bad password confirmation');
          }
   }
+
   this.update = function(){
 
-     console.log('update');
-     api = new Api;
+
+     var api = new Api;
      user = api.update();
 
 
@@ -79,13 +91,16 @@ function User(){
   this.orders = function(){
   if(window.localStorage['user']){
       if(!jQuery.isEmptyObject( JSON.parse(window.localStorage['user']))){
-         console.log('------------------------orders---------------------------');
-          api = new Api;
-          orders = api.orders();
+
+          var api = new Api;
+          var orders = api.orders();
           window.localStorage['orders'] = JSON.stringify(orders);
           set_order_list();
 
-      }
+      }  else{
+           alert('user must sign in before');
+           return false;
+         }
   }
   else{
     alert('user must sign in before');

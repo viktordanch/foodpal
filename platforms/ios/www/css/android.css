@@ -93,7 +93,7 @@
     content: "Select City "; float: right; text-overflow: ellipsis;
     color: green; font-weight: 100; font-size: 18px;
     }
-    #search ul#select-menu li.cuisine-select .ui-select a span span.ui-btn-text:after {padding-top: 5px;
+   #search ul#select-menu  .ui-select a#selectCuisine-button span span.ui-btn-text:after {padding-top: 5px;
     content: "Select Cuisine "; float: right;
     color: green; font-weight: 100; font-size: 18px;
     }

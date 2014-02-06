@@ -18,6 +18,7 @@ function GoogleMap(){
     }
     // add markers
     var addMarkersToMap = function(map, collection, user){
+      spiner_on('#map-page');
 
       var mapBounds = new google.maps.LatLngBounds();
       rest_list = collection ;
@@ -90,12 +91,13 @@ function GoogleMap(){
          //arr with all markers
          all_markers.push(mar);
 
-         console.log(arr_rest_mark);
+        // console.log(arr_rest_mark);
 
          // fit map
          mapBounds.extend(latitudeAndLongitude);
 
     }
+    spiner_off('#map-page');
 
     function createMarker(pos, info, iconRes, t) {
        var popup = new google.maps.InfoWindow({content: info,maxWidth: 280, maxHeight: 100, disableAutoPan: true});
@@ -119,6 +121,7 @@ function GoogleMap(){
 
     map.fitBounds(mapBounds);
     console.log("fit map");
+
     }
 
 

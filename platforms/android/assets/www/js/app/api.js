@@ -10,17 +10,19 @@ function Api(){
 
     var answer= {};
     var user = {};
-    console.log(window.location['hash']== "#ordering-page&ui-state=dialog");
-    window_location = window.location['hash'];
 
+    window_location = window.location['hash'];
+     spiner_on('#account');
     $.ajax({
 
                type: 'POST',
 
                url: 'http://foodpal.com/api/users/sign_in',
+
                dataType: 'json',
                data: {user: {login: name, password: password}},
                success: function(data) {
+               spiner_off('#account');
                    var answer = data;
                    var user = {};
                    user['token'] = answer['auth_token']      ;
@@ -36,22 +38,13 @@ function Api(){
                    set_profile_info();
                    alert('sign in success');
                    if(window_location =='#ordering-page&ui-state=dialog'){
-                      var user_cart = JSON.parse(window.localStorage['user_cart']);
-                      var user = JSON.parse(window.localStorage['user']);
-                      var loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                      //set url
-                      //$('#ordering-page #create_cart_link').attr('href', '#');
-                      var url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                     // url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-
-                       // $('#ordering-page #create_cart_link').attr('href',('http://foodpal.com' + '/orders/index?loc_id='+loc_id+'&session='+user['token']+''))
-
-                      window.location['href'] = "#ordering-page";
+                         window.location['href'] = "#ordering-page";
                    }else{
                      window.location.href = "#profile-info";
                    }
                     },
                error: function(data) {
+                   spiner_off('#account');
 
                    var answer = data;
 
@@ -82,17 +75,21 @@ function Api(){
   this.log_out = function(name, password){
 
     user = JSON.parse(window.localStorage['user'])
+      spiner_on('#account');
          $.ajax({
                     type: 'POST',
                     url: 'http://foodpal.com/api/users/destroy',
+
                     data:  {authentication_token: user['token']},
 
                     success: function(data) {
+                      spiner_off('#account');
                       var answer = data;
                       window.localStorage['user'] = JSON.stringify({});
                      alert( answer['info']);
                      },
                     error: function(data) {
+                      spiner_off('#account');
                        var answer = data;
 
                        var user = {};
@@ -125,13 +122,17 @@ function Api(){
    user['password']= password;
    user['password_confirmation']= password;
    user['email'] = mail;
+     spiner_on('#account');
 
    $.ajax({
               type: 'POST',
               url: 'http://foodpal.com/api/users/create',
+
               dataType: 'json',
               data:  {user: user},
               success: function(data) {
+                spiner_off('#account');
+
                    answer = data;
                    user['token'] = answer['auth_token']      ;
                    user['login'] = answer['user']['login']   ;
@@ -147,6 +148,7 @@ function Api(){
 
              },
               error: function(data) {
+                spiner_off('#account');
 
                var answer = data;
 
@@ -189,10 +191,12 @@ function Api(){
    user['email'] =  $('#email', form).val();
    token = JSON.parse(window.localStorage['user'])["token"];
 
+      spiner_on('#profile-info');
 
    $.ajax({
            type: 'GET',
            url: 'http://foodpal.com/api/users/update',
+
 
            data:  {
                 authentication_token: token,
@@ -200,12 +204,17 @@ function Api(){
               },
 
            success: function(data) {
+             spiner_off('#profile-info');
 
 
+
+             user['token'] = token;
              window.localStorage['user'] = JSON.stringify(user);
+
              alert('perofile updated success');
             },
            error: function(data) {
+             spiner_off('#profile-info');
                var answer = data;
 
                 var user = {};
@@ -240,18 +249,23 @@ function Api(){
   this.orders = function(){
   var user_session = JSON.parse(window.localStorage['user']);
   var orders = [];
-
+    spiner_on('#my-orders');
 
     $.ajax({
                type: 'POST',
                url:'http://foodpal.com/api/users/orders',
+
                data:  {authentication_token: user_session['token']},
                success: function(data) {
+                spiner_off('#my-orders');
 
                 window.localStorage['orders'] = JSON.stringify(data);
                 set_order_list();
                },
-               error: function(data) { console.log(data['responseText']) },
+               error: function(data) {
+                 spiner_off('#my-orders');
+                 alert('No connection');
+                },
 
        });
 
@@ -267,20 +281,23 @@ function Api(){
 
   var orders = [];
 
-
+     spiner_on('#my-orders');
 
     $.ajax({
                type: 'POST',
                url: ('http://foodpal.com/api/users/orders'),
+
                data:  {authentication_token: user_session['token']},
               success: function(data) {
+                  spiner_off('#my-orders');
 
                   window.localStorage['orders'] = JSON.stringify(data);
                   set_order_list()
                   alert('update success');
                },
               error: function(data) {
-                   alert('error');
+                   spiner_off('#my-orders');
+                   alert('No connection');
                },
 
        });
@@ -300,8 +317,9 @@ function Api(){
   spiner_on(page);
 
    $.ajax({
-                 //url: 'http://foodpal.com/api/restaurants/set_select_params',
-                 url: 'http://foodpal.com/api/restaurants/set_select_params',
+
+                url: 'http://foodpal.com/api/restaurants/set_select_params',
+
                  crossDomain: true,
                  dataType: 'json',
                  type: 'GET',
@@ -325,7 +343,7 @@ function Api(){
 
                  },
                  error: function(data) {
-                 spiner_off('search');
+                 spiner_off('#search');
                     alert('No connection with server');
                   }
 
@@ -363,8 +381,8 @@ function Api(){
 
         $.ajax({
 
-                //url: ('http://foodpal.com/api/restaurants/search_by_params'),
                 url: ('http://foodpal.com/api/restaurants/search_by_params'),
+
                 crossDomain: true,
                 dataType: 'json',
                 type: 'GET',
@@ -417,33 +435,31 @@ function Api(){
            spiner_on('#ordering-page');
            var   user = JSON.parse(window.localStorage['user']);
          var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-        //var    url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
+            var user_cart = JSON.parse(window.localStorage['user_cart']);
+
            url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-           alert('pleas wait a few minutes');
-            window.open(url, '_blank', 'location=yes');
+
 
 
            $.ajax({
                       type: 'GET',
-                      // url: ('http://foodpal.com' + '/api/orders/create_cart'),
-                       url: ('http://foodpal.com' + '/api/orders/create_cart'),
+
+                       url: 'http://foodpal.com/api/orders/create_cart',
                        dataType: 'json',
-                       data: {authentication_token: user['token'], cart: cart } ,
+                       data: {authentication_token: user['token'], cart: user_cart } ,
                        success: function(data) {
                          spiner_off('#ordering-page');
                           try {
                                var answer = data;
-                              var  user_cart = JSON.parse(window.localStorage['user_cart']);
-                             var   user = JSON.parse(window.localStorage['user']);
-                             var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                            var    url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                               //url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-                               alert('pleas wait a few minutes');
+                               var   user = JSON.parse(window.localStorage['user']);
 
 
+                                 url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
+                                  alert('pleas wait a few minutes');
+                                   window.open(url, '_blank', 'location=yes');
 
                            } catch(e) {
 
@@ -460,13 +476,12 @@ function Api(){
                              var  user = {};
                              var  message = '';
                               if(answer.responseText == 'success'){
+                                  var   user = JSON.parse(window.localStorage['user']);
+                                url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-                                alert('pleas wait a few minutes');
-                               var    user = JSON.parse(window.localStorage['user']);
-                               var   loc_id = JSON.parse(window.localStorage['current_restaurant'])['location_id'];
-                               var   url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                                 //url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
-                                 window.open(url, "_system");
+                                 alert('pleas wait a few minutes');
+                                 window.open(url, '_blank', 'location=yes');
+
 
                               }else{
                                 try {
@@ -480,7 +495,7 @@ function Api(){
 
                                      return false;
                                   } catch(e) {
-
+                                    alert('No connection');
                                     return false;
                                   }
 

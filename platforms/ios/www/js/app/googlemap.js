@@ -18,6 +18,7 @@ function GoogleMap(){
     }
     // add markers
     var addMarkersToMap = function(map, collection, user){
+      spiner_on('#map-page');
 
       var mapBounds = new google.maps.LatLngBounds();
       rest_list = collection ;
@@ -75,7 +76,7 @@ function GoogleMap(){
                                                                              margin-top: 10px;\
                                                                              float: left;\
                                                                           margin-right: 10px;\
-                                 background: url(http://perechin.net:3000'+rest['logo']+') center no-repeat;\
+                                 background: url(http://foodpal.com'+rest['logo']+') center no-repeat;\
                                                                                               background-size: contain;"></div>\
                                    <div style="float: left; padding: 0% 3% 3% 3%; width: 160px; max-height: 77px; overflow: hidden;">\
                                        <h1 class="title">'+rest['name']+'</h1><div class="address">'+rest['address']+'</div></div>\
@@ -90,12 +91,13 @@ function GoogleMap(){
          //arr with all markers
          all_markers.push(mar);
 
-         console.log(arr_rest_mark);
+        // console.log(arr_rest_mark);
 
          // fit map
          mapBounds.extend(latitudeAndLongitude);
 
     }
+    spiner_off('#map-page');
 
     function createMarker(pos, info, iconRes, t) {
        var popup = new google.maps.InfoWindow({content: info,maxWidth: 280, maxHeight: 100, disableAutoPan: true});
@@ -119,6 +121,7 @@ function GoogleMap(){
 
     map.fitBounds(mapBounds);
     console.log("fit map");
+
     }
 
 

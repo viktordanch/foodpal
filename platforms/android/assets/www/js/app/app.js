@@ -1,6 +1,5 @@
   function spiner_on(page){
 
-
      $(page+'  #spiner').css('display', 'block');
      $(page+'  #black').css('display', 'block');
   }
@@ -32,21 +31,18 @@
      }
 
  });
- $(document).on("change", " #selectCity", filter_on_search);
- $(document).on("change", "#selectCuisine", filter_on_search);
- $(document).on("change", "#search #selectRating",  filter_on_search);
 
- $(document).on("click", "#search #set_rest_list, #map-page #go-to-list", set_rest_list);
- $(document).on("click", "#search #search-restaurant", find_restaurant_by_city);
- $(document).on("click", "#log-aut-button", log_out);
- $(document).on("click", "#registration-button", log_up);
- $(document).on("click", "#set-profile-info", set_profile_info);
- $(document).on("click", "#profile-info #save-update", update_profile);
- $(document).on("click", "#account #set-orders", set_orders);
- $(document).on('click', '#log_in form #sign-in', log_in);
- $(document).on('click', '#search  #set_hotels_to_map', set_to_map);
- $(document).on('click', '#my-orders  #update_orders', update_orders);
- $(document).on('click', '#ordering-page  #create_cart_link', check_and_create_cart);
+ $(document).on("touchend", "#search #set_rest_list, #map-page #go-to-list", set_rest_list);
+ $(document).on("touchend", "#search #search-restaurant", find_restaurant_by_city);
+ $(document).on("touchend", "#log-aut-button", log_out);
+ $(document).on("touchend", "#registration-button", log_up);
+ $(document).on("touchend", "#set-profile-info", set_profile_info);
+ $(document).on("touchend", "#profile-info #save-update", update_profile);
+ $(document).on("touchend", "#account #set-orders", set_orders);
+ $(document).on('touchend', '#log_in form #sign-in', log_in);
+ $(document).on('touchend', '#search  #set_hotels_to_map', set_to_map);
+ $(document).on('touchend', '#my-orders  #update_orders', update_orders);
+ $(document).on('touchend', '#ordering-page  #create_cart_link', check_and_create_cart);
 
 
 
@@ -195,44 +191,40 @@
 
 
 
- $('#selectCity-dialog').live('pageshow', function(event, ui){
-
-
-    set_search_selects();
-    $('#selectCity-dialog [role="dialog"]').height($('html').height() - 50);
-    $('#selectCity-dialog [role="dialog"]').css('overflow', 'hidden');
-    $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
-    if($('#city_scroller')){
-      setTimeout(function(){
-        var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
-      },100)
-
-    }
-  });
-
-
- $('#selectCuisine-dialog').live('pageshow', function(event, ui){
-    set_search_selects();
-    $('#selectCuisine-dialog [role="dialog"]').height($('html').height() - 50);
-    $('#selectCuisine-dialog [role="dialog"]').css('overflow', 'hidden');
-    $('#selectCuisine-dialog [data-role="content"]').attr('id', 'cuisine_scroller');
-
-     setTimeout(function(){
-       var cuisineScroll = new iScroll('cuisine_scroller', {vScrollbar: false, onBeforeScrollStart: null});
-      },100)
-
-  });
+//   $('#selectCity-dialog').live('pageshow', function(event, ui){
+//
+//
+//      set_search_selects();
+//      $('#selectCity-dialog [role="dialog"]').height($('html').height() - 50);
+//      $('#selectCity-dialog [role="dialog"]').css('overflow', 'hidden');
+//      $('#selectCity-dialog [data-role="content"]').attr('id', 'city_scroller');
+//      if($('#city_scroller')){
+//        setTimeout(function(){
+//          var cityScroll = new iScroll('city_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+//        },100)
+//
+//      }
+//    });
+//
+//
+//   $('#selectCuisine-dialog').live('pageshow', function(event, ui){
+//      set_search_selects();
+//      $('#selectCuisine-dialog [role="dialog"]').height($('html').height() - 50);
+//      $('#selectCuisine-dialog [role="dialog"]').css('overflow', 'hidden');
+//      $('#selectCuisine-dialog [data-role="content"]').attr('id', 'cuisine_scroller');
+//
+//       setTimeout(function(){
+//         var cuisineScroll = new iScroll('cuisine_scroller', {vScrollbar: false, onBeforeScrollStart: null});
+//        },100)
+//
+//    });
 
 
 
 
   function filter_on_search(){
-   console.log('-----------futs----------------');
 
 
-
-  var city_id = $('#selectCity').val();
-  var cuisine_id = $('#selectCuisine').val();
   var rating_id = $('#selectRating').val();
 
   var  city = $.trim(  $('#selectCity-button span span span').text());
@@ -326,21 +318,16 @@
         $('#selectCuisine-listbox > .ui-header').css('width','103px');
 
       }
- //    $('#selectCity-dialog ul li a').click(function(e){e.preventDefault();});
- //   $(document).on('click','#selectCuisine-listbox li a', function(){
- //           console.log('------------------close popub---------------');
- //           $('#selectCuisine-listbox').popup('close');
- //   })
+
 
 
 
      var city = JSON.parse(window.localStorage['city']);
-  //    console.log($('#selectCity-listbox-popup ul#selectCity-menu li a ').text());
-  //    console.log($('#search #select-menu #selectCity option').text());
+
 
       $('#selectCity-listbox-popup ul#selectCity-menu').html('');
       $('#selectCity-listbox-popup ul#selectCity-menu').html('');
-    //  $('#selectCity-dialog ul#selectCity-menu').html('');
+
 
       $('#search #select-menu #selectCity').html('');
      for (var i=0;i<city.length;i++)
@@ -402,6 +389,7 @@
    }
 
    function set_orders(){
+
        var user = new User;
        user.orders();
        return false;
@@ -465,6 +453,7 @@
 
 
   function log_up(){
+
     var user = new User;
     user.log_up();
 
@@ -494,6 +483,10 @@
         $('#profile-info #profile-update #address').val(user_session['address']);
 
         $('#profile-info #profile-update #lang').val(user_session['language']);
+      }
+        else{
+          alert('You mast sing in before');
+          return false;
       }
   }
   else{
@@ -570,7 +563,7 @@ $('#map-page').live('pageshow',function(event, ui){
  })
 
  $('#restouran-page').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
 
     $('#restouran-page #wrappen').height($('html').height() - 130);
     length = $('html').width() - 150 + 'px';
@@ -596,7 +589,7 @@ $('#map-page').live('pageshow',function(event, ui){
 
       $('#selectCuisine-listbox-popup').bind({
          popupafteropen: function(event, ui) {
-         console.log('open');
+
 
          set_search_selects();
 
@@ -624,13 +617,13 @@ $('#map-page').live('pageshow',function(event, ui){
   })
 
 $('#promotion').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     promotionScroll.refresh();
   })
 
 
 $('#my-orders').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     if(localStorage.orders){
       set_order_list();
     }
@@ -641,43 +634,43 @@ $('#my-orders').live('pageshow',function(event, ui){
 
 
 $('#register').live('pageshow resize',function(event, ui){
-    console.log('---------refresh-----------------');
+
     singScroll.refresh();
   })
 
 
 
 $('#help-page').live('pageshow',function(event, ui){
-    console.log('---------refresh-----resize------------');
+
     promotionScroll.refresh();
   })
 
 
 
 $('#how_work').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     workScroll.refresh();
   })
 
 
 $('#settings').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     settingScroll.refresh();
   })
 
 
 $('#policy').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     policyScroll.refresh();
   })
 
 $('#careers-page').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
     careerScroll.refresh();
   })
 
 $(' #menu-group').live('pageshow',function(event, ui){
-    console.log('---------refresh-----------------');
+
 
     if(localStorage.menu){
       create_menu_list();
@@ -688,20 +681,19 @@ $(' #menu-group').live('pageshow',function(event, ui){
   })
 
 $(' #log_in').live('pageshow',function(event, ui){
-    console.log('----log in -----refresh-----------------');
+
     $('#log_in [data-role="header"]').width($('#log_in [data-role="content"]').width()-1.8);
     doResize;
     loginScroll.refresh();
   })
 
 $(' #profile-info').live('pageshow',function(event, ui){
-    console.log('----log in -----refresh-----------------');
+
     set_profile_info();
     logupScroll.refresh();
   })
 
  $('#menu-item-page').live('pageshow',function(event, ui){
-    console.log('---------menu items---------------');
 
     $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
      if($('#menu-item-scroll ul li').length == 0){
@@ -717,9 +709,9 @@ $(' #profile-info').live('pageshow',function(event, ui){
 
 
  $('#restouran-card').live('pageshow',function(event, ui){
-    console.log('---------card--------------');
+
     if(localStorage.current_restaurant){
-       console.log('---------current--------------');
+
      show_restaurant_local();
     };
     $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
@@ -835,7 +827,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
     api.set_menu();
   }
   function create_menu_list(){
-  console.log('set menu');
+
    $('#menu-group ul.menu-list').html('');
    var menu = JSON.parse(window.localStorage['menu']);
    for(dish in menu){
@@ -935,6 +927,7 @@ $(' #profile-info').live('pageshow',function(event, ui){
 // menu item add to card
 
   $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
+  //$(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
 
