@@ -485,12 +485,12 @@
         $('#profile-info #profile-update #lang').val(user_session['language']);
       }
         else{
-          alert('You mast sing in before');
+          alert('You must sing in before');
           return false;
       }
   }
   else{
-    alert('You mast sing in before');
+    alert('You must sing in before');
     return false;
   }
 
@@ -565,7 +565,7 @@ $('#map-page').live('pageshow',function(event, ui){
 
 
   $('#restouran-card').live('pageshow',function(event, ui){
-    rest_scrollScroll.reload();
+    rest_scrollScroll.refresh();
   });
 
 
