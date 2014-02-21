@@ -1,3 +1,5 @@
+
+
   function spiner_on(page){
 
      $(page+'  #spiner').css('display', 'block');
@@ -19,7 +21,38 @@
    window.window.localStorage['rating'] = JSON.stringify(rating);
 
 
+    var view = {
+                 "name": "Chris",
+                 "company": "<b>GitHub</b>"
+               }
+
+    var temp = "    \
+    * {{name}}\
+    * {{age}}\
+    * {{company}}\
+    * {{{company}}}\
+    * {{&company}}"
+
+    var view1 = {  "stooges": [
+                    { "name": "Moe" },
+                    { "name": "Larry" },
+                    { "name": "Curly" }
+                  ]
+                }
+    var temp1 = "{{#stooges}}\
+                 <br />\
+                 <b>{{name}}</b>\
+                 {{/stooges}}"
+
  $(document).ready(function(){
+
+
+        var output = Mustache.render(temp, view);
+        var output1 = Mustache.render(temp1, view1);
+        $('#home #template').append(output);
+       // $('#home #template').append(output1);
+
+
 
      var rating = JSON.parse(window.localStorage['rating']);
      for (var i=0;i<rating.length;i++)
