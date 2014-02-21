@@ -194,7 +194,57 @@
                 <!--class="ui-btn-inner ui-btn-corner-all">-->
                     <!--<span class="ui-btn-text">Sign In</span></span></a>-->
         <!--<a href="#popupLogin" data-rel="popup" data-position-to="window">Popup</a>-->
+        <a href="#alertPopup" data-rel="popup" data-position-to="window"
+           data-transition="pop" >Alert</a>
+        <div data-role="popup" id="alertPopup">
+            <a href="#" data-rel="back" data-role="button" data-theme="a"
+               data-icon="delete" data-shadow="true" data-iconshadow="true" data-iconpos="notext"
+               class="ui-btn-right ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset">Close</a>
 
+            Some alert
+        </div>
+
+
+        <a href="#positionWindow" data-rel="popup" data-position-to="window" data-role="button"
+           data-inline="true" data-transition="pop" data-corners="true" data-shadow="true"
+           data-iconshadow="true" data-wrapperels="span" data-theme="c" aria-haspopup="true"
+          aria-owns="#positionWindow" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c">
+            <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Login</span></span></a>
+
+        <div  style = " background: #E7E7E7; " data-role="popup" id="positionWindow" data-shadow="true" class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow" data-theme="c" data-overlay-theme="c">
+            <a href="#" data-rel="back" data-role="button" data-theme="a" style = "top: 1px;right: 1px;  "
+               data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <form>
+                    <div style="padding:10px 20px;">
+                        <h3>Please sign in</h3>
+                        <label for="un" class="ui-hidden-accessible ui-input-text">Username:</label>
+                        <input type="text" name="user" id="un" value="" placeholder="username"
+                               data-theme="a" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">
+
+                        <label for="pw" class="ui-hidden-accessible ui-input-text">Password:</label>
+                        <input type="password" name="pass" id="pw" value=""
+                               placeholder="password" data-theme="a" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">
+
+                        <!--<div data-corners="true" data-shadow="true" data-iconshadow="true"-->
+                             <!--data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="b"-->
+                             <!--class="ui-btn ui-shadow ui-btn-corner-all ui-submit ui-focus ui-btn-up-b"-->
+                             <!--aria-disabled="false">-->
+                        <!--<span class="ui-btn-inner ui-btn-corner-all">-->
+                             <!--<span class="ui-btn-text">Sign in-->
+                           <!--</span>-->
+                        <!--</span>-->
+                        <a href="#" data-rel="back" id='sign-in' data-role="button" data-theme="reset"
+                           class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
+                           data-corners="true" data-rel="popup" data-transition="pop" data-position-to="window"
+                           style="font-weight: bold; width: 100%;"
+                           data-shadow="true" data-iconshadow="true" data-wrapperels="span">
+
+                            <span class="ui-btn-inner ui-btn-corner-all">
+                              <span class="ui-btn-text">Sign In</span></span></a>
+                        <!--</div>-->
+                    </div>
+                </form>
+        </div>
 
     </div>
     <div data-role="content" class="home-pad splitview ui-content ">
@@ -202,7 +252,6 @@
 
         <div id="home-scroll">
             <div id="template">
-
                 </div>
 
             <div id="scroller">
