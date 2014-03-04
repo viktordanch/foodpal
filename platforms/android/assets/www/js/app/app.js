@@ -795,7 +795,7 @@ $('#map-page').live('pageshow',function(event, ui){
   $(document).on('click', '#ordering-page .back-button[href="#menu-item-page"]', function(e){
 
      if((!localStorage.menu)||(localStorage.menu == '[]')){
-         $('#ordering-page .back-button').css('background','url("assets/images/99999999.png")');
+         $('#ordering-page .back-button').css('background','url("assets/images/99999999.PNG")');
           $('#ordering-page .back-button').css('background-size','100% 100%');
 
          e.preventDefault();
@@ -808,7 +808,7 @@ $('#map-page').live('pageshow',function(event, ui){
 
 $('#ordering-page').live('pagebeforeshow',function(event, ui){
      if((!localStorage.menu)||(localStorage.menu == '[]')){
-         $('#ordering-page .back-button').css('background','url("assets/images/99999999.png")');
+         $('#ordering-page .back-button').css('background','url("assets/images/99999999.PNG")');
           $('#ordering-page .back-button').css('background-size','100% 100%');
 
          
@@ -1105,7 +1105,7 @@ $(' #log_in').live('pageshow',function(event, ui){
     api.set_menu();
   }
   function create_menu_list(){
-   
+
    $('#menu-group ul.menu-list').html('');
    var menu = JSON.parse(window.localStorage['menu']);
    for(dish in menu){
