@@ -25,11 +25,11 @@
     <script src="js/app/user.js"></script>
     <script src="js/app/ios.js"></script>
     <script src="js/app/api.js"></script>
+    <script src="js/app/mustache.js"></script>  
     <!-- your scripts here -->
     <script src="js/app/app.js"></script>
     <script src="js/app/bootstrap.js"></script>
     <script src="js/lib/jquery.mobile.js"></script>
-    <script src="js/app/mustache.js"></script>
     <script type="text/javascript" src="js/app/googlemap.js"></script>
     <!--<script src="http://maps.gstatic.com/cat_js/intl/en_us/mapfiles/api-3/13/15/%7Bmain,geometry%7D.js" type="text/javascript"></script>-->
     <!--<script src="//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" type="text/javascript"></script>-->
@@ -43,7 +43,6 @@
 
 
     <script type="text/javascript">
-
         var myScroll;
         var menuScroll;
         var menuItemScroll;
@@ -65,6 +64,8 @@
         var cuisine_selectScroll;
         var rest_scrollScroll;
 
+
+
         function loaded() {
            myScroll = new iScroll('wrappen', { useTransition:true});
            menuScroll = new iScroll('menuscroll', { useTransition:true});
@@ -84,15 +85,14 @@
            orderScroll = new iScroll('order_scroller', {vScrollbar: false});
            city_selectScroll = new iScroll('Cityscroller', {vScrollbar: false,  useTransition:true});
            cuisine_selectScroll = new iScroll('Cuisinescroller', {vScrollbar: false,  useTransition:true});
-           rest_scrollScroll = new iScroll('rest_cardScroll', {vScrollbar: false,  useTransition:true});
-
+           rest_scrollScroll = new iScroll('rest_cardScroll', {vScrollbar: false, useTransition:true});
 
           setTimeout(function () { myScroll.refresh(); }, 0);
           setTimeout(function () {  menuScroll.refresh(); }, 0);
         }
         window.addEventListener('load', loaded, false);
-
-
+        
+        
 
     </script>
 
@@ -119,7 +119,7 @@
     #menu-item-page .back-button, #promotion .back-button{
     width: 30px;
     height: 30px;
-    background: green url('assets/images/arrow.png');
+    background: url('assets/images/arrow.png');
     background-size: 100% 100%;
     margin-bottom: 0px;
     margin-top: 10px;
@@ -181,99 +181,38 @@
 <div data-role="page" id="home">
     <div data-role="header" class="grayheader">
         <img src="assets/images/logo.png" class="logo"/>
-        <a href="#positionWindow" id='sign-in' data-role="button" data-theme="reset"
+        <a href="#log_in" id='sign-in' data-role="button" data-theme="reset" data-transition="slidedown"
            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-           data-corners="true" data-rel="popup" data-transition="pop" data-position-to="window"
+           data-corners="true" data-rel="dialog"
            data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span
                 class="ui-btn-inner ui-btn-corner-all">
                     <span class="ui-btn-text">Sign In</span></span></a>
-        <!--<a href="#log_in" id='sign-in' data-role="button" data-theme="reset"-->
-           <!--class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"-->
-           <!--data-corners="true" data-rel="dialog"-->
-           <!--data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span-->
-                <!--class="ui-btn-inner ui-btn-corner-all">-->
-                    <!--<span class="ui-btn-text">Sign In</span></span></a>-->
-        <!--<a href="#popupLogin" data-rel="popup" data-position-to="window">Popup</a>-->
-        <a href="#alertPopup" data-rel="popup" data-position-to="window"
-           data-transition="pop" >Alert</a>
-        <div data-role="popup" id="alertPopup">
-            <a href="#" data-rel="back" data-role="button" data-theme="a"
-               data-icon="delete" data-shadow="true" data-iconshadow="true" data-iconpos="notext"
-               class="ui-btn-right ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset">Close</a>
-
-            Some alert
-        </div>
-
-
-        <a href="#positionWindow" data-rel="popup" data-position-to="window" data-role="button"
-           data-inline="true" data-transition="pop" data-corners="true" data-shadow="true"
-           data-iconshadow="true" data-wrapperels="span" data-theme="c" aria-haspopup="true"
-          aria-owns="#positionWindow" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c">
-            <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Login</span></span></a>
-
-        <div  style = " background: #E7E7E7; " data-role="popup" id="positionWindow" data-shadow="true" class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow" data-theme="c" data-overlay-theme="c">
-            <a href="#" data-rel="back" data-role="button" data-theme="a" style = "top: 1px;right: 1px;  "
-               data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                <form>
-                    <div style="padding:10px 20px;">
-                        <h3>Please sign in</h3>
-                        <label for="un" class="ui-hidden-accessible ui-input-text">Username:</label>
-                        <input type="text" name="user" id="un" value="" placeholder="username"
-                               data-theme="a" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">
-
-                        <label for="pw" class="ui-hidden-accessible ui-input-text">Password:</label>
-                        <input type="password" name="pass" id="pw" value=""
-                               placeholder="password" data-theme="a" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset">
-
-                        <!--<div data-corners="true" data-shadow="true" data-iconshadow="true"-->
-                             <!--data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="b"-->
-                             <!--class="ui-btn ui-shadow ui-btn-corner-all ui-submit ui-focus ui-btn-up-b"-->
-                             <!--aria-disabled="false">-->
-                        <!--<span class="ui-btn-inner ui-btn-corner-all">-->
-                             <!--<span class="ui-btn-text">Sign in-->
-                           <!--</span>-->
-                        <!--</span>-->
-                        <a href="#" data-rel="back" id='sign-in' data-role="button" data-theme="reset"
-                           class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
-                           data-corners="true" data-rel="popup" data-transition="pop" data-position-to="window"
-                           style="font-weight: bold; width: 100%;"
-                           data-shadow="true" data-iconshadow="true" data-wrapperels="span">
-
-                            <span class="ui-btn-inner ui-btn-corner-all">
-                              <span class="ui-btn-text">Sign In</span></span></a>
-                        <!--</div>-->
-                    </div>
-                </form>
-        </div>
 
     </div>
     <div data-role="content" class="home-pad splitview ui-content ">
 
 
         <div id="home-scroll">
-            <div id="template">
-                </div>
-
             <div id="scroller">
                 <div class="ui-grid-a pad">
                     <div class="ui-block-a">
-                        <a href="#search" data-transition="slidefade" id="link-to-search">
+                        <a href="#search" data-transmition="flip" id="link-to-search">
                             <img src="assets/images/v6_01.png" class="t_btn"/>
                         </a>
                     </div>
                     <div class="ui-block-b">
-                        <a href="#register" data-transition="slidefade">
+                        <a href="#register"  data-transmition="flip">
                             <img src="assets/images/v6_02.png" class="t_btn"/>
                         </a>
                     </div>
-                    <div class="ui-block-a">
-                        <a href="#how_work">
+                    <div class="ui-block-a" >
+                        <a href="#how_work" data-transmition="flip">
 
                             <img src="assets/images/v6_03.png" class="t_btn"/>
                         </a>
                     </div>
                     <div class="ui-block-b">
-                        <a href="#help-page">
+                        <a href="#help-page"  data-transmition="flip">
 
                             <img src="assets/images/v6_04.png" class="t_btn"/>
                         </a>
@@ -291,10 +230,10 @@
             <ul>
                 <li><a href="#home" data-icon="custom"
                        class="home_t ui-btn-active ui-state-persist">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -304,26 +243,31 @@
 <!-- /page  search-->
 <style>
     #Cityscroller{
+    border-radius:20px!important;
+    -webkit-border-radius: 20px!important;
+    height:100%;
     width: 100%;
     overflow: hidden;
     position: absolute;
     z-index: 1;
-    top: 39px;
+    top: 0px;
     bottom: 1px;
     left: 0%;
+
+    }
+    a[data-rel="back"] .ui-btn-inner{
+        border: none;
     }
 </style>
 
 
-
-<div data-role="page" id="City_select">
-
+<!-- <div data-role="page" id="City_select">
     <div data-role="content"
          style="padding: 0px!important; border: none; background: #94CA74;">
         <div data-role="header" class="grayheader log-header"
              style='height: 40px; width: 100%; position: relative'>
 
-
+    
         </div>
 
         <div class='content' style="width: 100%;">
@@ -345,32 +289,71 @@
     </div>
 </div>
 </div>
-</div>
+</div> -->
 
+<div data-role="page" id="City_select" data-close-btn="none">
+    <div data-role="header" class="grayheader" style="height:28px; border: 1px solid #cccccc; background: #94CA74; text-align: center; color: white; padding-top: 10px;">
+        City select
+        <a href="#" data-rel="back" data-role="button" data-theme="f" style = "top: 8px;right: 9px;  "
+                         data-icon="delete" data-iconpos="notext" class="ui-btn-right">
+                         Close
+                        </a>
+    </div>
+
+    <div data-role="content" class="bottom-border-radius"
+         style="padding: 0px!important; border: none; background: #656565;">
+  
+      
+            <div id="Cityscroller" class="bottom-border-radius" style="border-bottom-left-radius: 8px;
+                  border-bottom-right-radius: 8px;">
+                <ul style="width: 100%; padding: 0px; margin: 0px;">
+
+
+                </ul>
+
+            </div>
+
+
+      
+
+
+        <div data-role="footer" data-id="tab1">
+
+        </div>
+    </div>
+
+    <!-- tab bar with custom icons -->
+
+    <div data-role="footer" data-id="tab1">
+    </div>
+
+
+</div>
 <style>
     #Cuisinescroller{
     width: 100%;
     overflow: hidden;
     position: absolute;
     z-index: 1;
-    top: 39px;
+    top: 0px;
     bottom: 1px;
     left: 0%;
     }
 </style>
 
 
-<div data-role="page" id="Cuisine_select">
-    <div data-role="content"
-         style="padding: 0px!important; border: none; background: #94CA74;">
-        <div data-role="header" class="grayheader log-header"
-             style='height: 40px; width: 100%; position: relative'>
-
-
-        </div>
-
+<div data-role="page" id="Cuisine_select" data-close-btn="none">
+    <div data-role="header" class="grayheader" style="height:28px; border: 1px solid #cccccc; background: #94CA74; text-align: center; color: white; padding-top: 10px;">
+     Cuisine select
+        <a href="#" data-rel="back" data-role="button" data-theme="f" style = "top: 8px;right: 9px;  "
+                         data-icon="delete" data-iconpos="notext" class="ui-btn-right">
+            Close
+        </a>
+    </div>
+    <div data-role="content" class="bottom-border-radius"
+         style="padding: 0px!important; border: none; background: #656565;">
         <div class='content' style="width: 100%;">
-            <div id="Cuisinescroller" style="">
+            <div id="Cuisinescroller" class="bottom-border-radius" style="">
                 <ul style="width: 100%; padding: 0px; margin: 0px;">
 
 
@@ -389,15 +372,6 @@
 </div>
 </div>
 </div>
-<script>
-    $(document).ready(function(){
-       //     $( "#popupLogin" ).popup('close');
-    })
-</script>
-<!--<div data-role="popup" id="popupLogin">-->
-    <!---->
-<!--</div>-->
-
 <style>
     #search-scroll {
 
@@ -410,7 +384,9 @@
     #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     display:none;
@@ -447,7 +423,90 @@
     <img src="assets/images/loading.gif" id="spiner">
 
     <div id="black">
+    </div>
+    <div style=" background: #E7E7E7; min-height: 50px; min-width: 180px;"
+                      data-role="popup" id="ratingSelect" data-shadow="true"  data-transition="pop"
+                      class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow" data-theme="c"
+                       data-overlay-theme="c" >
 
+        <div class="ul-content" style="padding: 10px;">
+            <ul class="ui-selectmenu-list ui-listview" id="selectRating-menu" role="listbox" aria-labelledby="selectRating-button" 
+            data-theme="a" data-divider-theme="b">
+               <li data-option-index="0" data-icon="false" data-placeholder="true" 
+               class="ui-selectmenu-placeholder ui-btn ui-btn-up-a ui-btn-icon-right ui-li ui-first-child" role="option" 
+               data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" 
+               aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                Rating
+                            </a>
+                    </div>
+                </div>
+                </li>
+                <li data-option-index="1" data-icon="false" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option" data-corners="false" 
+                data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                           <a href="#" tabindex="-1" class="ui-link-inherit">
+                               Rating
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li data-option-index="2" data-icon="false" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option" data-corners="false"
+                 data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                1
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li data-option-index="3" data-icon="false" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a" role="option" data-corners="false" 
+                data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                2
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li data-option-index="4" data-icon="false" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li" role="option" data-corners="false" 
+                data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                3
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li data-option-index="5" data-icon="false" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li" role="option" data-corners="false"
+                 data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                4
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li data-option-index="6" data-icon="false" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li ui-last-child" role="option" 
+                data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" 
+                data-theme="a" aria-selected="false">
+                    <div class="ui-btn-inner ui-li">
+                        <div class="ui-btn-text">
+                            <a href="#" tabindex="-1" class="ui-link-inherit">
+                                5
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div data-role="content" data-scroll="true" class="search-page " style='min-height: 0px;'>
 
@@ -549,11 +608,11 @@
     <div data-role="footer" data-id="tab1">
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -565,7 +624,9 @@
     #account #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     display:none;
@@ -638,11 +699,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -660,7 +721,7 @@
 
     position:absolute;
     z-index:1;
-    top:35px; bottom:48px; left:3%;
+    top:35px; bottom:154px; left:3%;
     width:94%;
 
     overflow:auto;
@@ -669,7 +730,9 @@
     #settings #setting_scroller #scroller{
     font-family: Arial, sans-serif;
     background: white;
-    border-radius: 30px;
+    text-align: justify;
+    word-break:break-all;
+    border-radius: 15px;
     position:absolute;
     z-index:1;
     width:92%;
@@ -755,11 +818,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -830,11 +893,11 @@
     <div data-role="footer" data-id="tab1">
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -858,7 +921,7 @@
 
         <ul class='select-menu' data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-theme="c" class='network'>
-                <a href="#how_work" data-transition="slide">
+                <a href="#help-page" data-transition="slide">
                     General Help
                 </a>
             </li>
@@ -869,7 +932,7 @@
             </li>
             <li data-theme="c" class='synchronize'>
                 <a href="#promotion" data-transition="slide">
-                    Rewords Program
+                    Rewards Program
                 </a>
             </li>
             <li data-theme="c" class='interface'>
@@ -890,10 +953,10 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
                 <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
             </ul>
         </div>
@@ -921,7 +984,9 @@
 
     position:absolute;
     z-index:1;
-    top:92px; bottom:48px; left:3%;
+    top:63px; 
+    bottom:45px;
+    left:3%;
     width:94%;
 
     overflow:auto;
@@ -960,9 +1025,9 @@
 
     </div>
     <div data-role="content" class="registration-page"
-         style="padding-top: 15px!important; margin; margin-top: 25px!important;">
+         style="padding-top: 15px!important; margin; margin-top: 28px!important; position:relative">
         <div id="sing_scroller">
-            <div id="scroller" style="padding: 20px">
+            <div id="scroller" >
 
                 <form id="logup" action="http://foodpal.com/rest_api/user/logup.json" type='post'>
                     <div class="ui-grid-a">
@@ -1049,11 +1114,11 @@
     <div data-role="footer" data-id="tab1">
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1110,7 +1175,9 @@
     #my-orders #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     display:none;
@@ -1177,11 +1244,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info-page" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info-page" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1248,11 +1315,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1261,14 +1328,20 @@
 
 <!-- restaurant-card page -->
 <style>
-    #rest_cardScroll {
+#rest_cardScroll {
 
-    position:absolute;
-    z-index:1;
-    top:42px;; bottom:48px; left:3%;
-    width:94%;
-    overflow:auto;
-    }
+position:absolute;
+z-index:1;
+top:83px;; bottom:48px; left:3%;
+width:94%;
+overflow:auto;
+}
+#restouran-card .back-button {
+position: absolute;
+top: -9px;
+left: 16px;
+}
+
 
 </style>
 <script>
@@ -1284,20 +1357,22 @@
            data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span
                 class="ui-btn-text">Sign In</span></span></a>
 
-        <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANTS CARD</h1>
+        <h1 class="ui-title page-title" role="heading" aria-level="1">RESTAURANTS CARD
+            <a data-role="button" class='back-button' data-transition="slide" href="#restouran-page"
+               style='margin-left: 10px;'>
+           </a>
+        </h1>
     </div>
 
     <div data-role="content" class='body-container'>
-       <div id = 'rest_cardScroll'>
-       <div id = 'scroller'>
-        <a data-role="button" class='back-button' data-transition="slide" href="#restouran-page"
-           style='margin-left: 10px;'>
-        </a>
+      <div id = 'rest_cardScroll'>
+        <div id = 'scroller'>
+ 
 
         <div class="ui-grid-a title">
             <div class="ui-block-a" style="width: 40%; ">
                 <div id='logo-contqainer'
-                     style="width: 70%; margin: 0 auto; height: 60px; position: relative; ">
+                     style="width: 70%; margin: 0 auto; height: 100px; position: relative; ">
 
                 </div>
             </div>
@@ -1313,9 +1388,10 @@
 
             </div>
             <div class="ui-block-b contecst-area"
-                 style="width: 100%; max-height: 400px; padding-top: 20px;">
+                 style="width: 100%; padding-top: 20px;">
                 <div class='content'
-                     style="font-weight: 100; font-size: 12px; max-height: 215px; overflow: auto; ">
+                     style="font-weight: 100; border-radius: 7px; background: #F2F1F0; 
+                             padding: 10px; font-size: 12px;  overflow: auto; ">
 
 
                 </div>
@@ -1323,7 +1399,7 @@
 
                     <div class="ui-block-a"
                          style=' padding-bottom: 10px; text-align: right; padding-right: 20px;'>
-                        Average rating
+                        Rating
 
                     </div>
 
@@ -1334,7 +1410,6 @@
 
 
             </div>
-
 
 
         </div>
@@ -1358,21 +1433,21 @@
                         style=" font-weight: bold;"> Location</span></span></a>
             </div>
         </div>
-       </div>
-       </div>
 
     </div>
+     </div>
+      </div>
 
     <div data-role="footer" data-id="tab1">
 
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1464,11 +1539,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1561,11 +1636,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1591,7 +1666,9 @@
     #ordering-page #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     // display:none;
@@ -1669,11 +1746,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -1704,7 +1781,9 @@
     #map-page #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     display:none;
@@ -1800,6 +1879,9 @@
 
             </div>
             <div class="wrapen" style=" display: none;">
+               <div class="infowindow" style="width:100px; height:100px;">
+                <h1>Simple example</h1>
+               </div>
             </div>
 
 
@@ -1841,15 +1923,15 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom"
+                <li><a href="#home" data-icon="custom" data-transition="flip" 
                        data-transition="slide" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom"
+                <li><a href="#account" data-icon="custom" data-transition="flip" 
                        data-transition="slide" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom"
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" 
                        data-transition="slide" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom"
+                <li><a href="#settings" data-icon="custom" data-transition="flip" 
                        data-transition="slide" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom"
+                <li><a href="#info" data-icon="custom" data-transition="flip" 
                        data-transition="slide" class="info_t">Info</a>
                 </li>
             </ul>
@@ -1930,7 +2012,9 @@
     #profile-info #spiner{
     position: absolute;
     top: 30%;
-    left: 40%;
+    left: 50%;
+    width:160px;
+    margin-left: -80px;
     z-index: 6;
     opacity: 1;
     display:none;
@@ -2029,30 +2113,43 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip"  class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" 
+                class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-
-<div data-role="page" id="log_in">
+<style>
+  
+</style>
+<div data-role="page" id="log_in" data-close-btn="none">
     <div id='login_scroller' style="width: 100%; height: 100%;">
         <div id="scroller">
+            <div data-role="header"  class="log-header"
+               style='height: 28px; width: 498px; position: relative; width: auto!important;
+               border-top-left-radius: 10px; border-top-right-radius: 10px; text-align: center;
+               color: white; padding-top: 10px;'> 
+               Please sign in
+               <a href="#" data-rel="back" data-role="button" data-theme="f" style = "top: 8px;right: 9px;  "
+                 data-icon="delete" data-iconpos="notext" class="ui-btn-left">
+                 Close
+                </a>
+
+            </div>
             <div data-role="content"
-                 style="padding: 0px!important; border: none; background: #94CA74;">
-                <div data-role="header" class="grayheader log-header"
-                     style='height: 40px; width: 498px; position: relative'>
+                 style="padding: 0px!important; border: none; background: #94CA74;  margin-top:0px; min-height:0px!important;
+                  border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
+
+                 ">
 
 
-                </div>
-
-                <div class='content' id='log_in-cotent'>
-
+                <div class='content' id='log_in-cotent' >
+                    
                     <form enctype="" name="multiform" id="login"
                           action="http://foodpal.com/rest_api/user/login.json" method='post'
                           style='margin-top: 23px;'>
@@ -2066,7 +2163,7 @@
                                    type="password">
                         </div>
 
-                        <a href="#account" id='sign-in' data-role="button" data-theme="reset"
+                        <a href="#account" id='sign-in-form' data-role="button" data-theme="reset"
                            class="ios green login-btn ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-reset"
                            data-corners="true" data-shadow="true" data-iconshadow="true"
                            data-wrapperels="span"><span
@@ -2099,7 +2196,7 @@
 
     position:absolute;
     z-index:1;
-    top:64px; bottom:48px; left:3%;
+    top:64px; bottom:154px; left:3%;
     width:94%;
 
     overflow:auto;
@@ -2137,7 +2234,7 @@
                 class="ui-btn-text">Sign In</span></span></a>
 
         <h1 class="ui-title page-title" class='sing' role="heading" aria-level="1">CAREERS
-            <a data-role="button" class='back-button careers' data-transition="slide" href="#info"
+            <a data-role="button" class='back-button careers' data-transition="slide" href="#" data-rel="back"
                style='margin-left: 10px;'>
             </a>
         </h1>
@@ -2200,11 +2297,11 @@
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -2221,7 +2318,7 @@
 
     position:absolute;
     z-index:1;
-    top:64px; bottom:48px; left:3%;
+    top:64px; bottom:154px; left:3%;
     width:94%;
 
     overflow:auto;
@@ -2265,7 +2362,7 @@
             class="ui-btn-text">Sign In</span></span></a>
 
     <h1 class="ui-title page-title" class='sing' role="heading" aria-level="1"> Privacy Policy
-        <a data-role="button" class='back-button policy' data-transition="slide" href="#info"
+        <a data-role="button" class='back-button policy' data-transition="slide" href="#" data-rel="back"
            style='margin-left: 10px;'>
         </a>
     </h1>
@@ -3952,11 +4049,11 @@ false Counter Notification constitutes perjury.
 
     <div data-role="navbar" class="tab-bar">
         <ul>
-            <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-            <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-            <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-            <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-            <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+            <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+            <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+            <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+            <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+            <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
         </ul>
     </div>
 </div>
@@ -3975,7 +4072,7 @@ false Counter Notification constitutes perjury.
 
     position:absolute;
     z-index:1;
-    top:64px; bottom:48px; left:3%;
+    top:64px; bottom:154px; left:3%;
     width:94%;
 
     overflow:auto;
@@ -4013,7 +4110,7 @@ false Counter Notification constitutes perjury.
                 class="ui-btn-text">Sign In</span></span></a>
 
         <h1 class="ui-title page-title" class='sing' role="heading" aria-level="1">PROMOTION
-            <a data-role="button" class='back-button promotion' data-transition="slide" href="#info"
+            <a data-role="button" class='back-button promotion' data-transition="slide" href="#" data-rel="back"
                style='margin-left: 10px;'>
             </a>
         </h1>
@@ -4069,11 +4166,11 @@ false Counter Notification constitutes perjury.
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>
@@ -4091,7 +4188,7 @@ false Counter Notification constitutes perjury.
 
     position:absolute;
     z-index:1;
-    top:64px; bottom:48px; left:3%;
+    top:64px; bottom: 153px; left:3%;
     width:94%;
 
     overflow:auto;
@@ -4129,7 +4226,7 @@ false Counter Notification constitutes perjury.
                 class="ui-btn-text">Sign In</span></span></a>
 
         <h1 class="ui-title page-title" class='sing' role="heading" aria-level="1">HELP
-            <a data-role="button" class='back-button help' data-transition="slide" href="#home"
+            <a data-role="button" class='back-button help' data-transition="slide" href="#" data-rel="back"
                style='margin-left: 10px;'>
             </a>
         </h1>
@@ -4185,11 +4282,11 @@ false Counter Notification constitutes perjury.
 
         <div data-role="navbar" class="tab-bar">
             <ul>
-                <li><a href="#home" data-icon="custom" class="home_t">Home</a></li>
-                <li><a href="#account" data-icon="custom" class="account_t">Account</a></li>
-                <li><a href="#ordering-page" data-icon="custom" class="cart_t">Cart</a></li>
-                <li><a href="#settings" data-icon="custom" class="settings_t">About us</a></li>
-                <li><a href="#info" data-icon="custom" class="info_t">Info</a></li>
+                <li><a href="#home" data-icon="custom" data-transition="flip" class="home_t">Home</a></li>
+                <li><a href="#account" data-icon="custom" data-transition="flip" class="account_t">Account</a></li>
+                <li><a href="#ordering-page" data-icon="custom" data-transition="flip" class="cart_t">Cart</a></li>
+                <li><a href="#settings" data-icon="custom" data-transition="flip" class="settings_t">About us</a></li>
+                <li><a href="#info" data-icon="custom" data-transition="flip" class="info_t">Info</a></li>
             </ul>
         </div>
     </div>

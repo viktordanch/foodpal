@@ -3,6 +3,13 @@
         //$('.pad').css('display', 'block');
 
 function doResize() {
+
+    if((!localStorage.user ) || (localStorage.user == '{}')){
+        open_login();
+    }else{
+        
+        close_login();
+    }
     var winhight = $.mobile.getScreenHeight();
     var scroller = $('#register div[data-role="content"]');
     scroller.css('margin-top', '25px');
@@ -11,9 +18,11 @@ function doResize() {
     var $content=$('[data-role="content"]');
     var $pagecontent=$('[data-role="page"]');
     newhight = winhight - headhight - foothight - 10;
-
-    $content.css('min-height',newhight + 'px');
-
+    if( $.mobile.activePage.attr('id') == 'City_select' || $.mobile.activePage.attr('id') == 'Cuisine_select'){
+       $content.css('min-height',($('html').height() - 125)+'px'); 
+    }else{
+      $content.css('min-height',newhight + 'px');
+    }  
 }
 $(document).bind('pageload', doResize);
 $(document).bind('pageload', checkStorage);
@@ -29,7 +38,7 @@ $(document).bind("touchmove",function(event){
 $(window).bind('orientationchange, resize', doResizeSize);
 
 function doResizeSize(){
-    doResize();
+    //doResize();
     try{
     homeScroll.refresh();
     searchScroll.refresh();

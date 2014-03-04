@@ -10,7 +10,8 @@ function GoogleMap(){
       var mapOptions = {
         zoom: 4,
         center: new google.maps.LatLng(-33, 151),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoomControl:false
       }
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -68,9 +69,9 @@ function GoogleMap(){
 
         // set info
 
-       var info = '<div id="infobox" class="">                                                                                                 \
+       var info = '<div id="infobox" class="" style="width:150px;height:90px">                                                                                                 \
                                    <a id = "'+rest['id']+'" href="#restouran-card" data-transition="slide" onclick="show_restaurant($(this)); set_map_to_none(); " class="ui-link">\
-                                   <img src="assets/images/arrw2.png" style="width:40px; height: 40px; float:right; padding-top:10px; padding-right: 20px"></a>\
+                                   <img src="assets/images/arrw2.png" style="width:40px; height: 40px; float:right; padding-top:10px; padding-right: 30px"></a>\
                                    <div class="image-container" style="width: 50px;\
                                                                              height: 50px;\
                                                                              margin-top: 10px;\
@@ -78,10 +79,12 @@ function GoogleMap(){
                                                                           margin-right: 10px;\
                                  background: url(http://foodpal.com'+rest['logo']+') center no-repeat;\
                                                                                               background-size: contain;"></div>\
-                                   <div style="float: left; padding: 0% 3% 3% 3%; width: 160px; max-height: 77px; overflow: hidden;">\
+                                   <div style="float: left; padding: 0% 3% 3% 3%; width: 150px; max-height: 77px; overflow: hidden;">\
                                        <h1 class="title">'+rest['name']+'</h1><div class="address">'+rest['address']+'</div></div>\
                                </div>';
 
+
+       //info = $('#map-page .wrapen').html();
 
 
         all_markers = [];

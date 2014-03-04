@@ -24,7 +24,7 @@
     box-shadow: none !important;
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
-    -webkit-transform: translateZ(0);
+   // -webkit-transform: translateZ(0);
 }
 
 
@@ -615,20 +615,34 @@
     color-stop(62%,#63c03e), color-stop(64%,#69bc46), color-stop(74%,#6ec14b),
     color-stop(77%,#72c251), color-stop(83%,#77c357), color-stop(85%,#7ec55f),
     color-stop(91%,#84c665), color-stop(94%,#89c669), color-stop(100%,#8dc86e));
-    border: 1px solid green;
+    
     border-bottom: 0px;
     }
 
     #log_in .content#log_in-cotent{
-    border: 1px solid green;
-    padding: 30px;
-    min-height: 200px;
+    
+    padding: 10px 30px 30px 30px;
+    min-height: 161px;
     max-height: 250px;
-    background: #94CA74;
+    background: #E7E7E7;
     border-bottom-left-radius: 10px ;
 
     border-bottom-right-radius: 10px;
     }
     #log_in{
-    background: #94CA74!important;
+    background: #353535!important;
     }
+    #sign-in .active-sign-in{
+      background: -webkit-linear-gradient(top, #d5e5c0 0%,#cfe1b9 6%,#c3dfae 13%,#c2dead 15%,#bbdca5
+       17%,#b2d89b 23%,#add694 26%,#a6d08e 32%,#a5d589 34%,#9ece82 36%,#a0ce83 38%,#9ecc81 40%,#95c977 
+       43%,#9ace7c 45%,#8bcf6a 47%,#75b954 49%,#61bb3f 51%,#61bb3f 53%,#5ec039 55%,#63c03e 62%,#69bc46 
+       64%,#6ec14b 74%,#72c251 77%,#77c357 83%,#7ec55f 85%,#84c665 91%,#89c669 94%,#8dc86e 100%);
+    }
+    #sign-in .no-sign-in, a#sign-in.ui-btn-down-reset .no-sign-in{
+      background: #9D9D9b!important;
+    }
+    .bottom-border-radius{
+      border-bottom-left-radius: 8px!important;
+      border-bottom-right-radius: 8px!important;
+    } 
+

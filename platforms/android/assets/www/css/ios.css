@@ -2,7 +2,7 @@ body{margin:0;overflow:hidden;}
 #container{height:100%;position:absolute;width:100%;}
 .ui-content{background-color:#d6d4d5; overflow: hidden; margin-top: 25px; height:100%}
 .search-page {margin-top: 70px;}
-.ui-overlay-c {background-color: black;}
+.ui-overlay-c {background-color:black;}
 .ui-header{background-color:gray; position:fixed;}
 .ui-footer,.ui-header{border-bottom-width:0;border-top-width:0;width:100%;}
 .ui-footer{bottom:0; position:fixed;}

@@ -23,7 +23,7 @@ function User(){
 
    }
    else{
-    alert('user already sing in');
+    open_alert('user already sing in');
    }
 
   };
@@ -37,7 +37,7 @@ function User(){
        }
        else{
 
-          alert('user must sign in before');
+          open_alert('user must sign in before');
        }
 
 
@@ -68,12 +68,14 @@ function User(){
             }
 
              else{
-               alert('user must sing out before');
+               setTimeout("open_alert('user must sing out before');", 1000);
+
+               
             }
 
          }
          else{
-           alert('bad password confirmation');
+           open_alert('bad password confirmation');
          }
   }
 
@@ -98,12 +100,12 @@ function User(){
           set_order_list();
 
       }  else{
-           alert('user must sign in before');
+           open_alert('user must sign in before');
            return false;
          }
   }
   else{
-    alert('user must sign in before');
+    open_alert('user must sign in before');
     return false;
   }
 
@@ -117,7 +119,7 @@ function User(){
        navigator.geolocation.getCurrentPosition(showLocation, showError);
 
     } else {
-        alert("Geolocation is not supported by this browser.")
+        open_alert("Geolocation is not supported by this browser.")
     }
 
     }
@@ -137,16 +139,16 @@ function User(){
         switch(error.code)
         {
           case error.PERMISSION_DENIED:
-              alert("User denied the request for Geolocation.");
+              open_alert("User denied the request for Geolocation.");
               break;
           case error.POSITION_UNAVAILABLE:
-              alert("Location information is unavailable.");
+              open_alert("Location information is unavailable.");
               break;
           case error.TIMEOUT:
-              alert("The request to get user location timed out.");
+              open_alert("The request to get user location timed out.");
               break;
           case error.UNKNOWN_ERROR:
-              alert("An unknown error occurred.");
+              open_alert("An unknown error occurred.");
               break;
         }
       }
@@ -170,7 +172,7 @@ this.set_coord = function(){
       navigator.geolocation.getCurrentPosition(coordShowLocation, showError);
 
     } else {
-        alert("Geolocation is not supported by this browser.")
+        open_alert("Geolocation is not supported by this browser.")
     }
 
     }

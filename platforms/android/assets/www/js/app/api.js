@@ -22,7 +22,8 @@ function Api(){
                dataType: 'json',
                data: {user: {login: name, password: password}},
                success: function(data) {
-               spiner_off('#account');
+                  $('#log_in').dialog('close');
+                  spiner_off('#account');
                    var answer = data;
                    var user = {};
                    user['token'] = answer['auth_token']      ;
@@ -36,12 +37,13 @@ function Api(){
                    window.localStorage['user'] = JSON.stringify(user);
 
                    set_profile_info();
-                   alert('sign in success');
-                   if(window_location =='#ordering-page&ui-state=dialog'){
-                         window.location['href'] = "#ordering-page";
-                   }else{
-                     window.location.href = "#profile-info";
-                   }
+                   setTimeout("open_alert('sign in success');",1000);
+                   //if(window_location =='#ordering-page&ui-state=dialog'){
+                   //      window.location['href'] = "#ordering-page";
+                   //}else{
+                   //  window.location.href = "#profile-info";
+                   //}
+                  close_login();
                     },
                error: function(data) {
                    spiner_off('#account');
@@ -60,7 +62,7 @@ function Api(){
                    }
 
 
-                   alert(message);
+                   open_alert(message);
 
                    return false;
                }
@@ -86,7 +88,8 @@ function Api(){
                       spiner_off('#account');
                       var answer = data;
                       window.localStorage['user'] = JSON.stringify({});
-                     alert( answer['info']);
+                     open_alert( answer['info']);
+                     open_login();
                      },
                     error: function(data) {
                       spiner_off('#account');
@@ -104,7 +107,7 @@ function Api(){
                        }
 
 
-                       alert(message);
+                       open_alert(message);
 
 
 
@@ -144,7 +147,8 @@ function Api(){
                    window.localStorage['user'] = JSON.stringify(user);
                    set_profile_info();
                    window.location.href = "#profile-info";
-                   alert('sign up success');
+
+                   setTimeout("open_alert('sign up success');", 2000);
 
              },
               error: function(data) {
@@ -159,12 +163,12 @@ function Api(){
 
                error = errors[key][0];
 
-               message = message  +key+': ' +error + '\n';
+               message = message  +key+': ' +error + '<br />';
 
                }
 
-
-               alert(message);
+                setTimeout("open_alert(message);", 1000);
+               
 
 
 
@@ -211,7 +215,7 @@ function Api(){
              user['token'] = token;
              window.localStorage['user'] = JSON.stringify(user);
 
-             alert('perofile updated success');
+             open_alert('perofile updated success');
             },
            error: function(data) {
              spiner_off('#profile-info');
@@ -229,7 +233,7 @@ function Api(){
                 }
 
 
-                alert(message);
+                open_alert(message);
 
 
 
@@ -264,7 +268,7 @@ function Api(){
                },
                error: function(data) {
                  spiner_off('#my-orders');
-                 alert('No connection');
+                 open_alert('No connection');
                 },
 
        });
@@ -293,11 +297,11 @@ function Api(){
 
                   window.localStorage['orders'] = JSON.stringify(data);
                   set_order_list()
-                  alert('update success');
+                  open_alert('update success');
                },
               error: function(data) {
                    spiner_off('#my-orders');
-                   alert('No connection');
+                   open_alert('No connection');
                },
 
        });
@@ -344,7 +348,7 @@ function Api(){
                  },
                  error: function(data) {
                  spiner_off('#search');
-                    alert('No connection with server');
+                    open_alert('No connection with server');
                   }
 
 
@@ -359,29 +363,30 @@ function Api(){
 
 
    if(window.localStorage['cusines'] == "" || window.localStorage['city'] == ""){
-     alert('Pleas try again');
+     open_alert('Pleas try again');
      window.location.href = "";
 
    }else{
         spiner_on('#search');
         var parametr = $('#search-value').val();
 
-        var cities = JSON.parse(window.localStorage['city']);
-        var city = cities[parseInt($('#selectCity option:selected').val())];
-        var  cusines = JSON.parse(window.localStorage['cusines']);
-        var cusine  = cusines[parseInt( $('#selectCuisine option:selected').val())];
+  
+        var city = $.trim($('#selectCity-button span span span').text());
+ 
+        var cusine  = $.trim($('#selectCuisine-button span span span').text());
 
-        var ratings = JSON.parse(window.localStorage['rating']);
-        var rating= ratings[parseInt( $('#selectRating option:selected').val())];
+    
+        var rating= $.trim($('#selectRating-button span span span').text());
         if(localStorage.user_location){
           var user_location = JSON.parse(window.localStorage['user_location']);
         }
         var data = {city: city, cusine: cusine, rating: rating, search_parametr: parametr, user_location: user_location};
         var restaurants = [];
-
+       
         $.ajax({
 
                 url: ('http://foodpal.com/api/restaurants/search_by_params'),
+                
 
                 crossDomain: true,
                 dataType: 'json',
@@ -408,6 +413,7 @@ function Api(){
 
      this.set_menu = function(){
      var resr_id = $("#restouran-card .control .set_menu").attr('id' );
+   
 
      $.ajax({
               type: 'GET',
@@ -440,7 +446,7 @@ function Api(){
            url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
 
-
+           
 
            $.ajax({
                       type: 'GET',
@@ -458,12 +464,13 @@ function Api(){
 
                                  url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-                                  alert('pleas wait a few minutes');
-                                   window.open(url, '_blank', 'location=yes');
+                                
+                                   //window.open(url, '_blank', 'location=yes');
+                                   sendToApp("search",url);
 
                            } catch(e) {
 
-                           alert('connection wrong');
+                           open_alert('connection wrong');
                            return false;
                          }
 
@@ -479,8 +486,9 @@ function Api(){
                                   var   user = JSON.parse(window.localStorage['user']);
                                 url = 'http://foodpal.com/orders/index?loc_id='+loc_id+'&session='+user['token']+'';
 
-                                 alert('pleas wait a few minutes');
-                                 window.open(url, '_blank', 'location=yes');
+
+                                window.open(url, '_blank', 'location=yes');
+                              // sendToApp("search",url);
 
 
                               }else{
@@ -491,11 +499,11 @@ function Api(){
                                     error = errors[key][0];
                                     message = message  +key+': ' +error + '\n';
                                     }
-                                     alert('Pleas sign in before');
+                                     open_alert('Pleas sign in before');
 
                                      return false;
                                   } catch(e) {
-                                    alert('No connection');
+                                    open_alert('No connection');
                                     return false;
                                   }
 
@@ -508,7 +516,7 @@ function Api(){
 
         }else{
 
-        alert('user must sing in before');
+        open_alert('user must sing in before');
         }
     }
 
