@@ -22,11 +22,15 @@ function doResize() {
 
     if( $.mobile.activePage.attr('id') == 'City_select' || $.mobile.activePage.attr('id') == 'Cuisine_select'){
        $content.css('min-height',($('html').height() - 125)+'px'); 
+    }else if($.mobile.activePage.attr('id') == 'log_in'){
+      $content.css('min-height',0 + 'px');
     }else{
       $content.css('min-height',newhight + 'px');
     }  
 }
 $(document).bind('pageload', doResize);
+
+$('#log_in').live('pagebeforeshow', doResize);
 $(document).bind('pageload', checkStorage);
 
 $(document).bind('pageshow', doResize);

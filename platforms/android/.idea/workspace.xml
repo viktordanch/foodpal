@@ -17,7 +17,6 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Unnamed-0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f31ed070-e9a3-4684-a220-5f1312db9d35" name="Default" comment="">
@@ -26,11 +25,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/drinks.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/first_cosine.png" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../ios/www/assets/images/main-courses.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/css/android.css" afterPath="$PROJECT_DIR$/assets/www/css/android.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/app.js" afterPath="$PROJECT_DIR$/assets/www/js/app/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/index.html" afterPath="$PROJECT_DIR$/assets/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/ios.js" afterPath="$PROJECT_DIR$/assets/www/js/app/ios.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/www/js/app/user.js" afterPath="$PROJECT_DIR$/assets/www/js/app/user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android.iws" />
@@ -116,25 +112,25 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1367" column="69" selection-start="45616" selection-end="45616" vertical-scroll-proportion="-20.185184" vertical-offset="19960" max-vertical-offset="23415">
+            <state line="808" column="19" selection-start="27655" selection-end="27677" vertical-scroll-proportion="-16.11111" vertical-offset="11685" max-vertical-offset="23415">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="android.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="android.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/css/android.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="650" column="5" selection-start="16304" selection-end="16304" vertical-scroll-proportion="0.9164345" vertical-offset="9092" max-vertical-offset="9840">
+            <state line="644" column="47" selection-start="16178" selection-end="16178" vertical-scroll-proportion="0.0" vertical-offset="9077" max-vertical-offset="9840">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ios.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ios.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/www/js/app/ios.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="7" selection-start="4029" selection-end="4034" vertical-scroll-proportion="-23.814816" vertical-offset="1532" max-vertical-offset="2295">
+            <state line="30" column="39" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.68654174" vertical-offset="47" max-vertical-offset="2355">
               <folding />
             </state>
           </provider>
@@ -152,8 +148,12 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="911" column="24" selection-start="35282" selection-end="35289" vertical-scroll-proportion="-4.352941" vertical-offset="13428" max-vertical-offset="64485">
-              <folding />
+            <state line="2144" column="24" selection-start="78743" selection-end="78743" vertical-scroll-proportion="-4.647059" vertical-offset="31863" max-vertical-offset="64530">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -210,11 +210,11 @@
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/assets/www/css/ios.css" />
         <option value="$PROJECT_DIR$/assets/www/js/app/api.js" />
-        <option value="$PROJECT_DIR$/assets/www/js/app/ios.js" />
         <option value="$PROJECT_DIR$/assets/www/js/app/user.js" />
-        <option value="$PROJECT_DIR$/assets/www/index.html" />
         <option value="$PROJECT_DIR$/assets/www/js/app/app.js" />
         <option value="$PROJECT_DIR$/assets/www/css/android.css" />
+        <option value="$PROJECT_DIR$/assets/www/index.html" />
+        <option value="$PROJECT_DIR$/assets/www/js/app/ios.js" />
       </list>
     </option>
   </component>
@@ -666,7 +666,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.07361268" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295325" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.020524515" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14156285" sideWeight="0.79563814" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25934315" sideWeight="0.79563814" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38772213" sideWeight="0.49936947" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -843,6 +843,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/www/css/android.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="644" column="47" selection-start="16178" selection-end="16178" vertical-scroll-proportion="0.0" vertical-offset="9077" max-vertical-offset="9840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app/api.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="496" column="0" selection-start="14015" selection-end="14015" vertical-scroll-proportion="0.0" vertical-offset="7066" max-vertical-offset="8025">
@@ -850,10 +857,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/www/js/app/ios.js">
+    <entry file="file://$PROJECT_DIR$/assets/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="7" selection-start="4029" selection-end="4034" vertical-scroll-proportion="-23.814816" vertical-offset="1532" max-vertical-offset="2295">
-          <folding />
+        <state line="2144" column="24" selection-start="78743" selection-end="78743" vertical-scroll-proportion="-4.647059" vertical-offset="31863" max-vertical-offset="64530">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#18;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -864,23 +875,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="911" column="24" selection-start="35282" selection-end="35289" vertical-scroll-proportion="-4.352941" vertical-offset="13428" max-vertical-offset="64485">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/www/js/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1367" column="69" selection-start="45616" selection-end="45616" vertical-scroll-proportion="-20.185184" vertical-offset="19960" max-vertical-offset="23415">
+        <state line="808" column="19" selection-start="27655" selection-end="27677" vertical-scroll-proportion="-16.11111" vertical-offset="11685" max-vertical-offset="23415">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/www/css/android.css">
+    <entry file="file://$PROJECT_DIR$/assets/www/js/app/ios.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="650" column="5" selection-start="16304" selection-end="16304" vertical-scroll-proportion="0.9164345" vertical-offset="9092" max-vertical-offset="9840">
+        <state line="30" column="39" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.68654174" vertical-offset="47" max-vertical-offset="2355">
           <folding />
         </state>
       </provider>
