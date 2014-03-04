@@ -75,7 +75,8 @@ function User(){
 
          }
          else{
-           open_alert('bad password confirmation');
+
+            setTimeout("open_alert('bad password confirmation');", 1000);
          }
   }
 

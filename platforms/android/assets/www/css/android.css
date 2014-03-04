@@ -646,3 +646,6 @@
       border-bottom-right-radius: 8px!important;
     } 
 
+    a[data-rel="back"][href="#"]{
+      text-decoration: none;
+    }

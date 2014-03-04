@@ -1,3 +1,4 @@
+var keyboard_open = 0;
 function show_keyboard(){
     page_id = '#' + $.mobile.activePage.attr('id');
     
@@ -820,11 +821,13 @@ $('#ordering-page').live('pagebeforeshow',function(event, ui){
 })
 
 
- $('#restouran-page').live('pageshow',function(event, ui){
+ $('#restouran-page').live('pagebeforeshow',function(event, ui){
     if(localStorage.selected_restaurants){
       set_rest_list();
     }
-    
+ })
+ $('#restouran-page').live('pageshow',function(event, ui){
+
     $('#restouran-page #wrappen').height($('html').height() - 130);
     length = $('html').width() - 150 + 'px';
     $('#restouran-page ul li a .container').css('max-width', length);
@@ -941,7 +944,7 @@ $('#careers-page').live('pageshow',function(event, ui){
 
     careerScroll.refresh();
   })
-$(' #menu-group').live('pageinit',function(event, ui){
+$(' #menu-group').live('pagebeforeshow',function(event, ui){
     if(localStorage.menu){
       create_menu_list();
     }
@@ -964,12 +967,15 @@ $(' #log_in').live('pageshow',function(event, ui){
     logupScroll.refresh();
   })
 
+  $('#menu-item-page').live('pagebeforeshow',function(event, ui){
+      $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
+          if(localStorage.menu){
+            build_items_page();
+          }
+  })
   $('#menu-item-page').live('pageshow',function(event, ui){
 
-    $('#menu-item-page #menu-item-scroll').height($('html').height() - 260);
-        if(localStorage.menu){
-          build_items_page();
-        }
+
      menuItemScroll.refresh();
   })
 
@@ -1000,14 +1006,17 @@ $(' #log_in').live('pageshow',function(event, ui){
    }
 
 
- $('#ordering-page').live('pageshow',function(event, ui){
-
-
+ $('#ordering-page').live('pagebeforeshow',function(event, ui){
 
     if(localStorage.user_cart && JSON.parse(localStorage.user_cart != {})){
       set_order();
     }
     $('#ordering-page #order-scroll').height($('html').height() - 240);
+
+  })
+  $('#ordering-page').live('pageshow',function(event, ui){
+
+
     orderpageScroll.refresh();
   })
 
@@ -1215,8 +1224,8 @@ $(' #log_in').live('pageshow',function(event, ui){
 
 // menu item add to card
 
-  //$(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
-  $(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
+  $(document).on('touchend',"#menu-item-page ul.items-list li a",add_to_card);
+  //$(document).on('click',"#menu-item-page ul.items-list li a",add_to_card);
 
 
 
@@ -1348,8 +1357,8 @@ $(' #log_in').live('pageshow',function(event, ui){
     }
 
 
- //$(document).on('touchend',"#ordering-page ul.items-list li a",remove_from_card);
- $(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
+ $(document).on('touchend',"#ordering-page ul.items-list li a",remove_from_card);
+// $(document).on('click',"#ordering-page ul.items-list li a",remove_from_card);
  $(document).on('touchend',"#ordering-page #reset-cart",reset_cart);
 
  function reset_cart(){

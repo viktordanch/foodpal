@@ -4,10 +4,11 @@
 
 function doResize() {
 
+
     if((!localStorage.user ) || (localStorage.user == '{}')){
         open_login();
     }else{
-        
+
         close_login();
     }
     var winhight = $.mobile.getScreenHeight();
@@ -18,6 +19,7 @@ function doResize() {
     var $content=$('[data-role="content"]');
     var $pagecontent=$('[data-role="page"]');
     newhight = winhight - headhight - foothight - 10;
+
     if( $.mobile.activePage.attr('id') == 'City_select' || $.mobile.activePage.attr('id') == 'Cuisine_select'){
        $content.css('min-height',($('html').height() - 125)+'px'); 
     }else{
@@ -37,8 +39,69 @@ $(document).bind("touchmove",function(event){
 
 $(window).bind('orientationchange, resize', doResizeSize);
 
+function resize_page_by_id(id){
+    var winhight = $('html').height();
+
+    var headhight = $('#' + id + ' [data-role="header"]').height();
+
+    var foothight = $('#' + id + ' [data-role="footer"]').height();
+    var $content=$('#' + id + ' [data-role="content"]');
+
+   var newhight = winhight - headhight -10 ;
+    $content.css('min-height',newhight + 'px');
+
+}
+
 function doResizeSize(){
     //doResize();
+    console.log('Resize');
+
+    if($.mobile.activePage.attr('id') == 'register'){
+        console.log('Resize register');
+
+       resize_page_by_id('register');
+       singScroll.refresh();
+        if(keyboard_open == 0){
+          keyboard_open += 1;
+          $('#register [data-role="footer"]').css('display', 'none');
+        }else{
+           keyboard_open = 0;
+           $('#register [data-role="footer"]').css('display', 'block');
+        }
+
+    }else{
+
+
+       console.log('Resize not register');
+    }
+
+    if($.mobile.activePage.attr('id') == 'profile-info'){
+        console.log('Resize register');
+
+       resize_page_by_id('profile-info');
+       singScroll.refresh();
+        console.log('beafor' + keyboard_open);
+        if(keyboard_open == 0){
+          keyboard_open += 1;
+          $('#profile-info [data-role="footer"]').css('display', 'none');
+        }else{
+           keyboard_open = 0;
+           $('#profile-info [data-role="footer"]').css('display', 'block');
+        }
+        console.log('after' + keyboard_open);
+    }else{
+
+
+       console.log('Resize not register');
+    }
+
+     if($.mobile.activePage.attr('id') != 'profile-info' &&
+                       $.mobile.activePage.attr('id') != 'register'){
+
+              keyboard_open = 0;
+               console.log('page' + keyboard_open);
+     }
+
     try{
     homeScroll.refresh();
     searchScroll.refresh();
